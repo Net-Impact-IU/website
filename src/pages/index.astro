@@ -29,7 +29,7 @@ const projects = (await approvedProjects()).slice(0, 3);
       </div>
       <div class="hero__media">
         {page.hero_image ? (
-          <img src={url(page.hero_image)} alt={page.hero_image_alt} width="640" height="520" fetchpriority="high" />
+          <img src={url(page.hero_image)} alt={page.hero_image_alt} width="1800" height="1200" fetchpriority="high" />
         ) : (
           <div class="placeholder hero__placeholder">Group photo goes here<br />(Page text form: Home, hero image)</div>
         )}
@@ -108,7 +108,7 @@ const projects = (await approvedProjects()).slice(0, 3);
   .hero__grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(var(--space-8), 5vw, var(--space-16)); align-items: center; }
   .hero h1 { font-size: clamp(2.25rem, 4vw, 3.25rem); }
   .hero__meet { font-size: var(--fs-sm); margin-bottom: var(--space-6); }
-  .hero__media img { border-radius: 16px; box-shadow: var(--shadow-card-hover); width: 100%; aspect-ratio: 5 / 4; object-fit: cover; }
+  .hero__media img { border-radius: 16px; box-shadow: var(--shadow-card-hover); width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
   .hero__placeholder { aspect-ratio: 5 / 4; }
   .np { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-12); align-items: center; }
   .np__kicker { color: var(--color-teal); } /* small blue text on aqua is below 4.5:1 */

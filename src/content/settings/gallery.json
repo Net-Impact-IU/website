@@ -1,12 +1,99 @@
 {
   "photos": [
-    { "image": "", "caption": "Bowling social", "alt": "" },
-    { "image": "", "caption": "Rock painting community event", "alt": "" },
-    { "image": "", "caption": "Consulting final presentations", "alt": "" },
-    { "image": "", "caption": "Volunteering at Hoosier Hills Food Bank", "alt": "" },
-    { "image": "", "caption": "Sustainability meeting scavenger hunt", "alt": "" },
-    { "image": "", "caption": "Weekly general meeting", "alt": "" },
-    { "image": "", "caption": "Kelley Carnival recruiting event", "alt": "" },
-    { "image": "", "caption": "Sustainable fashion tote bag painting", "alt": "" }
+    {
+      "image": "/images/uploads/gallery/hoosier-hills-food-bank-team-fall-2025.jpg",
+      "caption": "Hoosier Hills Food Bank project team, Fall 2025",
+      "alt": "Net Impact IU project team presenting its final work for Hoosier Hills Food Bank"
+    },
+    {
+      "image": "/images/uploads/gallery/indiana-diaper-bank-team-fall-2025.jpg",
+      "caption": "Indiana Diaper Bank project team, Fall 2025",
+      "alt": "Net Impact IU project team presenting its final work for the Indiana Diaper Bank"
+    },
+    {
+      "image": "/images/uploads/gallery/needmore-coffee-team-fall-2025.jpg",
+      "caption": "Needmore Coffee project team, Fall 2025",
+      "alt": "Net Impact IU project team presenting its final work for Needmore Coffee"
+    },
+    {
+      "image": "/images/uploads/gallery/artists-for-climate-awareness-team-fall-2025.jpg",
+      "caption": "Artists for Climate Awareness project team, Fall 2025",
+      "alt": "Net Impact IU project team presenting its final work for Artists for Climate Awareness"
+    },
+    {
+      "image": "/images/uploads/gallery/callout-meeting-spring-2026.jpg",
+      "caption": "Callout meeting, Spring 2026",
+      "alt": "Officers presenting the agenda at the Spring 2026 callout meeting"
+    },
+    {
+      "image": "/images/uploads/gallery/general-meeting-spring-2026.jpg",
+      "caption": "General meeting, Spring 2026",
+      "alt": "Members listening to a presentation at a general meeting"
+    },
+    {
+      "image": "/images/uploads/gallery/project-teams-overview-spring-2025.jpg",
+      "caption": "Project teams overview, Spring 2025",
+      "alt": "An officer presenting the project teams overview at a general meeting"
+    },
+    {
+      "image": "/images/uploads/gallery/current-events-activity-spring-2026.jpg",
+      "caption": "Current events activity, Spring 2026",
+      "alt": "A member presenting a current events activity at a general meeting"
+    },
+    {
+      "image": "/images/uploads/gallery/professional-development-spring-2026.jpg",
+      "caption": "Professional development event, Spring 2026",
+      "alt": "Members seated around a table at a professional development event"
+    },
+    {
+      "image": "/images/uploads/gallery/icebreaker-spring-2026.jpg",
+      "caption": "Icebreaker activity, Spring 2026",
+      "alt": "Members at long tables during an icebreaker activity"
+    },
+    {
+      "image": "/images/uploads/gallery/outdoor-meeting-fall-2025.jpg",
+      "caption": "Outdoor meeting activity, Fall 2025",
+      "alt": "Members gathered outside a campus building for an outdoor meeting activity"
+    },
+    {
+      "image": "/images/uploads/gallery/recruiting-trifold-spring-2026.jpg",
+      "caption": "Recruiting trifold board, Spring 2026",
+      "alt": "Executive board members holding the Net Impact trifold board showing socials, volunteering, professional events and past clients"
+    },
+    {
+      "image": "/images/uploads/gallery/leadership-social-birthday-spring-2026.jpg",
+      "caption": "Leadership social, Spring 2026",
+      "alt": "Four executive board members in front of a gold birthday backdrop"
+    },
+    {
+      "image": "/images/uploads/gallery/leadership-social-spring-2026.jpg",
+      "caption": "Leadership social, Spring 2026",
+      "alt": "Six executive board members together at a leadership social"
+    },
+    {
+      "image": "/images/uploads/gallery/hiking-social-fall-2025.jpg",
+      "caption": "Hiking social, Fall 2025",
+      "alt": "Three members smiling outdoors on a hiking social"
+    },
+    {
+      "image": "/images/uploads/gallery/matcha-social-spring-2026.jpg",
+      "caption": "Matcha making social, Spring 2026",
+      "alt": "Members making matcha at a social"
+    },
+    {
+      "image": "/images/uploads/gallery/matcha-social-room-spring-2026.jpg",
+      "caption": "Matcha making social, Spring 2026",
+      "alt": "Members gathered in a classroom for the matcha making social"
+    },
+    {
+      "image": "/images/uploads/gallery/project-teams-social-fall-2025.jpg",
+      "caption": "Project teams arcade social, Fall 2025",
+      "alt": "Four project team members at an arcade social"
+    },
+    {
+      "image": "/images/uploads/gallery/project-teams-social-2-fall-2025.jpg",
+      "caption": "Project teams arcade social, Fall 2025",
+      "alt": "Project team members posing together at an arcade"
+    }
   ]
 }
