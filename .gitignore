@@ -3,3 +3,6 @@ dist/
 .astro/
 .DS_Store
 .env
+# Generated at build time by scripts/fetch-instagram.mjs
+src/content/generated/
+public/images/instagram/

@@ -1,0 +1,47 @@
+---
+import { site, instagramPosts } from '../lib/data';
+import { url } from '../lib/url';
+const posts = instagramPosts();
+const date = (iso: string) =>
+  new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/Indiana/Indianapolis' });
+---
+{posts.length > 0 && (
+  <section class="section section--surface" aria-labelledby="ig-title">
+    <div class="container">
+      <div class="ig-head">
+        <div>
+          <span class="kicker">Instagram</span>
+          <h2 id="ig-title">Latest from {site.instagram_handle}</h2>
+        </div>
+        <a class="btn btn--secondary" href={site.instagram_url} rel="noopener">Follow on Instagram</a>
+      </div>
+      <ul class="ig-grid">
+        {posts.map((p) => (
+          <li>
+            <a class="ig-post" href={p.permalink} rel="noopener">
+              <img src={url(p.image)} alt={p.alt} width="640" height="640" loading="lazy" />
+              {p.is_video && <span class="ig-post__badge">Video</span>}
+              <span class="ig-post__meta">
+                <span class="ig-post__date">{date(p.timestamp)}</span>
+                {p.caption && <span class="ig-post__caption">{p.caption}</span>}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+<style>
+  .ig-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-8); }
+  .ig-head h2 { margin: 0; }
+  .ig-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+  .ig-post { display: block; position: relative; border-radius: var(--radius-card); overflow: hidden; background: #fff; box-shadow: var(--shadow-card); text-decoration: none; color: var(--color-text); height: 100%; transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out); }
+  .ig-post:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover); color: var(--color-text); }
+  .ig-post img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .ig-post__badge { position: absolute; top: 10px; left: 10px; background: rgba(0, 56, 70, .85); color: #fff; font-size: var(--fs-xs); font-weight: 600; padding: 3px 8px; border-radius: var(--radius-pill); }
+  .ig-post__meta { display: block; padding: var(--space-4); }
+  .ig-post__date { display: block; font-size: var(--fs-xs); font-weight: 600; color: var(--color-primary); margin-bottom: 4px; }
+  .ig-post__caption { display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--fs-sm); }
+  @media (max-width: 760px) { .ig-grid { grid-template-columns: repeat(2, 1fr); } .ig-post__meta { padding: var(--space-3); } }
+</style>

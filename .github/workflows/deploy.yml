@@ -34,6 +34,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check:content
+      - name: Fetch latest Instagram posts
+        run: npm run fetch:instagram
+        env:
+          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

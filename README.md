@@ -64,6 +64,23 @@ npm run build        # outputs dist/
 3. Open the repo in Pages CMS. The forms come from `.pages.yml`.
 4. Invite officers by email under the repo's collaborators settings. They don't need GitHub accounts.
 
+## Instagram feed (Events page)
+
+The daily build pulls the 6 latest @netimpact_iu posts through Instagram's official API (`scripts/fetch-instagram.mjs`), saves resized copies of the images, and shows them on the Events page as plain HTML (no Instagram scripts on the site). If the token is missing or Instagram is down, the section hides itself and the rest of the site still deploys.
+
+**Requirements:** @netimpact_iu must stay a Business or Creator account.
+
+**Token:** stored as the repository secret `INSTAGRAM_TOKEN` (Settings > Secrets and variables > Actions). Long-lived tokens last 60 days; every build refreshes it, which resets the clock, so it should not expire while the daily build runs.
+
+**If the feed disappears** (the build log shows `Instagram feed not updated` or `token refresh skipped`), the token was revoked, usually by a password change or removed app access. Fix in about 10 minutes:
+
+1. Log in at https://developers.facebook.com with the account that owns the "Net Impact IU Website" app and open the app.
+2. In the Instagram API setup (API setup with Instagram login), generate a new access token for @netimpact_iu.
+3. Paste it into the `INSTAGRAM_TOKEN` repository secret (Update secret).
+4. Actions > Build and deploy > Run workflow.
+
+Run locally: `INSTAGRAM_TOKEN=... npm run fetch:instagram && npm run dev`.
+
 ## Changing things
 
 | Task | Where |

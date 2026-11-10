@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import EventList from '../components/EventList.astro';
 import JoinBanner from '../components/JoinBanner.astro';
+import InstagramFeed from '../components/InstagramFeed.astro';
 import page from '../content/pages/events.json';
 import { site, upcomingEvents } from '../lib/data';
 const events = await upcomingEvents();
@@ -25,6 +26,7 @@ const schema = events.map((e) => ({
       <p class="ig">Weekly meeting rooms and topics: <a href={site.instagram_url} rel="noopener">{site.instagram_handle} on Instagram</a></p>
     </div>
   </section>
+  <InstagramFeed />
   <JoinBanner />
 </Base>
 <style>.ig { margin-top: var(--space-8); font-weight: 500; }</style>

@@ -8,7 +8,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check:content": "node scripts/check-content.mjs"
+    "check:content": "node scripts/check-content.mjs",
+    "fetch:instagram": "node scripts/fetch-instagram.mjs"
   },
   "engines": {
     "node": ">=20"
@@ -17,6 +18,7 @@
     "@astrojs/sitemap": "^3.7.4",
     "@fontsource/dm-sans": "^5.3.0",
     "@fontsource/sora": "^5.3.0",
-    "astro": "^7.4.8"
+    "astro": "^7.4.8",
+    "sharp": "^0.35.5"
   }
 }
