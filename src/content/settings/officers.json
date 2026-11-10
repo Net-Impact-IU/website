@@ -1,16 +1,16 @@
 {
   "officers": [
     {
-      "name": "Divya Gollakota",
-      "role": "Co-President",
-      "photo": "/images/uploads/officers/divya-gollakota.jpg",
-      "photo_alt": "Headshot of Divya Gollakota"
-    },
-    {
       "name": "Alex Monroe",
       "role": "Co-President",
       "photo": "/images/uploads/officers/alex-monroe.jpg",
       "photo_alt": "Headshot of Alex Monroe"
+    },
+    {
+      "name": "Divya Gollakota",
+      "role": "Co-President",
+      "photo": "/images/uploads/officers/divya-gollakota.jpg",
+      "photo_alt": "Headshot of Divya Gollakota"
     },
     {
       "name": "Akshaya Vankayalapati",
