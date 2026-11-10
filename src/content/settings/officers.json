@@ -1,116 +1,100 @@
 {
   "officers": [
     {
-      "name": "Alex Monroe",
-      "role": "Co-President",
-      "department": "",
-      "photo": "/images/uploads/officers/alex-monroe.jpg",
-      "photo_alt": "Headshot of Alex Monroe",
-      "linkedin": ""
-    },
-    {
       "name": "Divya Gollakota",
       "role": "Co-President",
-      "department": "",
       "photo": "/images/uploads/officers/divya-gollakota.jpg",
-      "photo_alt": "Headshot of Divya Gollakota",
-      "linkedin": ""
+      "photo_alt": "Headshot of Divya Gollakota"
+    },
+    {
+      "name": "Alex Monroe",
+      "role": "Co-President",
+      "photo": "/images/uploads/officers/alex-monroe.jpg",
+      "photo_alt": "Headshot of Alex Monroe"
     },
     {
       "name": "Akshaya Vankayalapati",
       "role": "VP of Consulting",
       "department": "Consulting",
       "photo": "/images/uploads/officers/akshaya-vankayalapati.jpg",
-      "photo_alt": "Headshot of Akshaya Vankayalapati",
-      "linkedin": ""
+      "photo_alt": "Headshot of Akshaya Vankayalapati"
     },
     {
       "name": "Ananya Balaji",
       "role": "VP of Marketing",
       "department": "Marketing",
       "photo": "/images/uploads/officers/ananya-balaji.jpg",
-      "photo_alt": "Headshot of Ananya Balaji",
-      "linkedin": ""
+      "photo_alt": "Headshot of Ananya Balaji"
     },
     {
       "name": "Evelyn Tennenhouse",
       "role": "VP of Education",
       "department": "Education",
       "photo": "/images/uploads/officers/evelyn-tennenhouse.jpg",
-      "photo_alt": "Headshot of Evelyn Tennenhouse",
-      "linkedin": ""
+      "photo_alt": "Headshot of Evelyn Tennenhouse"
     },
     {
       "name": "Meghna Routhu",
       "role": "VP of Membership",
       "department": "Membership",
       "photo": "/images/uploads/officers/meghna-routhu.jpg",
-      "photo_alt": "Headshot of Meghna Routhu",
-      "linkedin": ""
+      "photo_alt": "Headshot of Meghna Routhu"
     },
     {
       "name": "Siddharth (Sid) Gupta",
       "role": "Finance Director",
       "department": "Finance",
       "photo": "/images/uploads/officers/siddharth-gupta.jpg",
-      "photo_alt": "Headshot of Siddharth (Sid) Gupta",
-      "linkedin": ""
+      "photo_alt": "Headshot of Siddharth (Sid) Gupta"
     },
     {
       "name": "Pawan Tegala",
       "role": "Project Teams Director",
       "department": "Consulting",
       "photo": "/images/uploads/officers/pawan-tegala.jpg",
-      "photo_alt": "Headshot of Pawan Tegala",
-      "linkedin": ""
+      "photo_alt": "Headshot of Pawan Tegala"
     },
     {
       "name": "Sanjay Shyamsundar",
       "role": "Client Engagement Director",
       "department": "Consulting",
       "photo": "/images/uploads/officers/sanjay-shyamsundar.jpg",
-      "photo_alt": "Headshot of Sanjay Shyamsundar",
-      "linkedin": ""
+      "photo_alt": "Headshot of Sanjay Shyamsundar"
     },
     {
       "name": "Isa Westberg",
       "role": "Marketing Director",
       "department": "Marketing",
       "photo": "/images/uploads/officers/isabella-westberg.jpg",
-      "photo_alt": "Headshot of Isa Westberg",
-      "linkedin": ""
+      "photo_alt": "Headshot of Isa Westberg"
     },
     {
       "name": "Jamie Davis",
       "role": "Curriculum Director",
       "department": "Education",
       "photo": "/images/uploads/officers/james-davis.jpg",
-      "photo_alt": "Headshot of Jamie Davis",
-      "linkedin": ""
+      "photo_alt": "Headshot of Jamie Davis"
     },
     {
       "name": "Vedant Shah",
       "role": "Professional Development Director",
       "department": "Education",
       "photo": "/images/uploads/officers/vedant-shah.jpg",
-      "photo_alt": "Headshot of Vedant Shah",
-      "linkedin": ""
+      "photo_alt": "Headshot of Vedant Shah"
     },
     {
       "name": "Akhila Lingam",
       "role": "DEI Director",
       "department": "Membership",
       "photo": "/images/uploads/officers/akhila-lingam.jpg",
-      "photo_alt": "Headshot of Akhila Lingam",
-      "linkedin": ""
+      "photo_alt": "Headshot of Akhila Lingam"
     },
     {
       "name": "Mary Clare Miller",
       "role": "Community Impact Director",
       "department": "Membership",
       "photo": "/images/uploads/officers/mary-clare-miller.jpg",
-      "photo_alt": "Headshot of Mary Clare Miller",
-      "linkedin": ""
+      "photo_alt": "Headshot of Mary Clare Miller"
     }
   ]
 }
