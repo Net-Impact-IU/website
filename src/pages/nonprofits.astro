@@ -12,6 +12,17 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Nonprofit pro
     <div class="btn-row"><a class="btn btn--primary" href={mailto}>Request a project</a></div>
   </PageHero>
 
+
+  <section class="section section--teal np-proof" aria-labelledby="proof-title">
+    <div class="container">
+      <h2 id="proof-title" class="visually-hidden">Our track record</h2>
+      <ul class="np-proof__stats">
+        {page.proof_stats.map((s) => <li><span class="np-proof__value">{s.value}</span><span class="np-proof__label">{s.label}</span></li>)}
+      </ul>
+      {page.time_text && <p class="np-proof__time">{page.time_text}</p>}
+    </div>
+  </section>
+
   <section class="section" aria-labelledby="services-title">
     <div class="container">
       <div class="section-head"><span class="kicker">Services</span><h2 id="services-title">What a team can help with</h2></div>
@@ -22,6 +33,16 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Nonprofit pro
       </div>
     </div>
   </section>
+
+
+  {page.client_quote?.quote && (
+    <section class="section" aria-label="Client testimonial">
+      <figure class="container narrow np-quote">
+        <blockquote><p>"{page.client_quote.quote}"</p></blockquote>
+        <figcaption>{page.client_quote.attribution}</figcaption>
+      </figure>
+    </section>
+  )}
 
   <section class="section section--surface" aria-labelledby="how-title">
     <div class="container">
@@ -52,6 +73,14 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Nonprofit pro
   </section>
 </Base>
 <style>
+  .np-proof { padding-block: var(--space-16); }
+  .np-proof__stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: var(--space-8); text-align: center; }
+  .np-proof__value { display: block; font-family: var(--font-display); font-weight: 800; font-size: clamp(2.25rem, 4vw, 3.25rem); line-height: 1; color: #fff; }
+  .np-proof__label { display: block; margin-top: var(--space-2); color: var(--color-aqua); font-size: var(--fs-sm); }
+  .np-proof__time { text-align: center; margin: var(--space-8) 0 0; color: #dbe9ea; }
+  .np-quote { margin-inline: auto; border-left: 4px solid var(--color-cyan); padding-left: var(--space-8); }
+  .np-quote blockquote { margin: 0; font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.45; color: var(--color-teal); }
+  .np-quote figcaption { margin-top: var(--space-4); font-weight: 600; font-size: var(--fs-sm); }
   .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-6); counter-reset: s; }
   .steps li { background: #fff; border-radius: var(--radius-card); padding: var(--space-6); box-shadow: var(--shadow-card); }
   .steps__num { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary); color: #fff; font-family: var(--font-display); font-weight: 700; margin-bottom: var(--space-3); }

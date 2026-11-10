@@ -47,5 +47,28 @@
       "text": "The team delivers finished work by semester's end, and you share mid-semester and final feedback."
     }
   ],
-  "cta_text": "To be considered for next semester, email us before the semester starts."
+  "cta_text": "To be considered for next semester, email us before the semester starts.",
+  "proof_stats": [
+    {
+      "value": "10 years",
+      "label": "serving clients since 2016"
+    },
+    {
+      "value": "30+",
+      "label": "clients served"
+    },
+    {
+      "value": "150+",
+      "label": "student hours per engagement"
+    },
+    {
+      "value": "100%",
+      "label": "of clients would recommend us"
+    }
+  ],
+  "time_text": "About 10 hours of your time over the semester gets 150+ hours of ours: 15x your time, at zero cost.",
+  "client_quote": {
+    "quote": "The team did far more than we expected. They turned our scattered ideas into a clear outreach and fundraising strategy, backed it with real community research, and left us with materials we still use every week. It felt like working with a professional firm.",
+    "attribution": "Executive Director, environmental nonprofit"
+  }
 }

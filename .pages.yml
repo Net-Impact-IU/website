@@ -309,6 +309,20 @@ content:
         fields:
           - { name: title, label: Step, type: string }
           - { name: text, label: Description, type: string }
+      - name: proof_stats
+        label: Track record stats
+        type: object
+        list: true
+        fields:
+          - { name: value, label: Number, type: string }
+          - { name: label, label: Label, type: string }
+      - { name: time_text, label: Time comparison line, type: string }
+      - name: client_quote
+        label: Client testimonial
+        type: object
+        fields:
+          - { name: quote, label: Quote, type: text, description: Only use quotes the client agreed to share. }
+          - { name: attribution, label: Attribution, type: string, description: "Example: Executive Director, environmental nonprofit" }
       - { name: cta_text, label: Closing sentence, type: string }
 
   - name: page_events
