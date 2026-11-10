@@ -1,0 +1,24 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { getCollection, render } from 'astro:content';
+import { url, formatDate } from '../../lib/url';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter((p) => p.data.published);
+  return posts.map((p) => ({ params: { slug: p.id }, props: { post: p } }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<Base title={`${post.data.title} | Net Impact IU`} description={post.data.summary} image={post.data.image || undefined}>
+  <PageHero kicker={formatDate(post.data.date).long} title={post.data.title} />
+  <article class="section">
+    <div class="container narrow prose">
+      {post.data.image && <img src={url(post.data.image)} alt={post.data.image_alt} width="780" height="520" />}
+      <Content />
+      <p><a href={url('/news/')}>All news</a></p>
+    </div>
+  </article>
+</Base>
+<style>.prose img { border-radius: var(--radius-card); margin-bottom: var(--space-8); }</style>

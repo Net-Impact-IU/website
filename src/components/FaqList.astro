@@ -1,0 +1,21 @@
+---
+import { faq } from '../lib/data';
+interface Props { limit?: number }
+const { limit } = Astro.props;
+const items = limit ? faq.faqs.slice(0, limit) : faq.faqs;
+---
+<div class="faq">
+  {items.map((f) => (
+    <div class="faq__item">
+      <h3>{f.question}</h3>
+      <p>{f.answer}</p>
+    </div>
+  ))}
+</div>
+<style>
+  .faq { display: grid; gap: var(--space-2); }
+  .faq__item { padding-block: var(--space-6); border-bottom: 1px solid var(--color-border); }
+  .faq__item:first-child { border-top: 1px solid var(--color-border); }
+  .faq__item h3 { font-size: 1.1875rem; margin-bottom: var(--space-2); }
+  .faq__item p { margin: 0; max-width: 70ch; }
+</style>

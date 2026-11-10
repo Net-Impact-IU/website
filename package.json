@@ -1,0 +1,22 @@
+{
+  "name": "netimpact-iu-website",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Net Impact Indiana University Undergrad chapter website",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check:content": "node scripts/check-content.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/dm-sans": "^5.3.0",
+    "@fontsource/sora": "^5.3.0",
+    "astro": "^7.4.8"
+  }
+}

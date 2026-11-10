@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import FaqList from '../components/FaqList.astro';
+import page from '../content/pages/join.json';
+import { site } from '../lib/data';
+---
+<Base title={page.seo_title} description={page.seo_description}>
+  <PageHero kicker="Join" title={page.headline} intro={page.intro}>
+    <div class="btn-row">
+      <a class="btn btn--primary" href={site.join_url} rel="noopener">Fill out the membership form</a>
+      <a class="btn btn--secondary" href={site.newsletter_url} rel="noopener">Get the newsletter</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <ol class="join-steps">
+        {page.steps.map((s, i) => (
+          <li><span class="join-steps__num" aria-hidden="true">{i + 1}</span><div><h2>{s.title}</h2><p>{s.text}</p></div></li>
+        ))}
+      </ol>
+      <p class="dues">{site.dues_note}</p>
+      <p class="links">More links: <a href={site.linktree_url} rel="noopener">Linktree</a> · <a href={site.instagram_url} rel="noopener">Instagram</a> · <a href={`mailto:${site.email}`}>{site.email}</a></p>
+    </div>
+  </section>
+
+  <section class="section section--surface" aria-labelledby="faq-title">
+    <div class="container narrow">
+      <div class="section-head"><span class="kicker">FAQ</span><h2 id="faq-title">Frequently asked questions</h2></div>
+      <FaqList />
+    </div>
+  </section>
+</Base>
+<style>
+  .join-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); max-width: 760px; }
+  .join-steps li { display: flex; gap: var(--space-6); align-items: flex-start; background: #fff; box-shadow: var(--shadow-card); border-radius: var(--radius-card); padding: var(--space-6); }
+  .join-steps__num { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--color-primary); color: #fff; font-family: var(--font-display); font-weight: 700; }
+  .join-steps h2 { font-size: var(--fs-h3); margin-bottom: var(--space-2); }
+  .join-steps p { margin: 0; }
+  .dues { margin-top: var(--space-8); font-weight: 500; }
+  .links { font-size: var(--fs-sm); }
+</style>

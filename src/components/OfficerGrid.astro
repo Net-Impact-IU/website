@@ -1,0 +1,29 @@
+---
+import { officers } from '../lib/data';
+import { url, initials } from '../lib/url';
+---
+<ul class="officers">
+  {officers.officers.map((o) => (
+    <li class="officer">
+      {o.photo ? (
+        <img class="officer__photo" src={url(o.photo)} alt={o.photo_alt || `Headshot of ${o.name}`} width="240" height="240" loading="lazy" />
+      ) : (
+        <div class="officer__photo officer__photo--initials" aria-hidden="true">{initials(o.name)}</div>
+      )}
+      <h3>{o.name}</h3>
+      <p class="officer__role">{o.role}</p>
+      {o.department && <p class="officer__dept">{o.department}</p>}
+      {o.linkedin && <a class="officer__link" href={o.linkedin} rel="noopener">LinkedIn<span class="visually-hidden"> profile of {o.name}</span></a>}
+    </li>
+  ))}
+</ul>
+<style>
+  .officers { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-8) var(--space-6); }
+  .officer { text-align: center; }
+  .officer__photo { width: min(148px, 100%); aspect-ratio: 1; height: auto; border-radius: 50%; object-fit: cover; margin: 0 auto var(--space-4); }
+  .officer__photo--initials { display: grid; place-items: center; background: var(--color-aqua); color: var(--color-teal); font-family: var(--font-display); font-weight: 700; font-size: 2.5rem; }
+  .officer h3 { font-size: 1.0625rem; margin-bottom: 2px; color: var(--color-teal); }
+  .officer__role { margin: 0; font-weight: 600; font-size: var(--fs-sm); color: var(--color-primary); }
+  .officer__dept { margin: 0; font-size: var(--fs-xs); }
+  .officer__link { display: inline-block; margin-top: var(--space-2); font-size: var(--fs-sm); font-weight: 600; }
+</style>

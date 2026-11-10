@@ -1,0 +1,22 @@
+---
+import { url } from '../lib/url';
+import { site } from '../lib/data';
+---
+<section class="section section--teal join-banner" aria-labelledby="join-banner-title">
+  <div class="container join-banner__inner">
+    <div>
+      <h2 id="join-banner-title">Ready to join?</h2>
+      <p>Open to IU undergraduates from every major. Come to a Monday meeting, {site.meeting_time.replace('Mondays, ', '')}.</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn--light" href={url('/join/')}>Join Net Impact</a>
+      <a class="btn btn--outline-light" href={site.newsletter_url} rel="noopener">Get the newsletter</a>
+      <a class="btn btn--outline-light" href={site.instagram_url} rel="noopener">Follow on Instagram</a>
+    </div>
+  </div>
+</section>
+<style>
+  .join-banner { border-bottom: 1px solid rgba(255,255,255,.15); }
+  .join-banner__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-8); }
+  .join-banner p { margin: 0; color: #dbe9ea; }
+</style>

@@ -1,0 +1,28 @@
+{
+  "seo_title": "Net Impact Indiana University | Kelley Sustainability Club",
+  "seo_description": "Net Impact IU is Kelley's sustainable business club. 90+ IU students do free consulting for Bloomington nonprofits, volunteer, and prep for impact careers.",
+  "kicker": "Kelley School of Business · Est. 2008",
+  "headline": "Net Impact at Indiana University: Kelley's Sustainable Business Club",
+  "intro": "Net Impact Indiana University is the undergraduate Net Impact chapter at the Kelley School of Business in Bloomington, Indiana. It's a student-led club for IU students, from any major, who want to use business as a force for good. Members do free consulting for local nonprofits, volunteer in the Bloomington community, and build skills for careers in sustainability and social impact.",
+  "hero_image": "",
+  "hero_image_alt": "",
+  "pillars": [
+    {
+      "title": "Nonprofit consulting project teams",
+      "text": "Each semester, teams of one project lead and five student consultants take on a real project for a local nonprofit, from marketing and fundraising to research and data analysis.",
+      "link": "/programs/"
+    },
+    {
+      "title": "Professional development for impact careers",
+      "text": "Weekly general meetings with hands-on workshops help members explore careers in sustainability, corporate responsibility and social impact.",
+      "link": "/programs/"
+    },
+    {
+      "title": "Service and community",
+      "text": "Members volunteer together at organizations like Hoosier Hills Food Bank and build friendships through socials and campus events.",
+      "link": "/programs/"
+    }
+  ],
+  "nonprofit_headline": "Free consulting for Bloomington nonprofits",
+  "nonprofit_text": "Net Impact IU offers free, semester-long consulting to Bloomington-area nonprofits. A team of six IU students meets with your organization weekly or biweekly, sends regular progress updates, and delivers finished work by the end of the semester."
+}

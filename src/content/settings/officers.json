@@ -1,0 +1,116 @@
+{
+  "officers": [
+    {
+      "name": "Alex Monroe",
+      "role": "Co-President",
+      "department": "",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    },
+    {
+      "name": "Divya Gollakota",
+      "role": "Co-President",
+      "department": "",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    },
+    {
+      "name": "Akshaya Vankayalapati",
+      "role": "VP of Consulting",
+      "department": "Consulting",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    },
+    {
+      "name": "Ananya Balaji",
+      "role": "VP of Marketing",
+      "department": "Marketing",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    },
+    {
+      "name": "Evelyn Tennenhouse",
+      "role": "VP of Education",
+      "department": "Education",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    },
+    {
+      "name": "Meghna Routhu",
+      "role": "VP of Membership",
+      "department": "Membership",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    },
+    {
+      "name": "Siddharth (Sid) Gupta",
+      "role": "Finance Director",
+      "department": "Finance",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    },
+    {
+      "name": "Pawan Tegala",
+      "role": "Project Teams Director",
+      "department": "Consulting",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    },
+    {
+      "name": "Sanjay Shyamsundar",
+      "role": "Client Engagement Director",
+      "department": "Consulting",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    },
+    {
+      "name": "Isa Westberg",
+      "role": "Marketing Director",
+      "department": "Marketing",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    },
+    {
+      "name": "Jamie Davis",
+      "role": "Curriculum Director",
+      "department": "Education",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    },
+    {
+      "name": "Vedant Shah",
+      "role": "Professional Development Director",
+      "department": "Education",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    },
+    {
+      "name": "Akhila Lingam",
+      "role": "DEI Director",
+      "department": "Membership",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    },
+    {
+      "name": "Mary Clare Miller",
+      "role": "Community Impact Director",
+      "department": "Membership",
+      "photo": "",
+      "photo_alt": "",
+      "linkedin": ""
+    }
+  ]
+}

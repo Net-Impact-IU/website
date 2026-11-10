@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import StatsBand from '../components/StatsBand.astro';
+import OfficerGrid from '../components/OfficerGrid.astro';
+import JoinBanner from '../components/JoinBanner.astro';
+import page from '../content/pages/about.json';
+import { impact, galleryPhotos } from '../lib/data';
+import { url } from '../lib/url';
+const photos = galleryPhotos();
+---
+<Base title={page.seo_title} description={page.seo_description}>
+  <PageHero kicker="About" title={page.headline} intro={page.mission} />
+
+  <section class="section" aria-labelledby="history-title">
+    <div class="container narrow">
+      <h2 id="history-title">Our history</h2>
+      <p>{page.history}</p>
+      <p>{impact.alumni_text}</p>
+    </div>
+  </section>
+
+  <StatsBand />
+
+  <section class="section" aria-labelledby="team-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Leadership</span>
+        <h2 id="team-title">Executive board</h2>
+        <p>{page.team_intro}</p>
+      </div>
+      <OfficerGrid />
+    </div>
+  </section>
+
+  {photos.length > 0 && (
+    <section class="section section--surface" aria-labelledby="life-title">
+      <div class="container">
+        <div class="section-head"><span class="kicker">Life at Net Impact</span><h2 id="life-title">Photo gallery</h2></div>
+        <ul class="gallery">
+          {photos.map((p) => (
+            <li>
+              <figure>
+                <img src={url(p.image)} alt={p.alt} width="600" height="450" loading="lazy" />
+                <figcaption>{p.caption}</figcaption>
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <JoinBanner />
+</Base>
+<style>
+  .gallery { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-6); }
+  .gallery figure { margin: 0; }
+  .gallery img { border-radius: var(--radius-card); aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
+  .gallery figcaption { margin-top: var(--space-2); font-size: var(--fs-sm); font-weight: 500; }
+</style>

@@ -1,0 +1,30 @@
+{
+  "year_label": "2025-26",
+  "stats": [
+    {
+      "value": "91",
+      "label": "active members in 2025-26"
+    },
+    {
+      "value": "8",
+      "label": "nonprofit project teams in 2025-26"
+    },
+    {
+      "value": "427",
+      "label": "students on the newsletter list"
+    }
+  ],
+  "awards": [
+    {
+      "name": "Trent McGee Membership & Engagement Award",
+      "detail": "Presented by Kelley Student Government; recognized as the most impactful business club among 42 competitors",
+      "year": "2025-2026"
+    },
+    {
+      "name": "Chapter of the Year Finalist",
+      "detail": "Net Impact, US Undergraduate category",
+      "year": "2026"
+    }
+  ],
+  "alumni_text": "Net Impact IU alumni have gone on to careers in consulting, sustainability, finance, technology and retail."
+}

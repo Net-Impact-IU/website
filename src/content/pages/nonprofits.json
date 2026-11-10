@@ -1,0 +1,51 @@
+{
+  "seo_title": "Free Consulting for Bloomington Nonprofits | Net Impact IU",
+  "seo_description": "Net Impact IU student teams give Bloomington-area nonprofits free, semester-long consulting in marketing, fundraising, research, operations and data.",
+  "headline": "Free consulting for Bloomington nonprofits",
+  "intro": "Net Impact IU offers free, semester-long consulting to Bloomington-area nonprofits. A team of six IU students works on a project you define, meets with you regularly, and delivers finished work by the end of the semester.",
+  "services": [
+    {
+      "name": "Marketing and engagement",
+      "text": "Social media, events and campaigns that reach your audience."
+    },
+    {
+      "name": "Fundraising and grant strategy",
+      "text": "Grant research and fundraising plans to grow your funding."
+    },
+    {
+      "name": "Research and strategic insights",
+      "text": "Data-driven research to inform your next decision."
+    },
+    {
+      "name": "Partnership development and outreach",
+      "text": "Finding and building relationships with partners."
+    },
+    {
+      "name": "Operational efficiency",
+      "text": "Assessing how your operations run and where they can improve."
+    },
+    {
+      "name": "Data analysis and optimization",
+      "text": "Turning your data into better decisions and operations."
+    }
+  ],
+  "steps": [
+    {
+      "title": "Reach out",
+      "text": "Email us with a short description of your organization and the help you need."
+    },
+    {
+      "title": "Get matched",
+      "text": "Projects are matched to student teams at the start of each semester."
+    },
+    {
+      "title": "Work together",
+      "text": "Your team meets with you weekly or biweekly to scope and assign tasks."
+    },
+    {
+      "title": "Get results",
+      "text": "The team delivers finished work by semester's end, and you share mid-semester and final feedback."
+    }
+  ],
+  "cta_text": "To be considered for next semester, email us before the semester starts."
+}

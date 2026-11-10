@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import JoinBanner from '../components/JoinBanner.astro';
+import page from '../content/pages/programs.json';
+import { url } from '../lib/url';
+---
+<Base title={page.seo_title} description={page.seo_description}>
+  <PageHero kicker="Programs" title={page.headline} intro={page.intro} />
+  <section class="section">
+    <div class="container programs">
+      {page.programs.map((p) => (
+        <article class="card program">
+          <div class="card__accent" aria-hidden="true"></div>
+          <h2>{p.title}</h2>
+          <p class="program__meta"><span class="chip">{p.audience}</span> <span class="program__status">{p.status}</span></p>
+          <p>{p.text}</p>
+          <ul>{p.bullets.map((b) => <li>{b}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+    <div class="container btn-row programs__cta">
+      <a class="btn btn--primary" href={url('/join/')}>Join Net Impact</a>
+      <a class="btn btn--secondary" href={url('/events/')}>See upcoming events</a>
+    </div>
+  </section>
+  <JoinBanner />
+</Base>
+<style>
+  .programs { display: grid; gap: var(--space-8); }
+  .program h2 { font-size: var(--fs-h3); font-size: clamp(1.375rem, 2.2vw, 1.75rem); }
+  .program__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+  .program__status { font-weight: 600; font-size: var(--fs-sm); }
+  .program ul { margin: 0; }
+  .programs__cta { margin-top: var(--space-12); }
+</style>

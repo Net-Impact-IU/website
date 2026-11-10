@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import page from '../../content/pages/blog.json';
+import { publishedPosts } from '../../lib/data';
+import { url, formatDate } from '../../lib/url';
+const posts = await publishedPosts();
+---
+<Base title={page.seo_title} description={page.seo_description}>
+  <PageHero kicker="News" title={page.headline} intro={page.intro} />
+  <section class="section">
+    <div class="container">
+      {posts.length === 0 ? <p>{page.empty_text}</p> : (
+        <div class="grid grid--3">
+          {posts.map((p) => (
+            <article class="card post">
+              {p.data.image && <img src={url(p.data.image)} alt={p.data.image_alt} width="480" height="320" loading="lazy" />}
+              <p class="post__date">{formatDate(p.data.date).long}</p>
+              <h2><a href={url(`/news/${p.id}/`)}>{p.data.title}</a></h2>
+              <p>{p.data.summary}</p>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Base>
+<style>
+  .post img { border-radius: 8px; margin-bottom: var(--space-4); aspect-ratio: 3 / 2; object-fit: cover; width: 100%; }
+  .post h2 { font-size: var(--fs-h3); }
+  .post h2 a { text-decoration: none; }
+  .post__date { font-size: var(--fs-sm); font-weight: 600; margin-bottom: var(--space-2); }
+</style>

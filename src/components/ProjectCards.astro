@@ -1,0 +1,24 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { url } from '../lib/url';
+interface Props { projects: CollectionEntry<'projects'>[] }
+const { projects } = Astro.props;
+---
+<div class="grid grid--3">
+  {projects.map((p) => (
+    <article class="card project">
+      {p.data.image && <img src={url(p.data.image)} alt={p.data.image_alt} width="480" height="320" loading="lazy" />}
+      <span class="chip">{p.data.service_area}</span>
+      <h3>{p.data.client}</h3>
+      <p class="project__sem">{p.data.semester}</p>
+      <p>{p.data.summary}</p>
+      {p.data.result && <p><strong>Result:</strong> {p.data.result}</p>}
+      {p.data.client_url && <a class="card__link" href={p.data.client_url} rel="noopener">Visit {p.data.client}</a>}
+    </article>
+  ))}
+</div>
+<style>
+  .project img { border-radius: 8px; margin-bottom: var(--space-4); aspect-ratio: 3 / 2; object-fit: cover; width: 100%; }
+  .project .chip { align-self: flex-start; margin-bottom: var(--space-3); }
+  .project__sem { font-size: var(--fs-sm); font-weight: 600; margin-bottom: var(--space-2); }
+</style>

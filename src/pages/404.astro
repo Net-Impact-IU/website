@@ -1,0 +1,10 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { url } from '../lib/url';
+---
+<Base title="Page not found | Net Impact IU" description="This page doesn't exist.">
+  <PageHero title="Page not found" intro="That page doesn't exist or has moved.">
+    <div class="btn-row"><a class="btn btn--primary" href={url('/')}>Go to the home page</a></div>
+  </PageHero>
+</Base>

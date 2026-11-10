@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ProjectCards from '../components/ProjectCards.astro';
+import page from '../content/pages/nonprofits.json';
+import { site, approvedProjects } from '../lib/data';
+const projects = await approvedProjects();
+const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Nonprofit project request')}`;
+---
+<Base title={page.seo_title} description={page.seo_description}>
+  <PageHero kicker="For nonprofits" title={page.headline} intro={page.intro}>
+    <div class="btn-row"><a class="btn btn--primary" href={mailto}>Request a project</a></div>
+  </PageHero>
+
+  <section class="section" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-head"><span class="kicker">Services</span><h2 id="services-title">What a team can help with</h2></div>
+      <div class="grid grid--3">
+        {page.services.map((s) => (
+          <article class="card"><div class="card__accent" aria-hidden="true"></div><h3>{s.name}</h3><p>{s.text}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface" aria-labelledby="how-title">
+    <div class="container">
+      <div class="section-head"><span class="kicker">How it works</span><h2 id="how-title">From first email to final deliverable</h2></div>
+      <ol class="steps">
+        {page.steps.map((s, i) => (
+          <li><span class="steps__num" aria-hidden="true">{i + 1}</span><h3>{s.title}</h3><p>{s.text}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  {projects.length > 0 && (
+    <section class="section" aria-labelledby="past-title">
+      <div class="container">
+        <div class="section-head"><span class="kicker">Client work</span><h2 id="past-title">Past projects</h2></div>
+        <ProjectCards projects={projects} />
+      </div>
+    </section>
+  )}
+
+  <section class="section section--teal" aria-labelledby="contact-title">
+    <div class="container narrow">
+      <h2 id="contact-title">Work with Net Impact IU</h2>
+      <p>{page.cta_text} Email <a href={mailto}>{site.email}</a> with a short description of your organization and the help you need.</p>
+      <a class="btn btn--light" href={mailto}>Request a project</a>
+    </div>
+  </section>
+</Base>
+<style>
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-6); counter-reset: s; }
+  .steps li { background: #fff; border-radius: var(--radius-card); padding: var(--space-6); box-shadow: var(--shadow-card); }
+  .steps__num { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary); color: #fff; font-family: var(--font-display); font-weight: 700; margin-bottom: var(--space-3); }
+  .steps h3 { margin-bottom: var(--space-2); }
+  .steps p { margin: 0; }
+</style>

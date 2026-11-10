@@ -1,0 +1,37 @@
+---
+import { impact } from '../lib/data';
+interface Props { showAwards?: boolean }
+const { showAwards = true } = Astro.props;
+---
+<section class="section section--teal stats" aria-labelledby="impact-title">
+  <div class="container">
+    <h2 id="impact-title" class="visually-hidden">Our impact in {impact.year_label}</h2>
+    <ul class="stats__list">
+      {impact.stats.map((s) => (
+        <li><span class="stats__value">{s.value}</span><span class="stats__label">{s.label}</span></li>
+      ))}
+    </ul>
+    {showAwards && impact.awards.length > 0 && (
+      <ul class="awards">
+        {impact.awards.map((a) => (
+          <li class="award">
+            <span class="award__year">{a.year}</span>
+            <span class="award__name">{a.name}</span>
+            <span class="award__detail">{a.detail}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</section>
+<style>
+  .stats { padding-block: var(--space-16); }
+  .stats__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-8); text-align: center; }
+  .stats__value { display: block; font-family: var(--font-display); font-weight: 800; font-size: clamp(2.75rem, 5vw, 3.75rem); line-height: 1; color: #fff; }
+  .stats__label { display: block; margin-top: var(--space-2); color: var(--color-aqua); font-size: var(--fs-sm); }
+  .awards { list-style: none; margin: var(--space-12) 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-4); }
+  .award { border: 1px solid rgba(255,255,255,.22); border-radius: var(--radius-card); padding: var(--space-6); display: grid; gap: 4px; }
+  .award__year { font-size: var(--fs-xs); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--color-cyan); }
+  .award__name { font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; color: #fff; }
+  .award__detail { font-size: var(--fs-sm); color: #dbe9ea; }
+</style>

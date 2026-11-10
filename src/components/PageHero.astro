@@ -1,0 +1,16 @@
+---
+interface Props { kicker?: string; title: string; intro?: string }
+const { kicker, title, intro } = Astro.props;
+---
+<section class="page-hero">
+  <div class="container">
+    {kicker && <span class="kicker">{kicker}</span>}
+    <h1>{title}</h1>
+    {intro && <p class="lead">{intro}</p>}
+    <slot />
+  </div>
+</section>
+<style>
+  .page-hero { padding-block: clamp(var(--space-12), 7vw, var(--space-16)) var(--space-8); background: linear-gradient(180deg, var(--color-surface), #fff); }
+  .page-hero h1 { max-width: 20ch; }
+</style>

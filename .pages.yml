@@ -1,0 +1,354 @@
+# Pages CMS configuration: the editing forms officers use at https://app.pagescms.org
+# Each entry below is one form. Field "description" lines are the help text editors see.
+# Maintainer note: field names must match the JSON/Markdown keys the site reads (see README).
+
+media:
+  input: public/images/uploads
+  output: /images/uploads
+
+content:
+  # ---------------------------------------------------------------- Site settings
+  - name: site
+    label: Site settings
+    type: file
+    path: src/content/settings/site.json
+    format: json
+    fields:
+      - { name: chapter_name, label: Chapter name, type: string, required: true }
+      - { name: short_name, label: Short name, type: string, required: true }
+      - name: description
+        label: One-sentence description
+        type: text
+        description: Used by Google and in the site's structured data. Keep it factual.
+      - { name: founded, label: Year founded, type: string }
+      - { name: email, label: Contact email, type: string, required: true }
+      - { name: meeting_time, label: Meeting day and time, type: string, description: "Example: Mondays, 7:00 to 8:00 pm" }
+      - { name: meeting_location, label: Meeting location note, type: string }
+      - { name: dues_note, label: Dues note, type: string, description: Shown on the Join page. }
+      - { name: join_url, label: Membership form link, type: string, required: true }
+      - { name: newsletter_url, label: Newsletter signup link, type: string }
+      - { name: linktree_url, label: Linktree link, type: string }
+      - { name: instagram_url, label: Instagram link, type: string }
+      - { name: instagram_handle, label: Instagram handle, type: string }
+      - { name: linkedin_url, label: LinkedIn page link, type: string, description: Leave empty to hide LinkedIn. }
+      - name: address
+        label: Address (for Google)
+        type: object
+        fields:
+          - { name: street, label: Street, type: string }
+          - { name: city, label: City, type: string }
+          - { name: state, label: State, type: string }
+          - { name: zip, label: ZIP, type: string }
+
+  # ---------------------------------------------------------------- Officers
+  - name: officers
+    label: Officers
+    type: file
+    path: src/content/settings/officers.json
+    format: json
+    fields:
+      - name: officers
+        label: Executive board
+        description: Drag to reorder. Add or delete a position with the list buttons. Order here is the order on the site.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.name} ({fields.role})"
+        fields:
+          - { name: name, label: Name, type: string, required: true }
+          - { name: role, label: Role, type: string, required: true, description: "Example: VP of Marketing" }
+          - { name: department, label: Department, type: string, description: "Example: Marketing. Leave empty for Co-Presidents." }
+          - { name: photo, label: Headshot, type: image, description: Square photo, at least 800 px. }
+          - { name: photo_alt, label: Photo description, type: string, description: "Example: Headshot of Jamie Davis" }
+          - { name: linkedin, label: LinkedIn URL, type: string }
+
+  # ---------------------------------------------------------------- Impact
+  - name: impact
+    label: Impact (stats and awards)
+    type: file
+    path: src/content/settings/impact.json
+    format: json
+    fields:
+      - { name: year_label, label: Year label, type: string, description: "Example: 2025-26" }
+      - name: stats
+        label: Stats
+        description: Three works best.
+        type: object
+        list: true
+        fields:
+          - { name: value, label: Number, type: string, required: true }
+          - { name: label, label: Label, type: string, required: true }
+      - name: awards
+        label: Awards
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Award name, type: string, required: true }
+          - { name: detail, label: Detail, type: string }
+          - { name: year, label: Year, type: string }
+      - { name: alumni_text, label: Where alumni go, type: text }
+
+  # ---------------------------------------------------------------- Events
+  - name: events
+    label: Events
+    type: collection
+    path: src/content/events
+    filename: "{primary}.md"
+    view:
+      primary: title
+      sort: date
+      order: asc
+    fields:
+      - { name: title, label: Event name, type: string, required: true }
+      - { name: date, label: Date, type: date, required: true, description: Past events disappear from the site automatically the next day. }
+      - { name: time, label: Time, type: string, description: "Example: 7:00 to 8:00 pm" }
+      - { name: location, label: Location, type: string }
+      - name: description
+        label: Short description
+        type: text
+        options: { maxlength: 240 }
+      - { name: signup_url, label: Signup link, type: string, description: Optional. }
+      - { name: featured, label: Show on home page, type: boolean }
+
+  # ---------------------------------------------------------------- Project teams (case studies)
+  - name: projects
+    label: Project teams (case studies)
+    type: collection
+    path: src/content/projects
+    filename: "{primary}.md"
+    view:
+      primary: client
+    fields:
+      - { name: client, label: Client name, type: string, required: true }
+      - { name: client_url, label: Client website, type: string }
+      - { name: semester, label: Semester, type: string, required: true, description: "Example: Fall 2026" }
+      - name: service_area
+        label: Service area
+        type: select
+        options:
+          values:
+            - Marketing and engagement
+            - Fundraising and grant strategy
+            - Research and strategic insights
+            - Partnership development and outreach
+            - Operational efficiency
+            - Data analysis and optimization
+      - { name: summary, label: What the team did, type: text, required: true }
+      - { name: result, label: Result, type: text }
+      - { name: image, label: Photo, type: image }
+      - { name: image_alt, label: Photo description, type: string }
+      - name: client_approved
+        label: Client approved publishing
+        type: boolean
+        description: The project only appears on the site when this is on.
+
+  # ---------------------------------------------------------------- Testimonials
+  - name: testimonials
+    label: Testimonials
+    type: file
+    path: src/content/settings/testimonials.json
+    format: json
+    fields:
+      - name: testimonials
+        label: Member quotes
+        description: A quote only shows when "Permission to publish" is on.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.name}"
+        fields:
+          - { name: quote, label: Quote, type: text, required: true, options: { maxlength: 280 } }
+          - { name: name, label: Name, type: string, required: true }
+          - { name: detail, label: Year and major, type: string, description: "Example: Junior, Finance" }
+          - { name: photo, label: Headshot, type: image }
+          - { name: photo_alt, label: Photo description, type: string }
+          - { name: permission, label: Permission to publish, type: boolean }
+
+  # ---------------------------------------------------------------- FAQ
+  - name: faq
+    label: FAQ
+    type: file
+    path: src/content/settings/faq.json
+    format: json
+    fields:
+      - name: faqs
+        label: Questions
+        description: Start each answer with the direct answer and use the club's name instead of "we". Keep answers under 60 words.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.question}"
+        fields:
+          - { name: question, label: Question, type: string, required: true }
+          - { name: answer, label: Answer, type: text, required: true, options: { maxlength: 420 } }
+
+  # ---------------------------------------------------------------- Gallery
+  - name: gallery
+    label: Photo gallery
+    type: file
+    path: src/content/settings/gallery.json
+    format: json
+    fields:
+      - name: photos
+        label: Photos
+        description: Drag to reorder. Photos without an image file are hidden.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.caption}"
+        fields:
+          - { name: image, label: Photo, type: image }
+          - { name: caption, label: Caption, type: string, required: true }
+          - { name: alt, label: Photo description, type: string, description: "What's in the photo, for screen readers and Google." }
+
+  # ---------------------------------------------------------------- News
+  - name: blog
+    label: News posts
+    type: collection
+    path: src/content/blog
+    filename:
+      template: "{year}-{month}-{day}-{primary}.md"
+      field: create
+    view:
+      primary: title
+      sort: date
+      order: desc
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: date, label: Date, type: date, required: true }
+      - { name: summary, label: Summary, type: text, required: true, options: { maxlength: 200 } }
+      - { name: image, label: Photo, type: image }
+      - { name: image_alt, label: Photo description, type: string }
+      - { name: published, label: Published, type: boolean, default: true }
+      - { name: body, label: Post, type: rich-text }
+
+  # ---------------------------------------------------------------- Page text
+  - name: page_home
+    label: "Page text: Home"
+    type: file
+    path: src/content/pages/home.json
+    format: json
+    fields:
+      - { name: seo_title, label: Google title, type: string, options: { maxlength: 60 }, description: "Shown as the Google result title. Under 60 characters." }
+      - { name: seo_description, label: Google description, type: text, options: { maxlength: 160 }, description: "Shown under the title in Google. Under 160 characters." }
+      - { name: kicker, label: Small line above headline, type: string }
+      - { name: headline, label: Headline, type: string, required: true }
+      - { name: intro, label: Intro paragraph, type: text }
+      - { name: hero_image, label: Group photo, type: image }
+      - { name: hero_image_alt, label: Group photo description, type: string }
+      - name: pillars
+        label: What we do cards
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: text, label: Text, type: text }
+          - { name: link, label: Link, type: string, description: "Example: /programs/" }
+      - { name: nonprofit_headline, label: Nonprofit section headline, type: string }
+      - { name: nonprofit_text, label: Nonprofit section text, type: text }
+
+  - name: page_about
+    label: "Page text: About"
+    type: file
+    path: src/content/pages/about.json
+    format: json
+    fields:
+      - { name: seo_title, label: Google title, type: string, options: { maxlength: 60 }, description: "Shown as the Google result title. Under 60 characters." }
+      - { name: seo_description, label: Google description, type: text, options: { maxlength: 160 }, description: "Shown under the title in Google. Under 160 characters." }
+      - { name: headline, label: Headline, type: string }
+      - { name: mission, label: Mission, type: text }
+      - { name: history, label: History, type: text }
+      - { name: team_intro, label: Executive board intro, type: text }
+
+  - name: page_programs
+    label: "Page text: Programs"
+    type: file
+    path: src/content/pages/programs.json
+    format: json
+    fields:
+      - { name: seo_title, label: Google title, type: string, options: { maxlength: 60 }, description: "Shown as the Google result title. Under 60 characters." }
+      - { name: seo_description, label: Google description, type: text, options: { maxlength: 160 }, description: "Shown under the title in Google. Under 160 characters." }
+      - { name: headline, label: Headline, type: string }
+      - { name: intro, label: Intro, type: text }
+      - name: programs
+        label: Programs
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: audience, label: Who it's for, type: string }
+          - { name: status, label: Application status, type: string, description: "Example: Applications open Jan 12 to Jan 23." }
+          - { name: text, label: Description, type: text }
+          - { name: bullets, label: Bullet points, type: string, list: true }
+
+  - name: page_nonprofits
+    label: "Page text: For Nonprofits"
+    type: file
+    path: src/content/pages/nonprofits.json
+    format: json
+    fields:
+      - { name: seo_title, label: Google title, type: string, options: { maxlength: 60 }, description: "Shown as the Google result title. Under 60 characters." }
+      - { name: seo_description, label: Google description, type: text, options: { maxlength: 160 }, description: "Shown under the title in Google. Under 160 characters." }
+      - { name: headline, label: Headline, type: string }
+      - { name: intro, label: Intro, type: text }
+      - name: services
+        label: Services
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Service, type: string }
+          - { name: text, label: Description, type: string }
+      - name: steps
+        label: How it works steps
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Step, type: string }
+          - { name: text, label: Description, type: string }
+      - { name: cta_text, label: Closing sentence, type: string }
+
+  - name: page_events
+    label: "Page text: Events"
+    type: file
+    path: src/content/pages/events.json
+    format: json
+    fields:
+      - { name: seo_title, label: Google title, type: string, options: { maxlength: 60 }, description: "Shown as the Google result title. Under 60 characters." }
+      - { name: seo_description, label: Google description, type: text, options: { maxlength: 160 }, description: "Shown under the title in Google. Under 160 characters." }
+      - { name: headline, label: Headline, type: string }
+      - { name: intro, label: Intro, type: text }
+      - { name: empty_text, label: Text when no events are posted, type: string }
+
+  - name: page_join
+    label: "Page text: Join"
+    type: file
+    path: src/content/pages/join.json
+    format: json
+    fields:
+      - { name: seo_title, label: Google title, type: string, options: { maxlength: 60 }, description: "Shown as the Google result title. Under 60 characters." }
+      - { name: seo_description, label: Google description, type: text, options: { maxlength: 160 }, description: "Shown under the title in Google. Under 160 characters." }
+      - { name: headline, label: Headline, type: string }
+      - { name: intro, label: Intro, type: text }
+      - name: steps
+        label: Steps
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Step, type: string }
+          - { name: text, label: Description, type: string }
+
+  - name: page_news
+    label: "Page text: News"
+    type: file
+    path: src/content/pages/blog.json
+    format: json
+    fields:
+      - { name: seo_title, label: Google title, type: string, options: { maxlength: 60 }, description: "Shown as the Google result title. Under 60 characters." }
+      - { name: seo_description, label: Google description, type: text, options: { maxlength: 160 }, description: "Shown under the title in Google. Under 160 characters." }
+      - { name: headline, label: Headline, type: string }
+      - { name: intro, label: Intro, type: text }
+      - { name: empty_text, label: Text when there are no posts, type: string }

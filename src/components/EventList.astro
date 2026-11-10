@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { formatDate } from '../lib/url';
+interface Props { events: CollectionEntry<'events'>[]; emptyText?: string }
+const { events, emptyText } = Astro.props;
+---
+{events.length === 0 ? (
+  <p class="events-empty">{emptyText}</p>
+) : (
+  <ul class="events">
+    {events.map((e) => {
+      const d = formatDate(e.data.date);
+      return (
+        <li class="event">
+          <div class="event__date" aria-hidden="true"><span>{d.month}</span><strong>{d.day}</strong></div>
+          <div class="event__body">
+            <h3>{e.data.title}</h3>
+            <p class="event__meta">
+              <span class="visually-hidden">{d.long}. </span>
+              {[e.data.time, e.data.location].filter(Boolean).join(' · ')}
+            </p>
+            {e.data.description && <p>{e.data.description}</p>}
+          </div>
+          {e.data.signup_url && <a class="btn btn--secondary event__cta" href={e.data.signup_url} rel="noopener">Sign up<span class="visually-hidden"> for {e.data.title}</span></a>}
+        </li>
+      );
+    })}
+  </ul>
+)}
+<style>
+  .events { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
+  .event { display: grid; grid-template-columns: 72px 1fr auto; gap: var(--space-6); align-items: center; background: #fff; border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: var(--space-6); }
+  .event__date { background: var(--color-primary); color: #fff; border-radius: 10px; text-align: center; padding: 8px 0; }
+  .event__date span { display: block; font-size: var(--fs-xs); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; }
+  .event__date strong { display: block; font-family: var(--font-display); font-size: 1.75rem; line-height: 1.1; }
+  .event__body h3 { margin-bottom: 4px; }
+  .event__body p { margin: 0; }
+  .event__meta { font-size: var(--fs-sm); font-weight: 500; }
+  .events-empty { padding: var(--space-6); background: var(--color-surface); border-radius: var(--radius-card); margin: 0; }
+  @media (max-width: 640px) { .event { grid-template-columns: 60px 1fr; } .event__cta { grid-column: 1 / -1; } }
+</style>

@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import EventList from '../components/EventList.astro';
+import JoinBanner from '../components/JoinBanner.astro';
+import page from '../content/pages/events.json';
+import { site, upcomingEvents } from '../lib/data';
+const events = await upcomingEvents();
+const schema = events.map((e) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: e.data.title,
+  startDate: e.data.date.toISOString().slice(0, 10),
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  location: { '@type': 'Place', name: e.data.location || 'Indiana University Bloomington', address: `${site.address.city}, ${site.address.state}` },
+  description: e.data.description || undefined,
+  organizer: { '@type': 'Organization', name: site.chapter_name },
+}));
+---
+<Base title={page.seo_title} description={page.seo_description} extraSchema={schema}>
+  <PageHero kicker="Events" title={page.headline} intro={page.intro} />
+  <section class="section">
+    <div class="container">
+      <EventList events={events} emptyText={page.empty_text} />
+      <p class="ig">Weekly meeting rooms and topics: <a href={site.instagram_url} rel="noopener">{site.instagram_handle} on Instagram</a></p>
+    </div>
+  </section>
+  <JoinBanner />
+</Base>
+<style>.ig { margin-top: var(--space-8); font-weight: 500; }</style>

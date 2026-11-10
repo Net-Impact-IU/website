@@ -1,0 +1,31 @@
+---
+import { publishedTestimonials } from '../lib/data';
+import { url, initials } from '../lib/url';
+const items = publishedTestimonials();
+---
+{items.length > 0 && (
+  <section class="section" aria-labelledby="voices-title">
+    <div class="container">
+      <div class="section-head"><span class="kicker">Member voices</span><h2 id="voices-title">What members say</h2></div>
+      <div class="grid grid--3">
+        {items.map((t) => (
+          <figure class="card quote">
+            <blockquote><p>{t.quote}</p></blockquote>
+            <figcaption>
+              {t.photo ? <img src={url(t.photo)} alt={t.photo_alt || ''} width="56" height="56" loading="lazy" /> : <span class="quote__initials" aria-hidden="true">{initials(t.name)}</span>}
+              <span><strong>{t.name}</strong>{t.detail && <span class="quote__detail">{t.detail}</span>}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+<style>
+  .quote { margin: 0; }
+  .quote blockquote { margin: 0 0 var(--space-6); font-size: 1.0625rem; }
+  .quote figcaption { display: flex; align-items: center; gap: var(--space-3); margin-top: auto; }
+  .quote img, .quote__initials { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; flex: none; }
+  .quote__initials { display: grid; place-items: center; background: var(--color-aqua); color: var(--color-teal); font-weight: 700; }
+  .quote__detail { display: block; font-size: var(--fs-sm); }
+</style>

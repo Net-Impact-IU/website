@@ -1,0 +1,60 @@
+---
+import { url } from '../lib/url';
+import { site } from '../lib/data';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <img src={url('/images/brand/logo-white.svg')} alt={`${site.chapter_name} Undergrad`} width="220" height="89" />
+      <p>The undergraduate Net Impact chapter at the Kelley School of Business, Indiana University Bloomington.</p>
+      <p><a href="https://www.netimpact.org/" rel="noopener">Part of Net Impact's global network</a></p>
+    </div>
+
+    <div>
+      <h2 class="site-footer__title">Visit</h2>
+      <p>General meetings<br />{site.meeting_time}<br />{site.meeting_location}</p>
+    </div>
+
+    <div>
+      <h2 class="site-footer__title">Explore</h2>
+      <ul>
+        <li><a href={url('/about/')}>About and team</a></li>
+        <li><a href={url('/programs/')}>Programs</a></li>
+        <li><a href={url('/nonprofits/')}>For nonprofits</a></li>
+        <li><a href={url('/events/')}>Events</a></li>
+        <li><a href={url('/join/')}>Join</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="site-footer__title">Connect</h2>
+      <ul>
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li><a href={site.instagram_url} rel="noopener">Instagram {site.instagram_handle}</a></li>
+        {site.linkedin_url && <li><a href={site.linkedin_url} rel="noopener">LinkedIn</a></li>}
+        <li><a href={site.newsletter_url} rel="noopener">Newsletter signup</a></li>
+        <li><a href={site.linktree_url} rel="noopener">All links (Linktree)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__legal">
+    <p>© {year} {site.chapter_name} Undergrad. A student organization at Indiana University Bloomington.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--color-teal); color: #fff; padding-top: var(--space-16); }
+  .site-footer a { color: #fff; }
+  .site-footer a:hover { color: var(--color-aqua); }
+  .site-footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: var(--space-8); padding-bottom: var(--space-12); }
+  .site-footer__brand img { width: 220px; height: auto; margin-bottom: var(--space-4); }
+  .site-footer__brand p { font-size: var(--fs-sm); color: #dbe9ea; max-width: 34ch; }
+  .site-footer__title { font-family: var(--font-body); font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-aqua); margin-bottom: var(--space-3); }
+  .site-footer p, .site-footer li { font-size: var(--fs-sm); }
+  .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-2); }
+  .site-footer__legal { border-top: 1px solid rgba(255, 255, 255, .15); padding-block: var(--space-6); }
+  .site-footer__legal p { margin: 0; font-size: var(--fs-xs); color: #b9cfd1; }
+  @media (max-width: 900px) { .site-footer__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .site-footer__grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,42 @@
+{
+  "seo_title": "Programs | Net Impact IU Project Teams and Workshops",
+  "seo_description": "Net Impact IU programs: semester-long nonprofit consulting project teams, weekly professional development meetings, and service events in Bloomington.",
+  "headline": "What members do",
+  "intro": "Net Impact IU members can join a consulting project team, build career skills at weekly meetings, and give back through service events. Most members do all three.",
+  "programs": [
+    {
+      "title": "Nonprofit consulting project teams",
+      "audience": "Any member; apply each semester",
+      "status": "Applications open at the start of each semester.",
+      "text": "Students provide free consulting to local nonprofits and get hands-on experience. Each team has one project lead and five consultants, meets with its client weekly or biweekly, and delivers results by the end of the semester.",
+      "bullets": [
+        "Apply and interview at the start of the semester (about two weeks)",
+        "Rank the projects you want to work on",
+        "Send weekly updates to the Net Impact consulting team",
+        "Clients give mid-semester and end-of-semester feedback"
+      ]
+    },
+    {
+      "title": "Professional development",
+      "audience": "All members",
+      "status": "General meetings every Monday, 7:00 to 8:00 pm.",
+      "text": "Hands-on general meetings help members explore careers in sustainability, corporate responsibility and social impact, and build the skills employers in those fields look for.",
+      "bullets": [
+        "Weekly workshops and activities",
+        "Career exploration in impact-focused fields",
+        "Topics and rooms posted each week on Instagram"
+      ]
+    },
+    {
+      "title": "Service and community",
+      "audience": "All members",
+      "status": "Events throughout the semester.",
+      "text": "Members volunteer together and build friendships through socials and campus events.",
+      "bullets": [
+        "Volunteer events at organizations like Hoosier Hills Food Bank",
+        "Socials, from bowling to tote bag painting",
+        "Campus events like the Kelley Carnival"
+      ]
+    }
+  ]
+}
