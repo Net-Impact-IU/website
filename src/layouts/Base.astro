@@ -73,12 +73,18 @@ const schemas = [org, ...extraSchema];
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    {site.announcement && (
-      <p class="announce">
-        {site.announcement}
-        {site.announcement_link && site.announcement_link_text && <a href={url(site.announcement_link)}>{site.announcement_link_text}</a>}
-      </p>
-    )}
+    {/* Announcement strip: one slim line. When it has a link, the whole strip is the tap target. */}
+    {site.announcement && (site.announcement_link ? (
+      <a class="announce" href={url(site.announcement_link)}>
+        <span>{site.announcement}</span>{' '}
+        <span class="announce__cta">
+          {site.announcement_link_text && <span class="announce__cta-text">{site.announcement_link_text}</span>}
+          <span aria-hidden="true">→</span>
+        </span>
+      </a>
+    ) : (
+      <p class="announce">{site.announcement}</p>
+    ))}
     <Header />
     <main id="main">
       <slot />
