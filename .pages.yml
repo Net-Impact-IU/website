@@ -23,6 +23,7 @@ content:
       - { name: founded, label: Year founded, type: string }
       - { name: email, label: Contact email, type: string, required: true }
       - { name: meeting_time, label: Meeting day and time, type: string, description: "Example: Mondays, 7:00 to 8:00 pm" }
+      - { name: meeting_room, label: General meeting room, type: string, description: "This semester's room, e.g. Luddy Hall, IF 1104. If beINvolved lists the same meeting twice, the site keeps the entry in this room." }
       - { name: meeting_location, label: Meeting location note, type: string }
       - { name: dues_note, label: Dues note, type: string, description: Shown on the Join page. }
       - { name: join_url, label: Membership form link, type: string, required: true }

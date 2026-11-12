@@ -83,7 +83,7 @@ Run locally: `INSTAGRAM_TOKEN=... npm run fetch:instagram && npm run dev`.
 
 ## Events from beINvolved (Events page and home page)
 
-Every build pulls Net Impact's upcoming events from beINvolved (`scripts/fetch-beinvolved.mjs`) and shows them as plain HTML next to any events typed into the Events form. Officers post an event on beINvolved once; it appears on the site after the next build (daily, about 5 am). No login, key or token is involved.
+Every build pulls Net Impact's upcoming events from beINvolved (`scripts/fetch-beinvolved.mjs`) and shows them as plain HTML next to any events typed into the Events form. Officers post an event on beINvolved once; it appears on the site after the next build (every 6 hours). No login, key or token is involved.
 
 | Item | Value |
 | --- | --- |
@@ -97,7 +97,7 @@ What the script does, and why:
 
 - **Times:** beINvolved sends UTC. The site converts to Indiana time (`America/Indiana/Indianapolis`), so `2026-11-17T00:05Z` shows as Mon Nov 16, 7:05 pm.
 - **Cancelled events** are dropped. **Members-only events** (visibility `Organization` in the fallback source) are dropped.
-- **Duplicates:** two entries with the same start time and location show once (the shorter title wins). Better fix: delete the duplicate in beINvolved.
+- **Duplicates:** two entries with the same start time show once. The entry in the room set under Site settings > General meeting room wins; otherwise the shorter title. Better fix: delete the duplicate in beINvolved.
 - **Descriptions** are reduced to plain text and shortened; nothing from beINvolved is inserted as HTML.
 - **If beINvolved is down or changes format,** the build still passes, the list shows only manual events, and the page keeps its "See all events on beINvolved" link. The build log says `beINvolved ... feed not read`.
 - The fetch runs on GitHub's servers during the build, never in the visitor's browser (beINvolved does not allow cross-site browser requests).

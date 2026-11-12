@@ -26,6 +26,14 @@ const DESCRIPTION_LIMIT = 220;
 const TIMEOUT_MS = 10000;
 const USER_AGENT = 'NetImpactIU-website-build (+https://github.com/Net-Impact-IU/website)';
 
+// This semester's general meeting room, set in the Site settings form. Used only to choose between duplicates.
+let MEETING_ROOM = '';
+try {
+  MEETING_ROOM = JSON.parse(fs.readFileSync(path.join(root, 'src/content/settings/site.json'), 'utf8')).meeting_room || '';
+} catch {}
+const squash = (s) => String(s ?? '').toLowerCase().replace(/[^a-z0-9]/g, '');
+const inMeetingRoom = (e) => Boolean(MEETING_ROOM) && squash(e.location).includes(squash(MEETING_ROOM));
+
 const clean = (s) => String(s ?? '').replace(/\s+/g, ' ').trim();
 const stripHtml = (s) =>
   String(s ?? '')
@@ -101,12 +109,12 @@ function fromJson(text) {
 export function normalize(events, now = new Date()) {
   const upcoming = events
     .filter((e) => e.title && !e.cancelled && !Number.isNaN(Date.parse(e.startUtc)) && new Date(e.endUtc) >= now)
-    .sort((a, b) => a.startUtc.localeCompare(b.startUtc) || a.title.length - b.title.length);
-  // beINvolved sometimes holds two entries for the same meeting (same start time and place).
-  // Keep one: the entry with the shorter title.
+    .sort((a, b) => a.startUtc.localeCompare(b.startUtc) || inMeetingRoom(b) - inMeetingRoom(a) || a.title.length - b.title.length);
+  // beINvolved sometimes holds two entries for the same meeting (same start time).
+  // Keep one: the entry in this semester's meeting room if there is one, otherwise the shorter title.
   const seen = new Set();
   const unique = upcoming.filter((e) => {
-    const key = `${e.startUtc}|${e.location.toLowerCase()}`;
+    const key = e.startUtc;
     if (seen.has(key)) return false;
     seen.add(key);
     return true;
