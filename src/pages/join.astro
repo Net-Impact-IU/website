@@ -9,6 +9,7 @@ import { site } from '../lib/data';
   <PageHero kicker="Join" title={page.headline} intro={page.intro}>
     <div class="btn-row">
       <a class="btn btn--primary" href={site.join_url} rel="noopener" data-goatcounter-click="click-membership-form" data-goatcounter-title="Membership form button">Fill out the membership form</a>
+      {site.groupme_url && <a class="btn btn--secondary" href={site.groupme_url} rel="noopener" data-goatcounter-click="click-groupme" data-goatcounter-title="GroupMe button">Join the GroupMe</a>}
       <a class="btn btn--secondary" href={site.newsletter_url} rel="noopener">Get the newsletter</a>
     </div>
   </PageHero>
@@ -21,7 +22,7 @@ import { site } from '../lib/data';
         ))}
       </ol>
       <p class="dues">{site.dues_note}</p>
-      <p class="links">More links: <a href={site.linktree_url} rel="noopener">Linktree</a> · <a href={site.instagram_url} rel="noopener">Instagram</a> · <a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <p class="links">More links: {site.groupme_url && <><a href={site.groupme_url} rel="noopener">GroupMe</a> · </>}<a href={site.instagram_url} rel="noopener">Instagram</a> · <a href={site.linktree_url} rel="noopener">Linktree</a> · <a href={`mailto:${site.email}`}>{site.email}</a></p>
     </div>
   </section>
 
