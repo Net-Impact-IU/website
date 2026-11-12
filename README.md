@@ -102,6 +102,8 @@ What the script does, and why:
 - **If beINvolved is down or changes format,** the build still passes, the list shows only manual events, and the page keeps its "See all events on beINvolved" link. The build log says `beINvolved ... feed not read`.
 - The fetch runs on GitHub's servers during the build, never in the visitor's browser (beINvolved does not allow cross-site browser requests).
 
+**IU sustainability calendar:** the same build step also saves the next 3 events from IU's campus sustainability calendar (`scripts/fetch-iu-sustainability.mjs`, LiveWhale group `Sustain IU`, https://events.iu.edu/sustainiu/). They show in their own "Sustainability events on campus" section on the Events page and are not marked as Net Impact events for Google. If the feed is empty or unreachable, the section shows only the calendar links. IU has changed calendar systems before, so if the build log says `IU sustainability calendar not read`, check the group name and feed path in the IU events documentation.
+
 Run locally: `npm run fetch:events && npm run dev`. The "Check event feed" workflow runs the script alone and prints the result.
 
 ## JavaScript on the site

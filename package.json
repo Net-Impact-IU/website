@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "check:content": "node scripts/check-content.mjs",
     "fetch:instagram": "node scripts/fetch-instagram.mjs",
-    "fetch:events": "node scripts/fetch-beinvolved.mjs"
+    "fetch:events": "node scripts/fetch-beinvolved.mjs && node scripts/fetch-iu-sustainability.mjs"
   },
   "engines": {
     "node": ">=20"

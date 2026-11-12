@@ -1,10 +1,9 @@
-# Runs the beINvolved events script on its own and prints what it found. Does not deploy anything.
+# Runs the event feed scripts (beINvolved, IU sustainability calendar) and prints what they found. Does not deploy anything.
 name: Check event feed
 on:
   workflow_dispatch:
   push:
-    branches: [js-and-event-feeds]
-    paths: ['scripts/fetch-beinvolved.mjs', '.github/workflows/feed-check.yml']
+    paths: ['scripts/fetch-beinvolved.mjs', 'scripts/fetch-iu-sustainability.mjs', '.github/workflows/feed-check.yml']
 permissions:
   contents: read
 jobs:
@@ -18,6 +17,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run fetch:events
+        env:
+          IU_EVENTS_DEBUG: '1'
+      - name: Show IU sustainability result
+        run: cat src/content/generated/iu-sustainability.json
       - name: Show result
         run: cat src/content/generated/beinvolved.json
       - name: Show feed headers (iCal and event search)

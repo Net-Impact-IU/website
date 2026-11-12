@@ -11,6 +11,8 @@ export { site, officers, impact, faq, gallery, testimonials };
 export const TIME_ZONE = 'America/Indiana/Indianapolis';
 export const BEINVOLVED_ORG_URL = 'https://beinvolved.indiana.edu/organization/netimpact';
 export const BEINVOLVED_ICAL_URL = `${BEINVOLVED_ORG_URL}/events.ics`;
+export const IU_SUSTAINABILITY_URL = 'https://events.iu.edu/sustainiu/';
+export const IU_SUSTAINABILITY_ICAL_URL = 'https://events.iu.edu/live/ical/events/group/Sustain%20IU/';
 
 /** One event as the site shows it, whether it was typed into the Events form or came from beINvolved. */
 export type SiteEvent = {
@@ -83,6 +85,35 @@ export function beinvolvedEvents(now = new Date()): SiteEvent[] {
         linkLabel: 'Details',
         featured: false,
         calendarUrl: googleCalendarUrl({ title: e.title, start, end, location: e.location, details: [e.description, e.url].filter(Boolean).join('\n\n') }),
+        startIso: e.startUtc,
+        endIso: e.endUtc,
+      };
+    });
+}
+
+type CampusFeedEvent = { id: string; title: string; location: string; startUtc: string; endUtc: string; allDay: boolean; url: string };
+// Written by scripts/fetch-iu-sustainability.mjs during the build; missing locally unless you run it.
+const campusFiles = import.meta.glob<{ default: { events: CampusFeedEvent[] } }>('../content/generated/iu-sustainability.json', { eager: true });
+
+/** Next few events from IU's campus sustainability calendar (not Net Impact events). */
+export function campusSustainabilityEvents(now = new Date()): SiteEvent[] {
+  const events = Object.values(campusFiles)[0]?.default.events ?? [];
+  return events
+    .filter((e) => new Date(e.endUtc) >= now)
+    .map((e) => {
+      const start = new Date(e.startUtc);
+      const end = new Date(e.endUtc);
+      return {
+        title: e.title,
+        sort: start.getTime(),
+        ...dateParts(start, TIME_ZONE),
+        time: e.allDay ? 'All day' : timeRange(start, end),
+        location: e.location,
+        description: '',
+        link: e.url,
+        linkLabel: 'Details',
+        featured: false,
+        calendarUrl: googleCalendarUrl({ title: e.title, start, end: e.allDay ? undefined : end, location: e.location, details: e.url }),
         startIso: e.startUtc,
         endIso: e.endUtc,
       };

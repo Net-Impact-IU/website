@@ -5,7 +5,8 @@ import EventList from '../components/EventList.astro';
 import JoinBanner from '../components/JoinBanner.astro';
 import InstagramFeed from '../components/InstagramFeed.astro';
 import page from '../content/pages/events.json';
-import { site, upcomingEvents, BEINVOLVED_ORG_URL, BEINVOLVED_ICAL_URL } from '../lib/data';
+import { site, upcomingEvents, campusSustainabilityEvents, BEINVOLVED_ORG_URL, BEINVOLVED_ICAL_URL, IU_SUSTAINABILITY_URL, IU_SUSTAINABILITY_ICAL_URL } from '../lib/data';
+const campus = campusSustainabilityEvents();
 const events = await upcomingEvents();
 const schema = events.map((e) => ({
   '@context': 'https://schema.org',
@@ -37,11 +38,26 @@ const schema = events.map((e) => ({
       <p class="ig">Weekly meeting rooms and topics: <a href={site.instagram_url} rel="noopener">{site.instagram_handle} on Instagram</a></p>
     </div>
   </section>
+  <section class="section section--surface" aria-labelledby="campus-title">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Around IU</span>
+        <h2 id="campus-title">Sustainability events on campus</h2>
+        <p>Talks, workshops and volunteer events from IU's campus sustainability calendar. These are hosted by other IU groups, not Net Impact IU.</p>
+      </div>
+      {campus.length > 0 && <EventList events={campus} />}
+      <div class="btn-row campus__links">
+        <a class="btn btn--secondary" href={IU_SUSTAINABILITY_URL} rel="noopener">See all IU sustainability events</a>
+        <a class="btn btn--secondary" href={IU_SUSTAINABILITY_ICAL_URL.replace(/^https:/, 'webcal:')}>Subscribe to the campus calendar</a>
+      </div>
+    </div>
+  </section>
   <InstagramFeed />
   <JoinBanner />
 </Base>
 <style>
   .ig { margin-top: var(--space-8); font-weight: 500; }
+  .campus__links { margin-top: var(--space-8); }
   .subscribe { margin-top: var(--space-12); padding: var(--space-8); background: var(--color-surface); border-radius: var(--radius-card); }
   .subscribe h2 { font-size: var(--fs-h3); }
   .subscribe__help { font-size: var(--fs-sm); margin: var(--space-4) 0 0; }
