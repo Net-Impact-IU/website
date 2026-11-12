@@ -49,7 +49,7 @@ export function normalize(items, now = new Date()) {
       return {
         id: String(e.id ?? url),
         title: decode(e.title),
-        location: decode(e.location || e.location_title),
+        location: decode(e.location || e.location_title) || (Number(e.is_online) ? 'Online' : ''),
         startUtc: start ? start.toISOString() : '',
         endUtc: end ? end.toISOString() : '',
         allDay: Boolean(e.is_all_day),
@@ -70,11 +70,11 @@ async function main() {
     console.log(`IU sustainability calendar: ${note}`);
   };
   try {
-    // The default feed leaves out location; ask for it, and fall back to the plain feed if that fails.
+    // Room/location is not part of IU's feed output; the event's Details page has it. Online events are labeled "Online".
     const feed = `${BASE}/live/json/events/group/${encodeURIComponent(GROUP)}/`;
     let items = null;
     let lastError = null;
-    for (const url of [`${feed}fields/location/`, feed]) {
+    for (const url of [feed]) {
       try {
         const res = await fetch(url, { signal: AbortSignal.timeout(TIMEOUT_MS), headers: { 'User-Agent': USER_AGENT } });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
