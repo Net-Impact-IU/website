@@ -1,0 +1,38 @@
+---
+// "Copy email address" button. Hidden unless JavaScript is on and the browser can copy,
+// so the page never shows a button that does nothing. The email link beside it always works.
+import { site } from '../lib/data';
+interface Props { variant?: 'secondary' | 'outline-light' }
+const { variant = 'secondary' } = Astro.props;
+---
+<button type="button" class={`btn btn--${variant} copy-email`} data-copy-email={site.email} hidden>
+  <span data-copy-label>Copy email address</span>
+</button>
+<span class="visually-hidden" role="status" data-copy-status></span>
+
+<script>
+  // Shows the button, copies the address on click, and confirms for two seconds.
+  if (navigator.clipboard) {
+    document.querySelectorAll<HTMLButtonElement>('[data-copy-email]').forEach((button) => {
+      const label = button.querySelector<HTMLElement>('[data-copy-label]')!;
+      const status = button.nextElementSibling as HTMLElement | null;
+      const original = label.textContent ?? '';
+      let timer: number | undefined;
+      button.hidden = false;
+      button.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(button.dataset.copyEmail ?? '');
+          label.textContent = 'Copied';
+          if (status) status.textContent = 'Email address copied';
+        } catch {
+          label.textContent = button.dataset.copyEmail ?? original; // show the address so it can be copied by hand
+        }
+        window.clearTimeout(timer);
+        timer = window.setTimeout(() => {
+          label.textContent = original;
+          if (status) status.textContent = '';
+        }, 2000);
+      });
+    });
+  }
+</script>

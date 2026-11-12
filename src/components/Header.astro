@@ -28,7 +28,7 @@ const isCurrent = (href: string) => here === href || here === href.replace(/\/$/
       <a class="btn btn--primary site-nav__cta" href={url('/join/')}>Join</a>
     </nav>
 
-    <!-- Mobile menu: works without JavaScript -->
+    <!-- Mobile menu: works without JavaScript. The script below only adds easier ways to close it. -->
     <details class="mobile-nav">
       <summary aria-label="Menu"><span class="mobile-nav__bars" aria-hidden="true"></span>Menu</summary>
       <ul>
@@ -38,6 +38,25 @@ const isCurrent = (href: string) => here === href || here === href.replace(/\/$/
     </details>
   </div>
 </header>
+
+<script>
+  // Close the mobile menu on a tap outside it, on Escape, or after choosing a link.
+  const menu = document.querySelector<HTMLDetailsElement>('.mobile-nav');
+  if (menu) {
+    const close = (refocus = false) => {
+      if (!menu.open) return;
+      menu.open = false;
+      if (refocus) menu.querySelector('summary')?.focus();
+    };
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target as Node)) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close(true);
+    });
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => close()));
+  }
+</script>
 
 <style>
   .site-header { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid var(--color-border); }

@@ -3,13 +3,14 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import ProjectCards from '../components/ProjectCards.astro';
 import page from '../content/pages/nonprofits.json';
+import CopyEmail from '../components/CopyEmail.astro';
 import { site, approvedProjects } from '../lib/data';
 const projects = await approvedProjects();
 const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Nonprofit project request')}`;
 ---
 <Base title={page.seo_title} description={page.seo_description}>
   <PageHero kicker="For nonprofits" title={page.headline} intro={page.intro}>
-    <div class="btn-row"><a class="btn btn--primary" href={mailto}>Request a project</a></div>
+    <div class="btn-row"><a class="btn btn--primary" href={mailto}>Request a project</a><CopyEmail /></div>
   </PageHero>
 
 
@@ -68,7 +69,7 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Nonprofit pro
     <div class="container narrow">
       <h2 id="contact-title">Work with Net Impact IU</h2>
       <p>{page.cta_text} Email <a href={mailto}>{site.email}</a> with a short description of your organization and the help you need.</p>
-      <a class="btn btn--light" href={mailto}>Request a project</a>
+      <div class="btn-row"><a class="btn btn--light" href={mailto}>Request a project</a><CopyEmail variant="outline-light" /></div>
     </div>
   </section>
 </Base>

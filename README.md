@@ -104,6 +104,17 @@ What the script does, and why:
 
 Run locally: `npm run fetch:events && npm run dev`. The "Check event feed" workflow runs the script alone and prints the result.
 
+## JavaScript on the site
+
+The site is plain HTML first. Two small scripts add convenience and nothing depends on them:
+
+| Script | Where | What it adds | With JavaScript off |
+| --- | --- | --- | --- |
+| Menu close | `src/components/Header.astro` | Mobile menu closes on a tap outside it, on Escape, or after choosing a link | Menu opens and closes with the Menu button |
+| Copy email | `src/components/CopyEmail.astro` | "Copy email address" button on For Nonprofits | Button is hidden; the email link still works |
+
+Rule for anything new: content must be in the HTML, and the page must still work with scripts off.
+
 ## Changing things
 
 | Task | Where |
