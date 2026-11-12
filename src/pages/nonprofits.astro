@@ -10,7 +10,7 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Nonprofit pro
 ---
 <Base title={page.seo_title} description={page.seo_description}>
   <PageHero kicker="For nonprofits" title={page.headline} intro={page.intro}>
-    <div class="btn-row"><a class="btn btn--primary" href={mailto}>Request a project</a><CopyEmail /></div>
+    <div class="btn-row"><a class="btn btn--primary" href={mailto} data-goatcounter-click="click-request-project" data-goatcounter-title="Request a project button">Request a project</a><CopyEmail /></div>
   </PageHero>
 
 
@@ -69,7 +69,7 @@ const mailto = `mailto:${site.email}?subject=${encodeURIComponent('Nonprofit pro
     <div class="container narrow">
       <h2 id="contact-title">Work with Net Impact IU</h2>
       <p>{page.cta_text} Email <a href={mailto}>{site.email}</a> with a short description of your organization and the help you need.</p>
-      <div class="btn-row"><a class="btn btn--light" href={mailto}>Request a project</a><CopyEmail variant="outline-light" /></div>
+      <div class="btn-row"><a class="btn btn--light" href={mailto} data-goatcounter-click="click-request-project" data-goatcounter-title="Request a project button">Request a project</a><CopyEmail variant="outline-light" /></div>
     </div>
   </section>
 </Base>

@@ -1,29 +1,53 @@
 ---
 import { officers } from '../lib/data';
 import { url, initials } from '../lib/url';
+
+// Group officers under their department, in the order departments first appear in the Officers form.
+// Officers with no department (the co-presidents) form the first group, titled by their shared role.
+type Officer = (typeof officers.officers)[number];
+const groups: { title: string; members: Officer[] }[] = [];
+for (const o of officers.officers) {
+  const key = (o.department || '').trim();
+  let group = groups.find((g) => g.key === key) as { key: string; title: string; members: Officer[] } | undefined;
+  if (!group) {
+    group = { key, title: key, members: [] };
+    groups.push(group);
+  }
+  group.members.push(o);
+}
+for (const g of groups) {
+  if (g.title) continue;
+  const roles = [...new Set(g.members.map((m) => m.role))];
+  g.title = roles.length === 1 ? (g.members.length > 1 ? `${roles[0]}s` : roles[0]) : 'Leadership';
+}
 ---
-<ul class="officers">
-  {officers.officers.map((o) => (
-    <li class="officer">
-      {o.photo ? (
-        <img class="officer__photo" src={url(o.photo)} alt={o.photo_alt || `Headshot of ${o.name}`} width="240" height="240" loading="lazy" />
-      ) : (
-        <div class="officer__photo officer__photo--initials" aria-hidden="true">{initials(o.name)}</div>
-      )}
-      <h3>{o.name}</h3>
-      <p class="officer__role">{o.role}</p>
-      {o.department && <p class="officer__dept">{o.department}</p>}
-      {o.linkedin && <a class="officer__link" href={o.linkedin} rel="noopener">LinkedIn<span class="visually-hidden"> profile of {o.name}</span></a>}
-    </li>
-  ))}
-</ul>
+{groups.map((g) => (
+  <section class="officer-group">
+    <h3 class="officer-group__title">{g.title}</h3>
+    <ul class="officers">
+      {g.members.map((o) => (
+        <li class="officer">
+          {o.photo ? (
+            <img class="officer__photo" src={url(o.photo)} alt={o.photo_alt || `Headshot of ${o.name}`} width="240" height="240" loading="lazy" />
+          ) : (
+            <div class="officer__photo officer__photo--initials" aria-hidden="true">{initials(o.name)}</div>
+          )}
+          <h4>{o.name}</h4>
+          <p class="officer__role">{o.role}</p>
+          {o.linkedin && <a class="officer__link" href={o.linkedin} rel="noopener">LinkedIn<span class="visually-hidden"> profile of {o.name}</span></a>}
+        </li>
+      ))}
+    </ul>
+  </section>
+))}
 <style>
+  .officer-group + .officer-group { margin-top: var(--space-12); }
+  .officer-group__title { font-size: var(--fs-h3); padding-bottom: var(--space-2); margin-bottom: var(--space-6); border-bottom: 1px solid var(--color-border); }
   .officers { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-8) var(--space-6); }
   .officer { text-align: center; }
   .officer__photo { width: min(148px, 100%); aspect-ratio: 1; height: auto; border-radius: 50%; object-fit: cover; margin: 0 auto var(--space-4); }
   .officer__photo--initials { display: grid; place-items: center; background: var(--color-aqua); color: var(--color-teal); font-family: var(--font-display); font-weight: 700; font-size: 2.5rem; }
-  .officer h3 { font-size: 1.0625rem; margin-bottom: 2px; color: var(--color-teal); }
+  .officer h4 { font-family: var(--font-display); font-weight: 600; line-height: 1.3; margin: 0; font-size: 1.0625rem; margin-bottom: 2px; color: var(--color-teal); }
   .officer__role { margin: 0; font-weight: 600; font-size: var(--fs-sm); color: var(--color-primary); }
-  .officer__dept { margin: 0; font-size: var(--fs-xs); }
   .officer__link { display: inline-block; margin-top: var(--space-2); font-size: var(--fs-sm); font-weight: 600; }
 </style>

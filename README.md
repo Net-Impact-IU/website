@@ -115,6 +115,8 @@ The site is plain HTML first. Two small scripts add convenience and nothing depe
 
 Related features that use plain links, no script: "Add to Google Calendar" on each event, gallery photos that open full size, and the announcement strip at the top of every page (Site settings > Announcement strip; leave it empty to hide it).
 
+**Visitor statistics:** every page loads GoatCounter's counter script (no cookies, no personal data). The dashboard is https://netimpactiu.goatcounter.com, owned by envbus@iu.edu. It also counts clicks on the membership form button and the Request a project buttons (`data-goatcounter-click`). To turn it off, clear Site settings > Visitor statistics code. If no visits show, test in a browser without an ad blocker.
+
 Rule for anything new: content must be in the HTML, and the page must still work with scripts off.
 
 ## Changing things

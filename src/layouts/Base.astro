@@ -84,5 +84,9 @@ const schemas = [org, ...extraSchema];
       <slot />
     </main>
     <Footer />
+    {/* Visitor statistics (GoatCounter): no cookies, no personal data. Set or clear the code in Site settings. */}
+    {site.goatcounter_code && import.meta.env.PROD && (
+      <script is:inline data-goatcounter={`https://${site.goatcounter_code}.goatcounter.com/count`} async src="https://gc.zgo.at/count.js"></script>
+    )}
   </body>
 </html>

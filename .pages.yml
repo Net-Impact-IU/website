@@ -27,6 +27,7 @@ content:
       - { name: announcement, label: Announcement strip (top of every page), type: string, description: "One short line, e.g. Membership applications are open all year. Leave empty to hide the strip." }
       - { name: announcement_link_text, label: Announcement link text, type: string, description: "Example: Join Net Impact" }
       - { name: announcement_link, label: Announcement link, type: string, description: "Example: /join/ or a full web address" }
+      - { name: goatcounter_code, label: Visitor statistics code (GoatCounter), type: string, description: "The site code from goatcounter.com, e.g. netimpactiu. Leave empty to turn visitor statistics off." }
       - { name: meeting_location, label: Meeting location note, type: string }
       - { name: dues_note, label: Dues note, type: string, description: Shown on the Join page. }
       - { name: join_url, label: Membership form link, type: string, required: true }
