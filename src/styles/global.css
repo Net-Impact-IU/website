@@ -143,6 +143,8 @@ main :where(p), main :where(ul:not([class]), ol:not([class])) > li { max-width: 
 }
 
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.announce { margin: 0; padding: 6px var(--space-4); background: var(--color-teal); color: #fff; text-align: center; font-size: var(--fs-sm); font-weight: 500; }
+.announce a { color: #fff; font-weight: 600; margin-left: var(--space-2); display: inline-block; padding-block: 12px; }
 .skip-link { position: absolute; left: -999px; top: 8px; background: #fff; padding: 8px 16px; z-index: 100; }
 .skip-link:focus { left: 8px; }
 

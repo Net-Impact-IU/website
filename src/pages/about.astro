@@ -41,7 +41,9 @@ const photos = galleryPhotos();
           {photos.map((p) => (
             <li>
               <figure>
-                <img src={url(p.image)} alt={p.alt} width="600" height="450" loading="lazy" />
+                <a href={url(p.image)} aria-label={`View larger photo: ${p.caption}`}>
+                  <img src={url(p.image)} alt={p.alt} width="600" height="450" loading="lazy" />
+                </a>
                 <figcaption>{p.caption}</figcaption>
               </figure>
             </li>
@@ -56,6 +58,7 @@ const photos = galleryPhotos();
 <style>
   .gallery { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-6); }
   .gallery figure { margin: 0; }
+  .gallery a { display: block; border-radius: var(--radius-card); }
   .gallery img { border-radius: var(--radius-card); aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
   .gallery figcaption { margin-top: var(--space-2); font-size: var(--fs-sm); font-weight: 500; }
 </style>

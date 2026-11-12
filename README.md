@@ -113,6 +113,8 @@ The site is plain HTML first. Two small scripts add convenience and nothing depe
 | Menu close | `src/components/Header.astro` | Mobile menu closes on a tap outside it, on Escape, or after choosing a link | Menu opens and closes with the Menu button |
 | Copy email | `src/components/CopyEmail.astro` | "Copy email address" button on For Nonprofits | Button is hidden; the email link still works |
 
+Related features that use plain links, no script: "Add to Google Calendar" on each event, gallery photos that open full size, and the announcement strip at the top of every page (Site settings > Announcement strip; leave it empty to hide it).
+
 Rule for anything new: content must be in the HTML, and the page must still work with scripts off.
 
 ## Changing things

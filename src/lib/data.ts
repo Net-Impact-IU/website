@@ -25,6 +25,7 @@ export type SiteEvent = {
   link: string;
   linkLabel: string;
   featured: boolean;
+  calendarUrl: string; // "Add to Google Calendar" link
   startIso: string; // for Google structured data
   endIso?: string;
 };
@@ -50,6 +51,15 @@ function timeRange(start: Date, end: Date) {
   return s.period === e.period ? `${s.clock} to ${e.clock} ${e.period}` : `${s.clock} ${s.period} to ${e.clock} ${e.period}`;
 }
 
+/** Standard Google Calendar "add event" link. Times are UTC (ends in Z); form events with no time are all-day. */
+function googleCalendarUrl(e: { title: string; start: Date; end?: Date; location: string; details: string }) {
+  const stamp = (d: Date) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+  const day = (d: Date) => d.toISOString().slice(0, 10).replace(/-/g, '');
+  const dates = e.end ? `${stamp(e.start)}/${stamp(e.end)}` : `${day(e.start)}/${day(new Date(e.start.getTime() + 86400000))}`;
+  const q = new URLSearchParams({ action: 'TEMPLATE', text: e.title, dates, location: e.location, details: e.details });
+  return `https://calendar.google.com/calendar/render?${q}`;
+}
+
 type FeedEvent = { id: string; title: string; description: string; location: string; startUtc: string; endUtc: string; categories: string[]; url: string };
 // Written by scripts/fetch-beinvolved.mjs during the build; missing locally unless you run it.
 const feedFiles = import.meta.glob<{ default: { events: FeedEvent[] } }>('../content/generated/beinvolved.json', { eager: true });
@@ -72,6 +82,7 @@ export function beinvolvedEvents(now = new Date()): SiteEvent[] {
         link: e.url,
         linkLabel: 'Details',
         featured: false,
+        calendarUrl: googleCalendarUrl({ title: e.title, start, end, location: e.location, details: [e.description, e.url].filter(Boolean).join('\n\n') }),
         startIso: e.startUtc,
         endIso: e.endUtc,
       };
@@ -98,6 +109,7 @@ export async function upcomingEvents(): Promise<SiteEvent[]> {
       link: e.data.signup_url,
       linkLabel: 'Sign up',
       featured: e.data.featured,
+      calendarUrl: googleCalendarUrl({ title: e.data.title, start: e.data.date, location: e.data.location, details: [e.data.time, e.data.description].filter(Boolean).join('\n\n') }),
       startIso: e.data.date.toISOString().slice(0, 10),
     }));
   return [...manual, ...beinvolvedEvents()].sort((a, b) => a.sort - b.sort);

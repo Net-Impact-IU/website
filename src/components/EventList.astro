@@ -17,6 +17,7 @@ const { events, emptyText } = Astro.props;
             {[e.time, e.location].filter(Boolean).join(' · ')}
           </p>
           {e.description && <p>{e.description}</p>}
+          <p class="event__cal"><a href={e.calendarUrl} rel="noopener">Add to Google Calendar<span class="visually-hidden">: {e.title}</span></a></p>
         </div>
         {e.link && <a class="btn btn--secondary event__cta" href={e.link} rel="noopener">{e.linkLabel}<span class="visually-hidden">: {e.title}</span></a>}
       </li>
@@ -31,6 +32,8 @@ const { events, emptyText } = Astro.props;
   .event__date strong { display: block; font-family: var(--font-display); font-size: 1.75rem; line-height: 1.1; }
   .event__body h3 { margin-bottom: 4px; }
   .event__body p { margin: 0; }
+  .event__cal { font-size: var(--fs-sm); font-weight: 600; }
+  .event__cal a { display: inline-block; padding-block: 11px; }
   .event__meta { font-size: var(--fs-sm); font-weight: 500; }
   .events-empty { padding: var(--space-6); background: var(--color-surface); border-radius: var(--radius-card); margin: 0; }
   @media (max-width: 640px) { .event { grid-template-columns: 60px 1fr; } .event__cta { grid-column: 1 / -1; } }

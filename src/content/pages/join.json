@@ -2,10 +2,19 @@
   "seo_title": "Join Net Impact IU | Membership for All IU Majors",
   "seo_description": "Join Net Impact Indiana University. Open to IU Bloomington undergraduates from any major. Fill out the membership form and come to a Monday meeting.",
   "headline": "Join Net Impact IU",
-  "intro": "Net Impact IU is open to Indiana University Bloomington undergraduates from any major and any year. Joining takes three steps.",
+  "intro": "Net Impact IU is open to Indiana University Bloomington undergraduates from any major and any year. Membership applications are open all year, and joining takes three steps.",
   "steps": [
-    { "title": "Fill out the membership form", "text": "Takes about two minutes." },
-    { "title": "Come to a Monday meeting", "text": "General meetings are Mondays, 7:00 to 8:00 pm. Check Instagram for the room." },
-    { "title": "Get involved", "text": "Apply for a project team at the start of the semester and sign up for events." }
+    {
+      "title": "Fill out the membership form",
+      "text": "Takes about two minutes."
+    },
+    {
+      "title": "Come to a Monday meeting",
+      "text": "General meetings are Mondays, 7:00 to 8:00 pm. Check Instagram for the room."
+    },
+    {
+      "title": "Get involved",
+      "text": "Apply for a project team (applications typically open the second week of the semester) and sign up for events."
+    }
   ]
 }

@@ -73,6 +73,12 @@ const schemas = [org, ...extraSchema];
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    {site.announcement && (
+      <p class="announce">
+        {site.announcement}
+        {site.announcement_link && site.announcement_link_text && <a href={url(site.announcement_link)}>{site.announcement_link_text}</a>}
+      </p>
+    )}
     <Header />
     <main id="main">
       <slot />
