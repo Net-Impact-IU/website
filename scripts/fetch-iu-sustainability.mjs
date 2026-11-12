@@ -70,12 +70,25 @@ async function main() {
     console.log(`IU sustainability calendar: ${note}`);
   };
   try {
-    const url = `${BASE}/live/json/events/group/${encodeURIComponent(GROUP)}/`;
-    const res = await fetch(url, { signal: AbortSignal.timeout(TIMEOUT_MS), headers: { 'User-Agent': USER_AGENT } });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const body = await res.json();
-    const items = Array.isArray(body) ? body : Array.isArray(body?.data) ? body.data : null;
-    if (!items) throw new Error('unexpected response shape (no event list)');
+    // The default feed leaves out location; ask for it, and fall back to the plain feed if that fails.
+    const feed = `${BASE}/live/json/events/group/${encodeURIComponent(GROUP)}/`;
+    let items = null;
+    let lastError = null;
+    for (const url of [`${feed}fields/location/`, feed]) {
+      try {
+        const res = await fetch(url, { signal: AbortSignal.timeout(TIMEOUT_MS), headers: { 'User-Agent': USER_AGENT } });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const body = await res.json();
+        items = Array.isArray(body) ? body : Array.isArray(body?.data) ? body.data : null;
+        if (!items) throw new Error('unexpected response shape (no event list)');
+        if (process.env.IU_EVENTS_DEBUG) console.log(`read ${url}`);
+        break;
+      } catch (e) {
+        lastError = e;
+        items = null;
+      }
+    }
+    if (!items) throw lastError ?? new Error('no event list');
     if (process.env.IU_EVENTS_DEBUG && items[0]) console.log(`fields on first event: ${Object.keys(items[0]).join(', ')}`);
     const events = normalize(items);
     write(events, `${events.length} upcoming events saved (${items.length} in feed)`);
