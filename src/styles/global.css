@@ -67,6 +67,7 @@ a { color: var(--color-primary); text-underline-offset: 3px; }
 a:hover { color: var(--color-primary-dark); }
 :focus-visible { outline: 3px solid var(--color-cyan); outline-offset: 3px; border-radius: 4px; }
 ul { padding-left: 1.2em; }
+[id] { scroll-margin-top: 112px; } /* in-page links land below the sticky header */
 
 .container { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--container-px); }
 .narrow { max-width: var(--container-narrow); }

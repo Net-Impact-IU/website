@@ -5,6 +5,7 @@
   "intro": "Net Impact IU members can join a consulting project team, build career skills at weekly meetings, and give back through service events. Most members do all three.",
   "programs": [
     {
+      "anchor": "project-teams",
       "title": "Nonprofit consulting project teams",
       "audience": "Any member; apply each semester",
       "status": "Applications open at the start of each semester.",
@@ -17,6 +18,7 @@
       ]
     },
     {
+      "anchor": "professional-development",
       "title": "Professional development",
       "audience": "All members",
       "status": "General meetings every Monday, 7:00 to 8:00 pm.",
@@ -28,6 +30,7 @@
       ]
     },
     {
+      "anchor": "service",
       "title": "Service and community",
       "audience": "All members",
       "status": "Events throughout the semester.",

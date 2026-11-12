@@ -10,7 +10,7 @@ import { url } from '../lib/url';
   <section class="section">
     <div class="container programs">
       {page.programs.map((p) => (
-        <article class="card program">
+        <article class="card program" id={p.anchor}>
           <div class="card__accent" aria-hidden="true"></div>
           <h2>{p.title}</h2>
           <p class="program__meta"><span class="chip">{p.audience}</span> <span class="program__status">{p.status}</span></p>

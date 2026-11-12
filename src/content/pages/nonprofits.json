@@ -1,32 +1,32 @@
 {
   "seo_title": "Free Consulting for Bloomington Nonprofits | Net Impact IU",
-  "seo_description": "Net Impact IU student teams give Bloomington-area nonprofits free, semester-long consulting in marketing, fundraising, research, operations and data.",
+  "seo_description": "Net Impact IU student teams give Bloomington-area nonprofits free, semester-long consulting in market research, growth, operations, sustainability and data.",
   "headline": "Free consulting for Bloomington nonprofits",
   "intro": "Net Impact IU offers free, semester-long consulting to Bloomington-area nonprofits. A team of six IU students works on a project you define, meets with you regularly, and delivers finished work by the end of the semester.",
   "services": [
     {
-      "name": "Marketing and engagement",
-      "text": "Social media, events and campaigns that reach your audience."
+      "name": "Market Research",
+      "text": "Research on your audience and community needs."
     },
     {
-      "name": "Fundraising and grant strategy",
-      "text": "Grant research and fundraising plans to grow your funding."
+      "name": "Growth and Scalability",
+      "text": "Plans to reach more people and expand your programs."
     },
     {
-      "name": "Research and strategic insights",
-      "text": "Data-driven research to inform your next decision."
-    },
-    {
-      "name": "Partnership development and outreach",
-      "text": "Finding and building relationships with partners."
-    },
-    {
-      "name": "Operational efficiency",
+      "name": "Operations Analysis",
       "text": "Assessing how your operations run and where they can improve."
     },
     {
-      "name": "Data analysis and optimization",
-      "text": "Turning your data into better decisions and operations."
+      "name": "Sustainability Strategy",
+      "text": "Practical steps to reduce environmental impact and plan for the long term."
+    },
+    {
+      "name": "Financial Sustainability",
+      "text": "Funding and revenue ideas to keep your mission resourced."
+    },
+    {
+      "name": "Data and Analytics",
+      "text": "Turning your data into clearer decisions."
     }
   ],
   "steps": [
@@ -35,22 +35,22 @@
       "text": "Email us with a short description of your organization and the help you need."
     },
     {
-      "title": "Get matched",
-      "text": "Projects are matched to student teams at the start of each semester."
+      "title": "Scope the project",
+      "text": "For fall projects, discovery calls in July and August define the work."
     },
     {
-      "title": "Work together",
-      "text": "Your team meets with you weekly or biweekly to scope and assign tasks."
+      "title": "Kick off",
+      "text": "Your student team starts in October and meets with you weekly or biweekly."
     },
     {
       "title": "Get results",
-      "text": "The team delivers finished work by semester's end, and you share mid-semester and final feedback."
+      "text": "The team presents finished work in December, and you share mid-semester and final feedback."
     }
   ],
-  "cta_text": "To be considered for next semester, email us before the semester starts.",
+  "cta_text": "Fall projects are scoped in July and August and kick off in October.",
   "proof_stats": [
     {
-      "value": "10 years",
+      "value": "2016",
       "label": "serving clients since 2016"
     },
     {

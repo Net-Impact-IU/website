@@ -128,12 +128,12 @@ content:
         type: select
         options:
           values:
-            - Marketing and engagement
-            - Fundraising and grant strategy
-            - Research and strategic insights
-            - Partnership development and outreach
-            - Operational efficiency
-            - Data analysis and optimization
+            - Market Research
+            - Growth and Scalability
+            - Operations Analysis
+            - Sustainability Strategy
+            - Financial Sustainability
+            - Data and Analytics
       - { name: summary, label: What the team did, type: text, required: true }
       - { name: result, label: Result, type: text }
       - { name: image, label: Photo, type: image }
@@ -237,6 +237,7 @@ content:
       - { name: seo_description, label: Google description, type: text, options: { maxlength: 160 }, description: "Shown under the title in Google. Under 160 characters." }
       - { name: kicker, label: Small line above headline, type: string }
       - { name: headline, label: Headline, type: string, required: true }
+      - { name: subhead, label: Line under headline, type: string }
       - { name: intro, label: Intro paragraph, type: text }
       - { name: hero_image, label: Group photo, type: image }
       - { name: hero_image_alt, label: Group photo description, type: string }
@@ -247,7 +248,7 @@ content:
         fields:
           - { name: title, label: Title, type: string }
           - { name: text, label: Text, type: text }
-          - { name: link, label: Link, type: string, description: "Example: /programs/" }
+          - { name: link, label: Link, type: string, description: "Example: /programs/#project-teams (the part after # is the program's link name)" }
       - { name: nonprofit_headline, label: Nonprofit section headline, type: string }
       - { name: nonprofit_text, label: Nonprofit section text, type: text }
 
@@ -279,6 +280,7 @@ content:
         type: object
         list: true
         fields:
+          - { name: anchor, label: Link name, type: string, description: "Used by links that jump to this program, e.g. project-teams. Lowercase, no spaces. Leave as is unless you also update the home page cards." }
           - { name: title, label: Title, type: string }
           - { name: audience, label: Who it's for, type: string }
           - { name: status, label: Application status, type: string, description: "Example: Applications open Jan 12 to Jan 23." }
