@@ -29,6 +29,7 @@
 
   --container-max: 1200px;
   --container-narrow: 780px;
+  --measure: 32em;                /* about 65 characters of body text per line, scales with font size */
   --container-px: clamp(1rem, 4vw, 2.5rem);
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
   --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
@@ -58,6 +59,9 @@ h1, h2, h3 { font-family: var(--font-display); color: var(--color-primary); marg
 h1 { font-size: var(--fs-h1); font-weight: 800; line-height: var(--lh-tight); letter-spacing: -0.02em; }
 h2 { font-size: var(--fs-h2); font-weight: 700; line-height: var(--lh-heading); letter-spacing: -0.015em; }
 h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.3; }
+/* No stranded last words: even out heading lines, avoid one-word last lines in body text */
+h1, h2, h3 { text-wrap: balance; }
+p, li, figcaption, blockquote { text-wrap: pretty; }
 p { margin: 0 0 var(--space-4); }
 a { color: var(--color-primary); text-underline-offset: 3px; }
 a:hover { color: var(--color-primary-dark); }
@@ -66,6 +70,8 @@ ul { padding-left: 1.2em; }
 
 .container { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--container-px); }
 .narrow { max-width: var(--container-narrow); }
+/* Reading width: keep running text near 65 characters per line */
+main :where(p), main :where(ul:not([class]), ol:not([class])) > li { max-width: var(--measure); }
 .section { padding-block: clamp(var(--space-12), 8vw, var(--space-24)); }
 .section--surface { background: var(--color-surface); }
 .section--aqua { background: var(--color-aqua); }
@@ -83,12 +89,13 @@ ul { padding-left: 1.2em; }
   margin-bottom: var(--space-3);
 }
 .section--teal .kicker { color: var(--color-aqua); }
-.lead { font-size: 1.1875rem; max-width: 62ch; }
+.lead { font-size: 1.1875rem; max-width: var(--measure); }
 .section-head { max-width: 62ch; margin-bottom: var(--space-8); }
 
 /* Buttons */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: 44px; /* touch target */
   padding: 12px 28px; border-radius: var(--radius-pill);
   font-family: var(--font-body); font-size: var(--fs-sm); font-weight: 600; line-height: 1;
   text-decoration: none; border: 1.5px solid transparent; cursor: pointer;
