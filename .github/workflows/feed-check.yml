@@ -1,0 +1,26 @@
+# Runs the beINvolved events script on its own and prints what it found. Does not deploy anything.
+name: Check event feed
+on:
+  workflow_dispatch:
+  push:
+    branches: [js-and-event-feeds]
+    paths: ['scripts/fetch-beinvolved.mjs', '.github/workflows/feed-check.yml']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run fetch:events
+      - name: Show result
+        run: cat src/content/generated/beinvolved.json
+      - name: Show feed headers (iCal and event search)
+        run: |
+          curl -sS -o /dev/null -D - -m 15 https://beinvolved.indiana.edu/organization/netimpact/events.ics | head -12 || true
+          curl -sS -o /dev/null -w "event search: HTTP %{http_code}, %{content_type}\n" -m 15 "https://beinvolved.indiana.edu/api/discovery/event/search?organizationIds[0]=133614&status=Approved&take=5&query=" || true

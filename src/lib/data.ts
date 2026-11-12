@@ -8,14 +8,99 @@ import testimonials from '../content/settings/testimonials.json';
 
 export { site, officers, impact, faq, gallery, testimonials };
 
-/** Upcoming events, soonest first. Past events drop off on the next build (daily). */
-export async function upcomingEvents() {
+export const TIME_ZONE = 'America/Indiana/Indianapolis';
+export const BEINVOLVED_ORG_URL = 'https://beinvolved.indiana.edu/organization/netimpact';
+export const BEINVOLVED_ICAL_URL = `${BEINVOLVED_ORG_URL}/events.ics`;
+
+/** One event as the site shows it, whether it was typed into the Events form or came from beINvolved. */
+export type SiteEvent = {
+  title: string;
+  sort: number; // start time in ms, for ordering
+  month: string;
+  day: string;
+  long: string; // "Monday, November 16, 2026"
+  time: string; // "7:05 to 8:05 pm"
+  location: string;
+  description: string;
+  link: string;
+  linkLabel: string;
+  featured: boolean;
+  startIso: string; // for Google structured data
+  endIso?: string;
+};
+
+function dateParts(d: Date, timeZone: string) {
+  return {
+    month: d.toLocaleString('en-US', { timeZone, month: 'short' }),
+    day: d.toLocaleString('en-US', { timeZone, day: 'numeric' }),
+    long: d.toLocaleString('en-US', { timeZone, weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }),
+  };
+}
+
+/** "7:05 to 8:05 pm" or "11:30 am to 1:00 pm", always in Indiana time (beINvolved sends UTC). */
+function timeRange(start: Date, end: Date) {
+  const parts = (d: Date) => {
+    const p = new Intl.DateTimeFormat('en-US', { timeZone: TIME_ZONE, hour: 'numeric', minute: '2-digit', hour12: true }).formatToParts(d);
+    const get = (t: string) => p.find((x) => x.type === t)?.value ?? '';
+    return { clock: `${get('hour')}:${get('minute')}`, period: get('dayPeriod').toLowerCase() };
+  };
+  const s = parts(start);
+  const e = parts(end);
+  if (end.getTime() <= start.getTime()) return `${s.clock} ${s.period}`;
+  return s.period === e.period ? `${s.clock} to ${e.clock} ${e.period}` : `${s.clock} ${s.period} to ${e.clock} ${e.period}`;
+}
+
+type FeedEvent = { id: string; title: string; description: string; location: string; startUtc: string; endUtc: string; categories: string[]; url: string };
+// Written by scripts/fetch-beinvolved.mjs during the build; missing locally unless you run it.
+const feedFiles = import.meta.glob<{ default: { events: FeedEvent[] } }>('../content/generated/beinvolved.json', { eager: true });
+
+/** Upcoming events from beINvolved (already filtered to public, not cancelled, no duplicates). */
+export function beinvolvedEvents(now = new Date()): SiteEvent[] {
+  const events = Object.values(feedFiles)[0]?.default.events ?? [];
+  return events
+    .filter((e) => new Date(e.endUtc) >= now)
+    .map((e) => {
+      const start = new Date(e.startUtc);
+      const end = new Date(e.endUtc);
+      return {
+        title: e.title,
+        sort: start.getTime(),
+        ...dateParts(start, TIME_ZONE),
+        time: timeRange(start, end),
+        location: e.location,
+        description: e.description,
+        link: e.url,
+        linkLabel: 'Details',
+        featured: false,
+        startIso: e.startUtc,
+        endIso: e.endUtc,
+      };
+    });
+}
+
+/**
+ * Upcoming events, soonest first: events typed into the Events form plus the beINvolved feed.
+ * Past events drop off on the next build (daily).
+ */
+export async function upcomingEvents(): Promise<SiteEvent[]> {
   const all = await getCollection('events');
   const today = new Date();
   today.setUTCHours(0, 0, 0, 0);
-  return all
+  const manual: SiteEvent[] = all
     .filter((e) => e.data.date >= today)
-    .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+    .map((e) => ({
+      title: e.data.title,
+      sort: e.data.date.getTime(),
+      ...dateParts(e.data.date, 'UTC'), // form dates have no time, so read them as the calendar day typed in
+      time: e.data.time,
+      location: e.data.location,
+      description: e.data.description,
+      link: e.data.signup_url,
+      linkLabel: 'Sign up',
+      featured: e.data.featured,
+      startIso: e.data.date.toISOString().slice(0, 10),
+    }));
+  return [...manual, ...beinvolvedEvents()].sort((a, b) => a.sort - b.sort);
 }
 
 export async function publishedPosts() {

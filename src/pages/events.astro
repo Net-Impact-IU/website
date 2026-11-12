@@ -5,16 +5,18 @@ import EventList from '../components/EventList.astro';
 import JoinBanner from '../components/JoinBanner.astro';
 import InstagramFeed from '../components/InstagramFeed.astro';
 import page from '../content/pages/events.json';
-import { site, upcomingEvents } from '../lib/data';
+import { site, upcomingEvents, BEINVOLVED_ORG_URL, BEINVOLVED_ICAL_URL } from '../lib/data';
 const events = await upcomingEvents();
 const schema = events.map((e) => ({
   '@context': 'https://schema.org',
   '@type': 'Event',
-  name: e.data.title,
-  startDate: e.data.date.toISOString().slice(0, 10),
+  name: e.title,
+  startDate: e.startIso,
+  endDate: e.endIso,
+  url: e.link || undefined,
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-  location: { '@type': 'Place', name: e.data.location || 'Indiana University Bloomington', address: `${site.address.city}, ${site.address.state}` },
-  description: e.data.description || undefined,
+  location: { '@type': 'Place', name: e.location || 'Indiana University Bloomington', address: `${site.address.city}, ${site.address.state}` },
+  description: e.description || undefined,
   organizer: { '@type': 'Organization', name: site.chapter_name },
 }));
 ---
@@ -23,10 +25,25 @@ const schema = events.map((e) => ({
   <section class="section">
     <div class="container">
       <EventList events={events} emptyText={page.empty_text} />
+      <div class="subscribe">
+        <h2>Get events on your calendar</h2>
+        <p>Subscribe once and new Net Impact IU events appear in your calendar automatically. Times are shown in Indiana time.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href={BEINVOLVED_ICAL_URL.replace(/^https:/, 'webcal:')}>Subscribe to the calendar</a>
+          <a class="btn btn--secondary" href={`${BEINVOLVED_ORG_URL}/events`} rel="noopener">See all events on beINvolved</a>
+        </div>
+        <p class="subscribe__help">Using Google Calendar? Choose Other calendars, then From URL, and paste: <span class="subscribe__url">{BEINVOLVED_ICAL_URL}</span></p>
+      </div>
       <p class="ig">Weekly meeting rooms and topics: <a href={site.instagram_url} rel="noopener">{site.instagram_handle} on Instagram</a></p>
     </div>
   </section>
   <InstagramFeed />
   <JoinBanner />
 </Base>
-<style>.ig { margin-top: var(--space-8); font-weight: 500; }</style>
+<style>
+  .ig { margin-top: var(--space-8); font-weight: 500; }
+  .subscribe { margin-top: var(--space-12); padding: var(--space-8); background: var(--color-surface); border-radius: var(--radius-card); }
+  .subscribe h2 { font-size: var(--fs-h3); }
+  .subscribe__help { font-size: var(--fs-sm); margin: var(--space-4) 0 0; }
+  .subscribe__url { overflow-wrap: anywhere; font-weight: 600; }
+</style>

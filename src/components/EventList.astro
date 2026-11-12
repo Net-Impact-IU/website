@@ -1,30 +1,26 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import { formatDate } from '../lib/url';
-interface Props { events: CollectionEntry<'events'>[]; emptyText?: string }
+import type { SiteEvent } from '../lib/data';
+interface Props { events: SiteEvent[]; emptyText?: string }
 const { events, emptyText } = Astro.props;
 ---
 {events.length === 0 ? (
   <p class="events-empty">{emptyText}</p>
 ) : (
   <ul class="events">
-    {events.map((e) => {
-      const d = formatDate(e.data.date);
-      return (
-        <li class="event">
-          <div class="event__date" aria-hidden="true"><span>{d.month}</span><strong>{d.day}</strong></div>
-          <div class="event__body">
-            <h3>{e.data.title}</h3>
-            <p class="event__meta">
-              <span class="visually-hidden">{d.long}. </span>
-              {[e.data.time, e.data.location].filter(Boolean).join(' · ')}
-            </p>
-            {e.data.description && <p>{e.data.description}</p>}
-          </div>
-          {e.data.signup_url && <a class="btn btn--secondary event__cta" href={e.data.signup_url} rel="noopener">Sign up<span class="visually-hidden"> for {e.data.title}</span></a>}
-        </li>
-      );
-    })}
+    {events.map((e) => (
+      <li class="event">
+        <div class="event__date" aria-hidden="true"><span>{e.month}</span><strong>{e.day}</strong></div>
+        <div class="event__body">
+          <h3>{e.title}</h3>
+          <p class="event__meta">
+            <span class="visually-hidden">{e.long}. </span>
+            {[e.time, e.location].filter(Boolean).join(' · ')}
+          </p>
+          {e.description && <p>{e.description}</p>}
+        </div>
+        {e.link && <a class="btn btn--secondary event__cta" href={e.link} rel="noopener">{e.linkLabel}<span class="visually-hidden">: {e.title}</span></a>}
+      </li>
+    ))}
   </ul>
 )}
 <style>

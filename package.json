@@ -9,7 +9,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "check:content": "node scripts/check-content.mjs",
-    "fetch:instagram": "node scripts/fetch-instagram.mjs"
+    "fetch:instagram": "node scripts/fetch-instagram.mjs",
+    "fetch:events": "node scripts/fetch-beinvolved.mjs"
   },
   "engines": {
     "node": ">=20"
@@ -19,6 +20,7 @@
     "@fontsource/dm-sans": "^5.3.0",
     "@fontsource/sora": "^5.3.0",
     "astro": "^7.4.8",
+    "ical.js": "^2.2.1",
     "sharp": "^0.35.5"
   }
 }

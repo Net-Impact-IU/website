@@ -38,6 +38,8 @@ jobs:
         run: npm run fetch:instagram
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+      - name: Fetch upcoming events from beINvolved
+        run: npm run fetch:events
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

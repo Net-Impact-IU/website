@@ -11,7 +11,9 @@ import nonprofits from '../content/pages/nonprofits.json';
 import { site, upcomingEvents, approvedProjects } from '../lib/data';
 import { url } from '../lib/url';
 
-const events = (await upcomingEvents()).filter((e) => e.data.featured).slice(0, 3);
+const allEvents = await upcomingEvents();
+const featured = allEvents.filter((e) => e.featured);
+const events = (featured.length > 0 ? featured : allEvents).slice(0, 3);
 const projects = (await approvedProjects()).slice(0, 3);
 ---
 <Base title={page.seo_title} description={page.seo_description}>
