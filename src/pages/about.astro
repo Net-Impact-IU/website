@@ -5,6 +5,7 @@ import StatsBand from '../components/StatsBand.astro';
 import OfficerGrid from '../components/OfficerGrid.astro';
 import JoinBanner from '../components/JoinBanner.astro';
 import page from '../content/pages/about.json';
+import PhotoViewer from '../components/PhotoViewer.astro';
 import { impact, galleryPhotos } from '../lib/data';
 import { url } from '../lib/url';
 const photos = galleryPhotos();
@@ -41,7 +42,7 @@ const photos = galleryPhotos();
           {photos.map((p) => (
             <li>
               <figure>
-                <a href={url(p.image)} aria-label={`View larger photo: ${p.caption}`}>
+                <a href={url(p.image)} aria-label={`View larger photo: ${p.caption}`} data-gallery-link data-caption={p.caption}>
                   <img src={url(p.image)} alt={p.alt} width="600" height="450" loading="lazy" />
                 </a>
                 <figcaption>{p.caption}</figcaption>
@@ -49,6 +50,7 @@ const photos = galleryPhotos();
             </li>
           ))}
         </ul>
+        <PhotoViewer />
       </div>
     </section>
   )}

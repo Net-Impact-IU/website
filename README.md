@@ -113,6 +113,7 @@ The site is plain HTML first. Two small scripts add convenience and nothing depe
 | Script | Where | What it adds | With JavaScript off |
 | --- | --- | --- | --- |
 | Menu close | `src/components/Header.astro` | Mobile menu closes on a tap outside it, on Escape, or after choosing a link | Menu opens and closes with the Menu button |
+| Photo viewer | `src/components/PhotoViewer.astro` | Gallery photos open full size on the About page; close with Back to gallery, Escape, a tap outside the photo, or the phone's back gesture | Each photo opens as a plain image file |
 | Copy email | `src/components/CopyEmail.astro` | "Copy email address" button on For Nonprofits | Button is hidden; the email link still works |
 
 Related features that use plain links, no script: "Add to Google Calendar" on each event, gallery photos that open full size, and the announcement strip at the top of every page (Site settings > Announcement strip; leave it empty to hide it).

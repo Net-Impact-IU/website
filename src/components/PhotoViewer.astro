@@ -1,0 +1,89 @@
+---
+// Full-size photo viewer for the gallery. Without JavaScript, each gallery photo is a plain link
+// to the full-size image, so nothing depends on this script.
+// Close with the Back button, the Escape key, a tap outside the photo, or the phone's back gesture.
+---
+<dialog class="viewer" aria-label="Photo viewer" data-viewer>
+  <div class="viewer__bar">
+    <button type="button" class="btn btn--light viewer__back" data-viewer-close>
+      <span aria-hidden="true">←</span> Back to gallery
+    </button>
+  </div>
+  <figure class="viewer__figure">
+    <img class="viewer__img" alt="" data-viewer-img />
+    <figcaption class="viewer__caption" data-viewer-caption></figcaption>
+  </figure>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-viewer]');
+  const links = document.querySelectorAll<HTMLAnchorElement>('[data-gallery-link]');
+  if (dialog && typeof dialog.showModal === 'function' && links.length) {
+    const img = dialog.querySelector<HTMLImageElement>('[data-viewer-img]')!;
+    const caption = dialog.querySelector<HTMLElement>('[data-viewer-caption]')!;
+    let opener: HTMLElement | null = null;
+    let pushed = false;
+
+    const finishClose = () => {
+      if (dialog.open) dialog.close();
+      img.removeAttribute('src');
+      opener?.focus();
+    };
+
+    // Closing goes through browser history so the phone's back gesture and the Back button behave the same.
+    const requestClose = () => {
+      if (pushed) history.back();
+      else finishClose();
+    };
+
+    links.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // let "open in new tab" work
+        e.preventDefault();
+        const thumb = link.querySelector('img');
+        img.src = link.href;
+        img.alt = thumb?.alt ?? '';
+        caption.textContent = link.dataset.caption ?? '';
+        opener = link;
+        dialog.showModal();
+        history.pushState({ photoViewer: true }, '');
+        pushed = true;
+      });
+    });
+
+    window.addEventListener('popstate', () => {
+      if (!pushed) return;
+      pushed = false;
+      finishClose();
+    });
+
+    dialog.querySelector('[data-viewer-close]')!.addEventListener('click', requestClose);
+    // Escape: the browser fires "cancel"; route it through the same close path.
+    dialog.addEventListener('cancel', (e) => {
+      e.preventDefault();
+      requestClose();
+    });
+    // Tap on the dark area around the photo closes it.
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog || e.target === dialog.querySelector('.viewer__figure')) requestClose();
+    });
+  }
+</script>
+
+<style>
+  .viewer {
+    width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0;
+    background: rgba(0, 20, 26, 0.94); color: #fff;
+  }
+  .viewer[open] { display: flex; flex-direction: column; }
+  .viewer::backdrop { background: rgba(0, 20, 26, 0.94); }
+  .viewer__bar { display: flex; justify-content: flex-start; padding: var(--space-4); }
+  .viewer__back { gap: var(--space-2); }
+  .viewer__figure {
+    flex: 1; min-height: 0; margin: 0; padding: 0 var(--space-4) var(--space-6);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3);
+  }
+  .viewer__img { max-width: min(100%, 1400px); max-height: calc(100% - 3rem); object-fit: contain; border-radius: 8px; }
+  .viewer__caption { font-size: var(--fs-sm); font-weight: 500; text-align: center; max-width: var(--measure); }
+  body:has(.viewer[open]) { overflow: hidden; }
+</style>
