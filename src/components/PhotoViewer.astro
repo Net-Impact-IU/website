@@ -1,50 +1,74 @@
 ---
 // Full-size photo viewer for the gallery. Without JavaScript, each gallery photo is a plain link
 // to the full-size image, so nothing depends on this script.
-// Close with the Back button, the Escape key, a tap outside the photo, or the phone's back gesture.
+// Move between photos with the arrow buttons, the left/right arrow keys, or a swipe on phones.
+// Close with Back to gallery, the Escape key, a tap outside the photo, or the phone's back gesture.
 ---
 <dialog class="viewer" aria-label="Photo viewer" data-viewer>
   <div class="viewer__bar">
     <button type="button" class="btn btn--light viewer__back" data-viewer-close>
       <span aria-hidden="true">←</span> Back to gallery
     </button>
+    <p class="viewer__count" aria-live="polite" data-viewer-count></p>
   </div>
-  <figure class="viewer__figure">
-    <img class="viewer__img" alt="" data-viewer-img />
-    <figcaption class="viewer__caption" data-viewer-caption></figcaption>
-  </figure>
+  <div class="viewer__stage">
+    <button type="button" class="viewer__nav viewer__nav--prev" aria-label="Previous photo" data-viewer-prev>
+      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+    </button>
+    <figure class="viewer__figure" data-viewer-figure>
+      <img class="viewer__img" alt="" data-viewer-img />
+      <figcaption class="viewer__caption" data-viewer-caption></figcaption>
+    </figure>
+    <button type="button" class="viewer__nav viewer__nav--next" aria-label="Next photo" data-viewer-next>
+      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+    </button>
+  </div>
 </dialog>
 
 <script>
   const dialog = document.querySelector<HTMLDialogElement>('[data-viewer]');
-  const links = document.querySelectorAll<HTMLAnchorElement>('[data-gallery-link]');
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('[data-gallery-link]')];
   if (dialog && typeof dialog.showModal === 'function' && links.length) {
     const img = dialog.querySelector<HTMLImageElement>('[data-viewer-img]')!;
     const caption = dialog.querySelector<HTMLElement>('[data-viewer-caption]')!;
-    let opener: HTMLElement | null = null;
+    const count = dialog.querySelector<HTMLElement>('[data-viewer-count]')!;
+    const figure = dialog.querySelector<HTMLElement>('[data-viewer-figure]')!;
+    const prevBtn = dialog.querySelector<HTMLButtonElement>('[data-viewer-prev]')!;
+    const nextBtn = dialog.querySelector<HTMLButtonElement>('[data-viewer-next]')!;
+    let index = 0;
     let pushed = false;
+
+    if (links.length < 2) prevBtn.hidden = nextBtn.hidden = true;
+
+    // Show photo i (wraps around at the ends) and warm up its neighbours so arrows feel instant.
+    const show = (i: number) => {
+      index = (i + links.length) % links.length;
+      const link = links[index];
+      img.src = link.href;
+      img.alt = link.querySelector('img')?.alt ?? '';
+      caption.textContent = link.dataset.caption ?? '';
+      count.textContent = `Photo ${index + 1} of ${links.length}`;
+      for (const n of [index - 1, index + 1]) new Image().src = links[(n + links.length) % links.length].href;
+    };
 
     const finishClose = () => {
       if (dialog.open) dialog.close();
       img.removeAttribute('src');
-      opener?.focus();
+      links[index].focus(); // back to the photo last viewed
     };
 
     // Closing goes through browser history so the phone's back gesture and the Back button behave the same.
+    // Moving between photos does not add history entries, so one back always closes the viewer.
     const requestClose = () => {
       if (pushed) history.back();
       else finishClose();
     };
 
-    links.forEach((link) => {
+    links.forEach((link, i) => {
       link.addEventListener('click', (e) => {
         if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // let "open in new tab" work
         e.preventDefault();
-        const thumb = link.querySelector('img');
-        img.src = link.href;
-        img.alt = thumb?.alt ?? '';
-        caption.textContent = link.dataset.caption ?? '';
-        opener = link;
+        show(i);
         dialog.showModal();
         history.pushState({ photoViewer: true }, '');
         pushed = true;
@@ -57,7 +81,14 @@
       finishClose();
     });
 
+    prevBtn.addEventListener('click', () => show(index - 1));
+    nextBtn.addEventListener('click', () => show(index + 1));
     dialog.querySelector('[data-viewer-close]')!.addEventListener('click', requestClose);
+
+    dialog.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(index - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(index + 1); }
+    });
     // Escape: the browser fires "cancel"; route it through the same close path.
     dialog.addEventListener('cancel', (e) => {
       e.preventDefault();
@@ -65,7 +96,20 @@
     });
     // Tap on the dark area around the photo closes it.
     dialog.addEventListener('click', (e) => {
-      if (e.target === dialog || e.target === dialog.querySelector('.viewer__figure')) requestClose();
+      if (e.target === dialog || e.target === figure || (e.target as HTMLElement).classList.contains('viewer__stage')) requestClose();
+    });
+
+    // Swipe left or right on the photo (phones).
+    let startX = 0;
+    let startY = 0;
+    figure.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    }, { passive: true });
+    figure.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - startX;
+      const dy = e.changedTouches[0].clientY - startY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) show(index + (dx < 0 ? 1 : -1));
     });
   }
 </script>
@@ -77,13 +121,32 @@
   }
   .viewer[open] { display: flex; flex-direction: column; }
   .viewer::backdrop { background: rgba(0, 20, 26, 0.94); }
-  .viewer__bar { display: flex; justify-content: flex-start; padding: var(--space-4); }
+  .viewer__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-4); }
   .viewer__back { gap: var(--space-2); }
+  .viewer__count { margin: 0; font-size: var(--fs-sm); font-weight: 500; }
+  .viewer__stage {
+    flex: 1; min-height: 0; display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+    gap: var(--space-4); padding: 0 var(--space-4) var(--space-6);
+  }
   .viewer__figure {
-    flex: 1; min-height: 0; margin: 0; padding: 0 var(--space-4) var(--space-6);
+    height: 100%; min-height: 0; min-width: 0; margin: 0;
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-3);
   }
   .viewer__img { max-width: min(100%, 1400px); max-height: calc(100% - 3rem); object-fit: contain; border-radius: 8px; }
   .viewer__caption { font-size: var(--fs-sm); font-weight: 500; text-align: center; max-width: var(--measure); }
+  .viewer__nav {
+    width: 52px; height: 52px; border-radius: 50%; border: 0; display: grid; place-items: center; cursor: pointer;
+    background: #fff; color: var(--color-teal); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    transition: background var(--duration-base) var(--ease-out);
+  }
+  .viewer__nav:hover { background: var(--color-aqua); }
+  .viewer__nav[hidden] { display: none; }
+  @media (max-width: 640px) {
+    /* Phones: photo on top, arrows side by side below it, within thumb reach. */
+    .viewer__stage { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr auto; gap: var(--space-4) var(--space-6); padding-bottom: var(--space-8); }
+    .viewer__figure { grid-column: 1 / -1; grid-row: 1; }
+    .viewer__nav--prev { grid-row: 2; justify-self: end; }
+    .viewer__nav--next { grid-row: 2; justify-self: start; }
+  }
   body:has(.viewer[open]) { overflow: hidden; }
 </style>
