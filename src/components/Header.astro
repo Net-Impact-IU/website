@@ -8,6 +8,7 @@ const links = [
   { href: '/programs/', label: 'Programs' },
   { href: '/nonprofits/', label: 'For Nonprofits' },
   { href: '/events/', label: 'Events' },
+  { href: '/resources/', label: 'Resources' },
   ...(posts.length ? [{ href: '/news/', label: 'News' }] : []),
 ];
 const here = Astro.url.pathname.replace(import.meta.env.BASE_URL.replace(/\/$/, ''), '') || '/';

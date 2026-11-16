@@ -1,0 +1,99 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import JoinBanner from '../components/JoinBanner.astro';
+import page from '../content/pages/resources.json';
+import { site } from '../lib/data';
+
+// Resources are edited in Pages CMS ("Page text: Resources"). Every link goes to another site,
+// so cards are plain links; clicks are counted in GoatCounter as "resource: <name>".
+const sections = page.sections.filter((s) => s.items.length > 0);
+// Keep the last word and the arrow together so the arrow never wraps onto a line by itself.
+const splitName = (name: string) => {
+  const i = name.lastIndexOf(' ');
+  return i === -1 ? ['', name] : [name.slice(0, i + 1), name.slice(i + 1)];
+};
+const KELLEY_SOCIAL_IMPACT_URL = 'https://kelley.iu.edu/undergraduate/why-kelley/social-impact/involvement/student-organizations/index.html';
+---
+<Base title={page.seo_title} description={page.seo_description}>
+  <PageHero kicker="Resources" title={page.headline} intro={page.intro}>
+    <nav class="jump" aria-label="On this page">
+      <ul>
+        {sections.map((s) => <li><a href={`#${s.anchor}`}>{s.title}</a></li>)}
+      </ul>
+    </nav>
+  </PageHero>
+
+  {sections.map((s, i) => (
+    <section id={s.anchor} class:list={['section', { 'section--surface': i % 2 === 1 }]} aria-labelledby={`${s.anchor}-title`}>
+      <div class="container">
+        <div class="section-head">
+          <h2 id={`${s.anchor}-title`}>{s.title}</h2>
+          {s.intro && <p>{s.intro}</p>}
+        </div>
+        <ul class="grid grid--2 resources">
+          {s.items.map((item) => (
+            <li class="card resource">
+              <h3>
+                <a href={item.url} rel="noopener" data-goatcounter-click={`resource: ${item.name}`} data-goatcounter-title={item.name}>
+                  {splitName(item.name)[0]}<span class="resource__last">{splitName(item.name)[1]}<span class="resource__ext" aria-hidden="true"> ↗</span></span>
+                </a>
+              </h3>
+              <p>{item.description}</p>
+              <div class="resource__meta">
+                {item.audience && <span class="chip">{item.audience}</span>}
+                {item.timing && <span class="resource__timing">{item.timing}</span>}
+              </div>
+            </li>
+          ))}
+        </ul>
+        {s.anchor === 'clubs' && (
+          <p class="resources__more"><a href={KELLEY_SOCIAL_IMPACT_URL} rel="noopener">See all Kelley Institute for Social Impact organizations</a></p>
+        )}
+        {s.more_url && s.more_text && <p class="resources__more"><a href={s.more_url} rel="noopener">{s.more_text}</a></p>}
+      </div>
+    </section>
+  ))}
+
+  <section class="section">
+    <div class="container narrow">
+      <p class="reviewed">
+        Last reviewed {page.last_reviewed}. Deadlines and eligibility change each year, so check each link for current details.
+        Know a resource that belongs here? Email <a href={`mailto:${site.email}`}>{site.email}</a>.
+      </p>
+    </div>
+  </section>
+  <JoinBanner />
+</Base>
+
+<style>
+  .jump { margin-top: var(--space-6); }
+  .jump ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .jump a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--space-4);
+    border: 1.5px solid var(--color-primary); border-radius: var(--radius-pill);
+    font-size: var(--fs-sm); font-weight: 600; text-decoration: none; background: #fff;
+  }
+  .jump a:hover { background: var(--color-primary); color: #fff; }
+  @media (max-width: 640px) {
+    /* Phones: one row that scrolls sideways instead of seven stacked rows */
+    .jump { margin-inline: calc(var(--space-4) * -1); }
+    .jump ul { flex-wrap: nowrap; overflow-x: auto; padding: 2px var(--space-4) var(--space-2); scrollbar-width: none; }
+    .jump ul::-webkit-scrollbar { display: none; }
+    .jump li { flex: none; }
+  }
+  .resources { list-style: none; margin: 0; padding: 0; }
+  .resource { position: relative; padding: var(--space-6); }
+  .resource h3 { font-size: 1.125rem; line-height: 1.3; }
+  .resource h3 a { text-decoration: none; }
+  .resource h3 a::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius-card); } /* whole card is the link */
+  .resource h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .resource__last { white-space: nowrap; }
+  .resource__ext { font-size: 0.9em; }
+  .resource p { font-size: var(--fs-sm); }
+  .resource__meta { margin-top: auto; padding-top: var(--space-2); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); }
+  .resource__timing { font-size: var(--fs-xs); font-weight: 600; color: var(--color-teal); }
+  .resources__more { margin-top: var(--space-6); font-weight: 600; }
+  .resources__more a { display: inline-block; padding-block: 10px; }
+  .reviewed { font-size: var(--fs-sm); margin: 0; }
+</style>

@@ -1,0 +1,275 @@
+{
+  "seo_title": "Sustainability Resources for IU Students | Net Impact IU",
+  "seo_description": "Sustainability internships, scholarships, courses, job boards, certifications and clubs at Indiana University, collected by Net Impact IU.",
+  "headline": "Resources for a career in sustainability",
+  "intro": "Internships, funding, courses, job boards and clubs at Indiana University and beyond, collected by Net Impact IU for members and any IU student building a career in sustainability or social impact.",
+  "last_reviewed": "November 2026",
+  "sections": [
+    {
+      "anchor": "experience",
+      "title": "Get hands-on experience",
+      "intro": "Internships and fellowships where you work on real sustainability projects while you are still in school.",
+      "items": [
+        {
+          "name": "Office of Sustainability internship",
+          "url": "https://sustainability.iu.edu/bloomington/engagement/internship.html",
+          "description": "Paid, part-time campus internship ($15 an hour) on sustainability programs such as waste diversion, energy and move-out donations, or on sustainability communications.",
+          "audience": "IU students, 2.5 GPA minimum",
+          "timing": "Applications have recently closed at the end of March."
+        },
+        {
+          "name": "McKinney Climate Fellows",
+          "url": "https://eri.iu.edu/programs/mckinney-climate-fellows/students.html",
+          "description": "Environmental Resilience Institute program placing students with Indiana local governments, businesses and nonprofits on climate and sustainability projects.",
+          "audience": "IU undergraduate and graduate students",
+          "timing": "Applications have typically closed in early November."
+        },
+        {
+          "name": "Kelley Institute for Social Impact internships",
+          "url": "https://kelley.iu.edu/undergraduate/why-kelley/social-impact/internships/index.html",
+          "description": "120-hour internships applying business skills at social-impact organizations. Unpaid and not for credit.",
+          "audience": "Kelley majors and minors after two semesters",
+          "timing": ""
+        },
+        {
+          "name": "Kelley Changemaker Internship Scholarship",
+          "url": "https://kelley.iu.edu/undergraduate/why-kelley/social-impact/changemaker-scholarship/index.html",
+          "description": "Funding for students taking unpaid or underpaid social-impact internships with public, private or nonprofit organizations.",
+          "audience": "Kelley students",
+          "timing": ""
+        }
+      ],
+      "more_text": "",
+      "more_url": ""
+    },
+    {
+      "anchor": "funding",
+      "title": "Fund an idea or earn a scholarship",
+      "intro": "Money for sustainability projects on campus and for students starting sustainability research.",
+      "items": [
+        {
+          "name": "Campus Sustainability Innovation Fund",
+          "url": "https://sustainability.iu.edu/bloomington/engagement/innovation-fund.html",
+          "description": "Office of Sustainability funding for projects that make IU Bloomington more sustainable.",
+          "audience": "IU Bloomington",
+          "timing": "Applications have recently been due in late January."
+        },
+        {
+          "name": "Sustainability Scholars",
+          "url": "https://environment.indiana.edu/people/students/scholars/index.html",
+          "description": "Research a sustainability issue with a faculty mentor starting in your first semester, with a $500 scholarship each semester.",
+          "audience": "First- and second-year students, any major",
+          "timing": ""
+        }
+      ],
+      "more_text": "",
+      "more_url": ""
+    },
+    {
+      "anchor": "study",
+      "title": "Study sustainability",
+      "intro": "Majors, co-majors and courses that build sustainability into an IU degree.",
+      "items": [
+        {
+          "name": "Sustainable Business co-major",
+          "url": "https://kelley.iu.edu/undergraduate/academics/bachelor-science-business/sustainable-business-co-major.html",
+          "description": "Kelley co-major drawing on business, geography and public and environmental affairs courses to build sustainable business strategy skills.",
+          "audience": "Kelley students",
+          "timing": ""
+        },
+        {
+          "name": "Sustainability degrees and courses at IU",
+          "url": "https://sustainability.iu.edu/bloomington/academics/degrees-courses.html",
+          "description": "IU Bloomington's guide to sustainability degrees, minors and certificates across O'Neill, the College of Arts and Sciences, Kelley and more.",
+          "audience": "All IU students",
+          "timing": ""
+        },
+        {
+          "name": "Kelley Institute for Environmental and Social Sustainability",
+          "url": "https://kelley.iu.edu/faculty-research/centers-institutes/environmental-social-sustainability/index.html",
+          "description": "Kelley's sustainability institute for research, courses, speakers and events on environmental and social sustainability in business.",
+          "audience": "Kelley students",
+          "timing": ""
+        }
+      ],
+      "more_text": "",
+      "more_url": ""
+    },
+    {
+      "anchor": "jobs",
+      "title": "Find a job or internship",
+      "intro": "Job boards and networks focused on sustainability and impact careers.",
+      "items": [
+        {
+          "name": "Net Impact national membership",
+          "url": "https://netimpact.org",
+          "description": "Sign up with Net Impact's national network for its impact job board, career guides and events.",
+          "audience": "Students and professionals",
+          "timing": ""
+        },
+        {
+          "name": "Indiana Sustainability Development Network",
+          "url": "https://www.linkedin.com/groups/13609376/",
+          "description": "LinkedIn group for Indiana sustainability professionals that shares jobs, internships and events.",
+          "audience": "LinkedIn account needed",
+          "timing": ""
+        },
+        {
+          "name": "AASHE job board",
+          "url": "https://bulletin.aashe.org/posts/job/",
+          "description": "Sustainability jobs at colleges and universities from the Association for the Advancement of Sustainability in Higher Education.",
+          "audience": "Open to all",
+          "timing": ""
+        }
+      ],
+      "more_text": "See all sustainability job boards on IU's career resources page",
+      "more_url": "https://sustainability.iu.edu/resources/career-resources.html"
+    },
+    {
+      "anchor": "credentials",
+      "title": "Earn a credential",
+      "intro": "Certifications that business students often pursue. Costs and exam requirements vary, so check each provider before you sign up.",
+      "items": [
+        {
+          "name": "LEED Green Associate",
+          "url": "https://www.usgbc.org/credentials/leed-green-associate",
+          "description": "Entry-level green building credential from the U.S. Green Building Council, aimed at people newer to sustainability.",
+          "audience": "Beginner",
+          "timing": ""
+        },
+        {
+          "name": "GRI Professional Certification",
+          "url": "https://www.globalreporting.org/reporting-support/gri-academy/professional-certification-program/",
+          "description": "Training in corporate sustainability reporting with the Global Reporting Initiative Standards.",
+          "audience": "Sustainability reporting",
+          "timing": ""
+        },
+        {
+          "name": "Fundamentals of Sustainability Accounting (FSA)",
+          "url": "https://fsa.sasb.org/",
+          "description": "Credential in the SASB standards that link sustainability issues to financial performance.",
+          "audience": "Sustainability accounting",
+          "timing": ""
+        },
+        {
+          "name": "CFA Institute Certificate in ESG Investing",
+          "url": "https://www.cfainstitute.org/en/programs/esg-investing",
+          "description": "Certificate on how environmental, social and governance factors are used in investment analysis.",
+          "audience": "Finance and investing",
+          "timing": ""
+        }
+      ],
+      "more_text": "See all certifications on IU's career resources page",
+      "more_url": "https://sustainability.iu.edu/resources/career-resources.html"
+    },
+    {
+      "anchor": "connected",
+      "title": "Stay connected",
+      "intro": "Newsletters, events and volunteer opportunities on campus and in Bloomington.",
+      "items": [
+        {
+          "name": "Office of Sustainability newsletter and events",
+          "url": "https://sustainability.iu.edu/about/newsletter/index.html",
+          "description": "Campus sustainability news, events, internships and funding deadlines from IU's Office of Sustainability.",
+          "audience": "All IU students",
+          "timing": ""
+        },
+        {
+          "name": "Environmental Resilience Institute",
+          "url": "https://eri.iu.edu/",
+          "description": "IU's climate and environmental research institute, home of IU Climate Week and the McKinney Climate Fellows, with newsletters and events.",
+          "audience": "All IU students",
+          "timing": ""
+        },
+        {
+          "name": "Bloomington Volunteer Network",
+          "url": "https://bloomington.in.gov/volunteer",
+          "description": "The City of Bloomington's volunteer site, with hundreds of one-time and recurring opportunities with local nonprofits, including environmental projects.",
+          "audience": "Free account",
+          "timing": ""
+        }
+      ],
+      "more_text": "",
+      "more_url": ""
+    },
+    {
+      "anchor": "clubs",
+      "title": "Related clubs at IU",
+      "intro": "Other student organizations working on sustainability and social impact. Many members join more than one.",
+      "items": [
+        {
+          "name": "Sustainable Finance Club",
+          "url": "https://beinvolved.indiana.edu/organization/sustainablefinanceiu",
+          "description": "Real-world cases and industry engagement on finance's role in environmental and social impact.",
+          "audience": "Kelley social impact",
+          "timing": ""
+        },
+        {
+          "name": "180 Degrees Consulting",
+          "url": "https://beinvolved.indiana.edu/organization/180dc",
+          "description": "Student-run consultancy serving nonprofits and social enterprises.",
+          "audience": "Kelley social impact",
+          "timing": ""
+        },
+        {
+          "name": "Social Engagement and Education at Kelley (SEEK)",
+          "url": "https://beinvolved.indiana.edu/organization/seek",
+          "description": "Applies business skills where for-profit enterprise meets social responsibility.",
+          "audience": "Kelley social impact",
+          "timing": ""
+        },
+        {
+          "name": "Alternative Break Program",
+          "url": "https://beinvolved.indiana.edu/organization/abp",
+          "description": "Service-learning trips over Thanksgiving, winter and spring breaks.",
+          "audience": "Kelley social impact",
+          "timing": ""
+        },
+        {
+          "name": "Epsilon Eta",
+          "url": "https://beinvolved.indiana.edu/organization/epsiloneta",
+          "description": "IU's environmental fraternity: gender-inclusive and pre-professional.",
+          "audience": "Environmental",
+          "timing": ""
+        },
+        {
+          "name": "Sigma Epsilon Beta",
+          "url": "https://beinvolved.indiana.edu/organization/seb",
+          "description": "Career education and applied learning in sustainability, corporate advocacy and entrepreneurship.",
+          "audience": "Environmental",
+          "timing": ""
+        },
+        {
+          "name": "Rewild at IU",
+          "url": "https://beinvolved.indiana.edu/organization/rewild_at_iu",
+          "description": "Restores and manages IU's natural areas with students, faculty and local environmental groups.",
+          "audience": "Environmental",
+          "timing": ""
+        },
+        {
+          "name": "Women in Conservation",
+          "url": "https://beinvolved.indiana.edu/organization/womeninconservation",
+          "description": "Academic and professional development for women in conservation, plus hands-on conservation work.",
+          "audience": "Environmental",
+          "timing": ""
+        },
+        {
+          "name": "Students for the New Urbanism at IU",
+          "url": "https://beinvolved.indiana.edu/organization/snu_iu",
+          "description": "Students learning about and advocating for better cities and towns.",
+          "audience": "Environmental",
+          "timing": ""
+        },
+        {
+          "name": "Habitat for Humanity at IU",
+          "url": "https://beinvolved.indiana.edu/organization/habitatforhumanity",
+          "description": "Building, fundraising and advocacy events with the Monroe County Habitat chapter.",
+          "audience": "Volunteering",
+          "timing": ""
+        }
+      ],
+      "more_text": "See all environmental and sustainability organizations on beINvolved",
+      "more_url": "https://beinvolved.indiana.edu/organizations?categories=6875"
+    }
+  ]
+}

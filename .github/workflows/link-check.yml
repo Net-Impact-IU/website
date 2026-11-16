@@ -1,0 +1,19 @@
+# Weekly check of every link on the Resources page. Reports broken links as warnings; never deploys or fails the site.
+name: Check resource links
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 13 * * 1' # Mondays, about 8-9 am Indiana time
+  push:
+    paths: ['src/content/pages/resources.json', 'scripts/check-resource-links.mjs', '.github/workflows/link-check.yml']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/check-resource-links.mjs

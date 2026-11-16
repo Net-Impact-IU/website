@@ -293,6 +293,38 @@ content:
           - { name: text, label: Description, type: text }
           - { name: bullets, label: Bullet points, type: string, list: true }
 
+  - name: page_resources
+    label: "Page text: Resources"
+    type: file
+    path: src/content/pages/resources.json
+    format: json
+    fields:
+      - { name: seo_title, label: Google title, type: string, options: { maxlength: 60 }, description: "Shown as the Google result title. Under 60 characters." }
+      - { name: seo_description, label: Google description, type: text, options: { maxlength: 160 }, description: "Shown under the title in Google. Under 160 characters." }
+      - { name: headline, label: Headline, type: string }
+      - { name: intro, label: Intro, type: text }
+      - { name: last_reviewed, label: Last reviewed, type: string, description: "Month and year someone last checked every link and date, e.g. November 2026. Review at least once a year." }
+      - name: sections
+        label: Sections
+        type: object
+        list: true
+        fields:
+          - { name: anchor, label: Link name, type: string, description: "Used by the jump links at the top of the page, e.g. jobs. Lowercase, no spaces." }
+          - { name: title, label: Section title, type: string }
+          - { name: intro, label: Section intro, type: text }
+          - name: items
+            label: Resources
+            type: object
+            list: true
+            fields:
+              - { name: name, label: Name, type: string, required: true }
+              - { name: url, label: Link, type: string, required: true, description: "Full web address starting with https://" }
+              - { name: description, label: One-line description, type: text, description: "What it is and why a member should care. One or two sentences." }
+              - { name: audience, label: Who it's for, type: string, description: "Short tag, e.g. All IU students, Kelley students, First- and second-year students" }
+              - { name: timing, label: Timing, type: string, description: "Optional. Use 'typically' or 'recently' for dates that change each year, e.g. Applications have typically closed in early November." }
+          - { name: more_text, label: "'See all' link text", type: string, description: "Optional link under the section, e.g. See all job boards on IU's career resources page" }
+          - { name: more_url, label: "'See all' link", type: string }
+
   - name: page_nonprofits
     label: "Page text: For Nonprofits"
     type: file

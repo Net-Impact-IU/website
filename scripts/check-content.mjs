@@ -31,6 +31,19 @@ for (const f of fs.readdirSync(path.join(root, 'src/content/pages'))) {
   if (page.seo_description && page.seo_description.length > 165) warn.push(`Page text (${f}): Google description is ${page.seo_description.length} characters; aim for under 160`);
 }
 
+const resources = read('src/content/pages/resources.json');
+const anchors = new Set();
+resources.sections.forEach((s) => {
+  if (!s.anchor || !/^[a-z0-9-]+$/.test(s.anchor)) errors.push(`Resources: section "${s.title}" needs a link name in lowercase letters, numbers and dashes`);
+  if (anchors.has(s.anchor)) errors.push(`Resources: two sections use the link name "${s.anchor}"`);
+  anchors.add(s.anchor);
+  (s.items || []).forEach((r) => {
+    if (!r.name) errors.push(`Resources: a resource in "${s.title}" has no name`);
+    if (!/^https:\/\//.test(r.url || '')) errors.push(`Resources: "${r.name}" needs a link starting with https://`);
+    if (!r.description) warn.push(`Resources: "${r.name}" has no description`);
+  });
+});
+
 warn.forEach((w) => console.warn(`warning: ${w}`));
 if (errors.length) {
   errors.forEach((e) => console.error(`error: ${e}`));

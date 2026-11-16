@@ -122,6 +122,15 @@ Related features that use plain links, no script: "Add to Google Calendar" on ea
 
 Rule for anything new: content must be in the HTML, and the page must still work with scripts off.
 
+## Resources page
+
+`/resources/` lists sustainability internships, funding, courses, job boards, certifications and related clubs. All content is in `src/content/pages/resources.json`, edited through Pages CMS ("Page text: Resources"): sections and resources can be added, removed and reordered without code. Each card is a link to another site; clicks are counted in GoatCounter as `resource: <name>`.
+
+- **Keeping it current:** dates are written as "typically" or "recently" because deadlines change every year. Review every link and date at least once a year and update "Last reviewed".
+- **Broken links:** the "Check resource links" workflow tests every link each Monday and lists broken ones as warnings in the GitHub Actions summary. LinkedIn blocks automated checks, so open LinkedIn links by hand.
+- **Content check:** the build stops if a resource has no name or its link does not start with `https://`.
+- **Clubs:** related clubs come from beINvolved's Environmental and Sustainability category and Kelley's social impact organizations. Partisan political groups and clubs with little sustainability focus were left out on purpose.
+
 ## Changing things
 
 | Task | Where |
