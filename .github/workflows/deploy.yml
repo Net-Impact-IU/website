@@ -34,12 +34,18 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check:content
+      # Feeds are optional extras: if a fetch step fails for any reason, the site still builds without that feed.
       - name: Fetch latest Instagram posts
+        continue-on-error: true
         run: npm run fetch:instagram
         env:
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
-      - name: Fetch upcoming events from beINvolved and the IU sustainability calendar
-        run: npm run fetch:events
+      - name: Fetch upcoming events from beINvolved
+        continue-on-error: true
+        run: node scripts/fetch-beinvolved.mjs
+      - name: Fetch upcoming events from the IU sustainability calendar
+        continue-on-error: true
+        run: node scripts/fetch-iu-sustainability.mjs
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

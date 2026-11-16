@@ -12,7 +12,7 @@ import { site } from '../lib/data';
 const isValid = (r: { name?: string; url?: string }) => Boolean(r.name?.trim()) && /^https:\/\//.test(r.url ?? '');
 const slug = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section';
 const usedAnchors = new Set<string>();
-const sections = page.sections
+const sections = (Array.isArray(page.sections) ? page.sections : [])
   .map((s) => ({ ...s, items: (s.items ?? []).filter(isValid) }))
   .filter((s) => s.items.length > 0)
   .map((s) => {
@@ -30,11 +30,11 @@ const KELLEY_SOCIAL_IMPACT_URL = 'https://kelley.iu.edu/undergraduate/why-kelley
 ---
 <Base title={page.seo_title} description={page.seo_description}>
   <PageHero kicker="Resources" title={page.headline} intro={page.intro}>
-    <nav class="jump" aria-label="On this page">
+    {sections.length > 1 && <nav class="jump" aria-label="On this page">
       <ul>
         {sections.map((s) => <li><a href={`#${s.anchor}`}>{s.title}</a></li>)}
       </ul>
-    </nav>
+    </nav>}
   </PageHero>
 
   {sections.map((s, i) => (
@@ -70,8 +70,9 @@ const KELLEY_SOCIAL_IMPACT_URL = 'https://kelley.iu.edu/undergraduate/why-kelley
 
   <section class="section">
     <div class="container narrow">
+      {sections.length === 0 && <p>Resources are being updated. Email <a href={`mailto:${site.email}`}>{site.email}</a> for help finding sustainability opportunities at IU.</p>}
       <p class="reviewed">
-        Last reviewed {page.last_reviewed}. Deadlines and eligibility change each year, so check each link for current details.
+        {page.last_reviewed && <>Last reviewed {page.last_reviewed}. </>}Deadlines and eligibility change each year, so check each link for current details.
         Know a resource that belongs here? Email <a href={`mailto:${site.email}`}>{site.email}</a>.
       </p>
     </div>
