@@ -7,7 +7,7 @@ import path from 'node:path';
 const root = path.resolve(import.meta.dirname, '..');
 const page = JSON.parse(fs.readFileSync(path.join(root, 'src/content/pages/resources.json'), 'utf8'));
 // Sites that block automated checks even when the page works in a browser.
-const SKIP = [/linkedin\.com/];
+const SKIP = [/linkedin\.com/, /careers\.netimpact\.org/]; // both checked in a browser Nov 2026
 
 const links = [];
 for (const s of page.sections) {
