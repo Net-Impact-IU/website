@@ -7,7 +7,20 @@ import { site } from '../lib/data';
 
 // Resources are edited in Pages CMS ("Page text: Resources"). Every link goes to another site,
 // so cards are plain links; clicks are counted in GoatCounter as "resource: <name>".
-const sections = page.sections.filter((s) => s.items.length > 0);
+// Entries missing a name or an https link are left off the page (the content check warns about them)
+// so one bad entry never stops the site build. Sections with nothing left are dropped too.
+const isValid = (r: { name?: string; url?: string }) => Boolean(r.name?.trim()) && /^https:\/\//.test(r.url ?? '');
+const slug = (t: string) => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section';
+const usedAnchors = new Set<string>();
+const sections = page.sections
+  .map((s) => ({ ...s, items: (s.items ?? []).filter(isValid) }))
+  .filter((s) => s.items.length > 0)
+  .map((s) => {
+    let anchor = /^[a-z0-9-]+$/.test(s.anchor ?? '') ? s.anchor : slug(s.title ?? '');
+    for (let n = 2; usedAnchors.has(anchor); n++) anchor = `${anchor.replace(/-\d+$/, '')}-${n}`;
+    usedAnchors.add(anchor);
+    return { ...s, anchor };
+  });
 // Keep the last word and the arrow together so the arrow never wraps onto a line by itself.
 const splitName = (name: string) => {
   const i = name.lastIndexOf(' ');
@@ -50,7 +63,7 @@ const KELLEY_SOCIAL_IMPACT_URL = 'https://kelley.iu.edu/undergraduate/why-kelley
         {s.anchor === 'clubs' && (
           <p class="resources__more"><a href={KELLEY_SOCIAL_IMPACT_URL} rel="noopener">See all Kelley Institute for Social Impact organizations</a></p>
         )}
-        {s.more_url && s.more_text && <p class="resources__more"><a href={s.more_url} rel="noopener">{s.more_text}</a></p>}
+        {/^https:\/\//.test(s.more_url ?? '') && s.more_text && <p class="resources__more"><a href={s.more_url} rel="noopener">{s.more_text}</a></p>}
       </div>
     </section>
   ))}

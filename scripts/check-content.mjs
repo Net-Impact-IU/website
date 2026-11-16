@@ -34,12 +34,13 @@ for (const f of fs.readdirSync(path.join(root, 'src/content/pages'))) {
 const resources = read('src/content/pages/resources.json');
 const anchors = new Set();
 resources.sections.forEach((s) => {
-  if (!s.anchor || !/^[a-z0-9-]+$/.test(s.anchor)) errors.push(`Resources: section "${s.title}" needs a link name in lowercase letters, numbers and dashes`);
-  if (anchors.has(s.anchor)) errors.push(`Resources: two sections use the link name "${s.anchor}"`);
+  // Resource problems never stop the build: the page hides the bad entry and the build carries on.
+  if (!s.anchor || !/^[a-z0-9-]+$/.test(s.anchor)) warn.push(`Resources: section "${s.title}" has an invalid link name; one is made from the title instead`);
+  if (anchors.has(s.anchor)) warn.push(`Resources: two sections use the link name "${s.anchor}"; the second gets a number added`);
   anchors.add(s.anchor);
   (s.items || []).forEach((r) => {
-    if (!r.name) errors.push(`Resources: a resource in "${s.title}" has no name`);
-    if (!/^https:\/\//.test(r.url || '')) errors.push(`Resources: "${r.name}" needs a link starting with https://`);
+    if (!r.name) warn.push(`Resources: a resource in "${s.title}" has no name, so it is hidden on the page`);
+    else if (!/^https:\/\//.test(r.url || '')) warn.push(`Resources: "${r.name}" has no link starting with https://, so it is hidden on the page`);
     if (!r.description) warn.push(`Resources: "${r.name}" has no description`);
   });
 });

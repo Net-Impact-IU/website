@@ -128,7 +128,7 @@ Rule for anything new: content must be in the HTML, and the page must still work
 
 - **Keeping it current:** dates are written as "typically" or "recently" because deadlines change every year. Review every link and date at least once a year and update "Last reviewed".
 - **Broken links:** the "Check resource links" workflow tests every link each Monday and lists broken ones as warnings in the GitHub Actions summary. LinkedIn blocks automated checks, so open LinkedIn links by hand.
-- **Content check:** the build stops if a resource has no name or its link does not start with `https://`.
+- **Bad entries:** a resource with no name or a link that does not start with `https://` is hidden on the page and the build carries on. The content check lists it as a warning in the build log so someone can fix it in Pages CMS.
 - **Clubs:** related clubs come from beINvolved's Environmental and Sustainability category and Kelley's social impact organizations. Partisan political groups and clubs with little sustainability focus were left out on purpose.
 
 ## Changing things
