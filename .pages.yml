@@ -85,6 +85,7 @@ content:
         fields:
           - { name: value, label: Number, type: string, required: true }
           - { name: label, label: Label, type: string, required: true }
+          - { name: short_label, label: Short label (phones), type: string, description: "Two or three words shown under the number on phones, e.g. clients served. Leave empty to use the full label." }
       - name: awards
         label: Awards
         type: object

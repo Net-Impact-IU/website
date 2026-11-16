@@ -3,15 +3,18 @@
   "stats": [
     {
       "value": "90+",
-      "label": "active members"
+      "label": "active members",
+      "short_label": "active members"
     },
     {
       "value": "30+",
-      "label": "nonprofit and mission-driven clients served"
+      "label": "nonprofit and mission-driven clients served",
+      "short_label": "clients served"
     },
     {
       "value": "51",
-      "label": "events hosted in 2025-26"
+      "label": "events hosted in 2025-26",
+      "short_label": "events in 2025-26"
     }
   ],
   "awards": [

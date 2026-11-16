@@ -72,9 +72,18 @@ ul { padding-left: 1.2em; }
 
 .container { width: 100%; max-width: var(--container-max); margin-inline: auto; padding-inline: var(--container-px); }
 .narrow { max-width: var(--container-narrow); }
+/* A narrow container keeps the normal left edge; only its content is narrowed */
+.container.narrow { max-width: var(--container-max); }
+.container.narrow > * { max-width: var(--container-narrow); }
 /* Reading width: keep running text near 65 characters per line */
 main :where(p), main :where(ul:not([class]), ol:not([class])) > li { max-width: var(--measure); }
-.section { padding-block: clamp(var(--space-12), 8vw, var(--space-24)); }
+.section { padding-block: clamp(var(--space-12), 6vw, 72px); }
+/* Two plain white sections in a row read as one gap, not two */
+.section:not([class*="section--"]) + .section:not([class*="section--"]) { padding-top: var(--space-8); }
+/* The page hero fades to white, so the first plain section after it needs less top space */
+.page-hero + .section:not([class*="section--"]) { padding-top: var(--space-8); }
+/* No leftover paragraph margin at the bottom of a section */
+.section .container > :last-child, .section .container > :last-child > :last-child { margin-bottom: 0; }
 .section--surface { background: var(--color-surface); }
 .section--aqua { background: var(--color-aqua); }
 .section--teal { background: var(--color-teal); color: #fff; }

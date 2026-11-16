@@ -6,7 +6,7 @@ import OfficerGrid from '../components/OfficerGrid.astro';
 import JoinBanner from '../components/JoinBanner.astro';
 import page from '../content/pages/about.json';
 import PhotoViewer from '../components/PhotoViewer.astro';
-import { impact, galleryPhotos } from '../lib/data';
+import { site, impact, galleryPhotos } from '../lib/data';
 import { url } from '../lib/url';
 const photos = galleryPhotos();
 ---
@@ -15,6 +15,7 @@ const photos = galleryPhotos();
 
   <section class="section" aria-labelledby="history-title">
     <div class="container narrow">
+      <span class="kicker">Since {site.founded}</span>
       <h2 id="history-title">Our history</h2>
       <p>{page.history}</p>
       <p>{impact.alumni_text}</p>
@@ -63,4 +64,8 @@ const photos = galleryPhotos();
   .gallery a { display: block; border-radius: var(--radius-card); }
   .gallery img { border-radius: var(--radius-card); aspect-ratio: 4 / 3; object-fit: cover; width: 100%; }
   .gallery figcaption { margin-top: var(--space-2); font-size: var(--fs-sm); font-weight: 500; }
+  @media (max-width: 600px) {
+    .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4) var(--space-3); }
+    .gallery figcaption { font-size: var(--fs-xs); line-height: 1.35; }
+  }
 </style>
