@@ -56,8 +56,8 @@
         },
         {
           "name": "Sustainability Scholars",
-          "url": "https://environment.indiana.edu/people/students/scholars/index.html",
-          "description": "Research a sustainability issue with a faculty mentor starting in your first semester, with a $500 scholarship each semester.",
+          "url": "https://environment.indiana.edu/academics/scholarships/sustainability.html",
+          "description": "Research a sustainability issue with a faculty mentor (8 to 10 hours a week) starting in your first semester, with a $500 scholarship each semester.",
           "audience": "First- and second-year students, any major",
           "timing": ""
         }
@@ -101,10 +101,10 @@
       "intro": "Job boards and networks focused on sustainability and impact careers.",
       "items": [
         {
-          "name": "Net Impact national membership",
-          "url": "https://netimpact.org",
-          "description": "Sign up with Net Impact's national network for its impact job board, career guides and events.",
-          "audience": "Students and professionals",
+          "name": "Net Impact job board",
+          "url": "https://careers.netimpact.org/",
+          "description": "Net Impact's national board of sustainability and social impact jobs and internships.",
+          "audience": "National",
           "timing": ""
         },
         {
@@ -138,23 +138,23 @@
           "timing": ""
         },
         {
-          "name": "GRI Professional Certification",
-          "url": "https://www.globalreporting.org/reporting-support/gri-academy/professional-certification-program/",
-          "description": "Training in corporate sustainability reporting with the Global Reporting Initiative Standards.",
+          "name": "GRI Academy certification",
+          "url": "https://www.globalreporting.org/academy/home",
+          "description": "Training and certification in corporate sustainability reporting with the Global Reporting Initiative Standards.",
           "audience": "Sustainability reporting",
           "timing": ""
         },
         {
-          "name": "Fundamentals of Sustainability Accounting (FSA)",
-          "url": "https://fsa.sasb.org/",
-          "description": "Credential in the SASB standards that link sustainability issues to financial performance.",
+          "name": "FSA Credential",
+          "url": "https://www.ifrs.org/products-and-services/sustainability-products-and-services/fsa-credential/",
+          "description": "IFRS Foundation credential in sustainability accounting and the SASB Standards, which link sustainability issues to financial performance.",
           "audience": "Sustainability accounting",
           "timing": ""
         },
         {
-          "name": "CFA Institute Certificate in ESG Investing",
-          "url": "https://www.cfainstitute.org/en/programs/esg-investing",
-          "description": "Certificate on how environmental, social and governance factors are used in investment analysis.",
+          "name": "CFA Institute Sustainable Investing Certificate",
+          "url": "https://www.cfainstitute.org/programs/sustainable-investing-certificate",
+          "description": "Certificate on working environmental, social and governance factors into investment analysis and decisions.",
           "audience": "Finance and investing",
           "timing": ""
         }
