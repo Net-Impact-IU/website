@@ -8,7 +8,7 @@ import { site } from '../lib/data';
 const profileUrl = site.instagram_url.split('?')[0].replace(/\/?$/, '/');
 ---
 {site.instagram_url && (
-  <div class="ig-card" data-ig-card data-ig-profile={profileUrl}>
+  <div class="ig-card" data-ig-card data-ig-profile={profileUrl} data-ig-handle={site.instagram_handle}>
     <div class="ig-card__top">
       <span class="kicker">Instagram</span>
       <h2 class="ig-card__title">{site.instagram_handle}</h2>
@@ -72,11 +72,16 @@ const profileUrl = site.instagram_url.split('?')[0].replace(/\/?$/, '/');
       // Instagram swaps the blockquote for an iframe. If that never happens, show the fallback.
       const timer = window.setTimeout(() => { if (!embed.querySelector('iframe')) fail(); }, TIMEOUT_MS);
       const watcher = new MutationObserver(() => {
-        if (embed.querySelector('iframe')) {
+        const frame = embed.querySelector('iframe');
+        if (frame) {
           window.clearTimeout(timer);
           watcher.disconnect();
+          // Instagram's iframe has no title; screen readers need one to name it.
+          frame.title = `Instagram profile and recent posts from ${card.dataset.igHandle || 'Net Impact IU'}`;
           button.hidden = true;
           if (note) note.hidden = true;
+          // Announced to screen readers, hidden visually (the posts themselves show it worked).
+          status.classList.add('visually-hidden');
           status.textContent = 'Instagram posts loaded.';
         }
       });
