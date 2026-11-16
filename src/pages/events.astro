@@ -35,7 +35,7 @@ const schema = events.map((e) => ({
         </div>
         <p class="subscribe__help">Using Google Calendar? Choose Other calendars, then From URL, and paste: <span class="subscribe__url">{BEINVOLVED_ICAL_URL}</span></p>
       </div>
-      <p class="ig">Weekly meeting rooms and topics: <a href={site.instagram_url} rel="noopener">{site.instagram_handle} on Instagram</a></p>
+      <InstagramFeed />
     </div>
   </section>
   <section class="section section--surface" aria-labelledby="campus-title">
@@ -52,11 +52,9 @@ const schema = events.map((e) => ({
       </div>
     </div>
   </section>
-  <InstagramFeed />
   <JoinBanner />
 </Base>
 <style>
-  .ig { margin-top: var(--space-8); font-weight: 500; }
   .campus__links { margin-top: var(--space-8); }
   .subscribe { margin-top: var(--space-12); padding: var(--space-8); background: var(--color-surface); border-radius: var(--radius-card); }
   .subscribe h2 { font-size: var(--fs-h3); }

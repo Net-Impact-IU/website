@@ -1,47 +1,108 @@
 ---
-import { site, instagramPosts } from '../lib/data';
-import { url } from '../lib/url';
-const posts = instagramPosts();
-const date = (iso: string) =>
-  new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/Indiana/Indianapolis' });
+// Instagram card for the Events page, built to be private and fast by default.
+// Nothing from Instagram or Meta loads until a visitor clicks "Show recent posts".
+// Then Instagram's own profile embed (profile header + latest posts) loads below the card.
+// With JavaScript off, or if a blocker stops Instagram, the card and plain link still work.
+// The handle and link come from Site settings (instagram_handle, instagram_url).
+import { site } from '../lib/data';
+const profileUrl = site.instagram_url.split('?')[0].replace(/\/?$/, '/');
 ---
-{posts.length > 0 && (
-  <section class="section section--surface" aria-labelledby="ig-title">
-    <div class="container">
-      <div class="ig-head">
-        <div>
-          <span class="kicker">Instagram</span>
-          <h2 id="ig-title">Latest from {site.instagram_handle}</h2>
-        </div>
-        <a class="btn btn--secondary" href={site.instagram_url} rel="noopener">Follow on Instagram</a>
-      </div>
-      <ul class="ig-grid">
-        {posts.map((p) => (
-          <li>
-            <a class="ig-post" href={p.permalink} rel="noopener">
-              <img src={url(p.image)} alt={p.alt} width="640" height="640" loading="lazy" />
-              {p.is_video && <span class="ig-post__badge">Video</span>}
-              <span class="ig-post__meta">
-                <span class="ig-post__date">{date(p.timestamp)}</span>
-                {p.caption && <span class="ig-post__caption">{p.caption}</span>}
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
+{site.instagram_url && (
+  <div class="ig-card" data-ig-card data-ig-profile={profileUrl}>
+    <div class="ig-card__top">
+      <span class="kicker">Instagram</span>
+      <h2 class="ig-card__title">{site.instagram_handle}</h2>
+      <p class="ig-card__text">Weekly meeting rooms and topics, event photos and announcements.</p>
     </div>
-  </section>
+    <div class="btn-row">
+      <button type="button" class="btn btn--primary" data-ig-load hidden
+        data-goatcounter-click="click-instagram-load" data-goatcounter-title="Instagram: show recent posts (Events)">
+        Show recent posts
+      </button>
+      <a class="btn btn--secondary" href={profileUrl} rel="noopener"
+        data-goatcounter-click="click-instagram-open" data-goatcounter-title="Instagram: open profile (Events)">
+        Open on Instagram
+      </a>
+    </div>
+    <p class="ig-card__note" data-ig-note hidden>Showing posts loads content from Instagram (Meta), which may set cookies.</p>
+    <p class="ig-card__status" role="status" data-ig-status></p>
+    <div class="ig-card__embed" data-ig-embed></div>
+  </div>
 )}
+
+<script>
+  // Click-to-load: adds Instagram's profile embed and its script only after a click.
+  type Instgrm = { Embeds: { process: () => void } };
+  const SCRIPT_SRC = 'https://www.instagram.com/embed.js';
+  const TIMEOUT_MS = 10000;
+
+  document.querySelectorAll<HTMLElement>('[data-ig-card]').forEach((card) => {
+    const button = card.querySelector<HTMLButtonElement>('[data-ig-load]');
+    const note = card.querySelector<HTMLElement>('[data-ig-note]');
+    const status = card.querySelector<HTMLElement>('[data-ig-status]')!;
+    const embed = card.querySelector<HTMLElement>('[data-ig-embed]')!;
+    const profile = card.dataset.igProfile ?? '';
+    if (!button || !profile) return;
+    button.hidden = false;
+    if (note) note.hidden = false;
+
+    const fail = () => {
+      embed.replaceChildren();
+      button.hidden = true;
+      if (note) note.hidden = true;
+      status.textContent = 'Instagram posts did not load. Your browser or an ad blocker may be blocking Instagram. Use "Open on Instagram" instead.';
+    };
+
+    button.addEventListener('click', () => {
+      button.disabled = true;
+      status.textContent = 'Loading posts from Instagram...';
+
+      // Same markup Instagram's "Embed" option produces for a profile.
+      const quote = document.createElement('blockquote');
+      quote.className = 'instagram-media';
+      quote.dataset.instgrmPermalink = `${profile}?utm_source=ig_embed&utm_campaign=loading`;
+      quote.dataset.instgrmVersion = '14';
+      const link = document.createElement('a');
+      link.href = profile;
+      link.rel = 'noopener';
+      link.textContent = 'View this profile on Instagram';
+      quote.append(link);
+      embed.replaceChildren(quote);
+
+      // Instagram swaps the blockquote for an iframe. If that never happens, show the fallback.
+      const timer = window.setTimeout(() => { if (!embed.querySelector('iframe')) fail(); }, TIMEOUT_MS);
+      const watcher = new MutationObserver(() => {
+        if (embed.querySelector('iframe')) {
+          window.clearTimeout(timer);
+          watcher.disconnect();
+          button.hidden = true;
+          if (note) note.hidden = true;
+          status.textContent = 'Instagram posts loaded.';
+        }
+      });
+      watcher.observe(embed, { childList: true, subtree: true });
+
+      const ig = (window as unknown as { instgrm?: Instgrm }).instgrm;
+      if (ig) { ig.Embeds.process(); return; }
+      const script = document.createElement('script');
+      script.src = SCRIPT_SRC;
+      script.async = true;
+      script.onerror = () => { window.clearTimeout(timer); watcher.disconnect(); fail(); };
+      document.body.append(script);
+    });
+  });
+</script>
+
 <style>
-  .ig-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-8); }
-  .ig-head h2 { margin: 0; }
-  .ig-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
-  .ig-post { display: block; position: relative; border-radius: var(--radius-card); overflow: hidden; background: #fff; box-shadow: var(--shadow-card); text-decoration: none; color: var(--color-text); height: 100%; transition: transform var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out); }
-  .ig-post:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover); color: var(--color-text); }
-  .ig-post img { width: 100%; aspect-ratio: 1; object-fit: cover; }
-  .ig-post__badge { position: absolute; top: 10px; left: 10px; background: rgba(0, 56, 70, .85); color: #fff; font-size: var(--fs-xs); font-weight: 600; padding: 3px 8px; border-radius: var(--radius-pill); }
-  .ig-post__meta { display: block; padding: var(--space-4); }
-  .ig-post__date { display: block; font-size: var(--fs-xs); font-weight: 600; color: var(--color-primary); margin-bottom: 4px; }
-  .ig-post__caption { display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--fs-sm); }
-  @media (max-width: 760px) { .ig-grid { grid-template-columns: repeat(2, 1fr); } .ig-post__meta { padding: var(--space-3); } }
+  .ig-card { margin-top: var(--space-8); padding: var(--space-8); background: #fff; border: 1px solid var(--color-border); border-radius: var(--radius-card); }
+  .ig-card__top { margin-bottom: var(--space-6); }
+  .ig-card__title { font-size: var(--fs-h3); margin: 0 0 var(--space-1); }
+  .ig-card__text { margin: 0; }
+  .ig-card__note { font-size: var(--fs-sm); margin: var(--space-3) 0 0; }
+  .ig-card__status { font-size: var(--fs-sm); margin: var(--space-3) 0 0; }
+  .ig-card__status:empty { display: none; }
+  .ig-card__embed { max-width: 540px; }
+  .ig-card__embed:not(:empty) { margin-top: var(--space-6); }
+  .ig-card__embed :global(.instagram-media) { margin: 0 !important; min-width: 0 !important; width: 100% !important; }
+  @media (max-width: 760px) { .ig-card { padding: var(--space-6); } }
 </style>

@@ -64,22 +64,17 @@ npm run build        # outputs dist/
 3. Open the repo in Pages CMS. The forms come from `.pages.yml`.
 4. Invite officers by email under the repo's collaborators settings. They don't need GitHub accounts.
 
-## Instagram feed (Events page)
+## Instagram card (Events page)
 
-The daily build pulls the 6 latest @netimpact_iu posts through Instagram's official API (`scripts/fetch-instagram.mjs`), saves resized copies of the images, and shows them on the Events page as plain HTML (no Instagram scripts on the site). If the token is missing or Instagram is down, the section hides itself and the rest of the site still deploys.
+The Events page has an Instagram card for @netimpact_iu, right under the calendar box. It is click-to-load: nothing from Instagram or Meta loads until a visitor clicks **Show recent posts**. Then Instagram's own profile embed (profile header and latest posts) appears under the card. This keeps the page fast and keeps Meta tracking off the site for anyone who doesn't ask for it. No API, token or Meta developer account is needed.
 
-**Requirements:** @netimpact_iu must stay a Business or Creator account.
+- **Handle and link:** Site settings > Instagram handle / Instagram link in Pages CMS. The card uses them automatically.
+- **Requirements:** @netimpact_iu must stay public, with embeds allowed (the Embeds setting in Instagram settings, on by default for public accounts).
+- **If posts don't load:** the card tells the visitor and points to "Open on Instagram". Usually that's an ad or privacy blocker on their side. If it fails for everyone, check the account is public and embeds are allowed.
+- **Visitor statistics:** GoatCounter counts `click-instagram-load` (Show recent posts) and `click-instagram-open` (Open on Instagram).
+- With JavaScript off, the button stays hidden and the card shows only the link.
 
-**Token:** stored as the repository secret `INSTAGRAM_TOKEN` (Settings > Secrets and variables > Actions). Long-lived tokens last 60 days; every build refreshes it, which resets the clock, so it should not expire while the daily build runs.
-
-**If the feed disappears** (the build log shows `Instagram feed not updated` or `token refresh skipped`), the token was revoked, usually by a password change or removed app access. Fix in about 10 minutes:
-
-1. Log in at https://developers.facebook.com with the account that owns the "Net Impact IU Website" app and open the app.
-2. In the Instagram API setup (API setup with Instagram login), generate a new access token for @netimpact_iu.
-3. Paste it into the `INSTAGRAM_TOKEN` repository secret (Update secret).
-4. Actions > Build and deploy > Run workflow.
-
-Run locally: `INSTAGRAM_TOKEN=... npm run fetch:instagram && npm run dev`.
+The earlier API-based feed (`scripts/fetch-instagram.mjs`, `INSTAGRAM_TOKEN` secret) was removed in favor of this. It can be restored from git history if the club ever gets Meta developer access.
 
 ## Events from beINvolved (Events page and home page)
 

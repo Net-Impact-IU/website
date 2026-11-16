@@ -164,7 +164,3 @@ export const publishedTestimonials = () =>
     (t) => t.permission && t.quote,
   );
 
-type InstagramPost = { id: string; image: string; caption: string; alt: string; permalink: string; timestamp: string; is_video: boolean };
-// Written by scripts/fetch-instagram.mjs during the build; missing locally unless you run it.
-const igFiles = import.meta.glob<{ default: { posts: InstagramPost[] } }>('../content/generated/instagram.json', { eager: true });
-export const instagramPosts = (): InstagramPost[] => Object.values(igFiles)[0]?.default.posts ?? [];

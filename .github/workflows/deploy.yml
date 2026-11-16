@@ -35,11 +35,6 @@ jobs:
       - run: npm ci
       - run: npm run check:content
       # Feeds are optional extras: if a fetch step fails for any reason, the site still builds without that feed.
-      - name: Fetch latest Instagram posts
-        continue-on-error: true
-        run: npm run fetch:instagram
-        env:
-          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
       - name: Fetch upcoming events from beINvolved
         continue-on-error: true
         run: node scripts/fetch-beinvolved.mjs
