@@ -21,9 +21,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # Set the repository variable CUSTOM_DOMAIN (Settings > Secrets and variables > Actions > Variables)
-      # to netimpactiu.org once the domain is connected. Until then the site builds for
-      # https://net-impact-iu.github.io/website
+      # The repository variable CUSTOM_DOMAIN (Settings > Secrets and variables > Actions > Variables)
+      # is set to netimpactiu.org, so the site builds for https://netimpactiu.org/ at the root.
+      # Keep it set: without it the build falls back to https://net-impact-iu.github.io/website
+      # paths, which break styles and images on the custom domain.
       SITE_URL: ${{ vars.CUSTOM_DOMAIN && format('https://{0}', vars.CUSTOM_DOMAIN) || 'https://net-impact-iu.github.io' }}
       BASE_PATH: ${{ vars.CUSTOM_DOMAIN && '/' || '/website' }}
     steps:

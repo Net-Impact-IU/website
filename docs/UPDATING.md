@@ -1,6 +1,6 @@
 # How to update the Net Impact IU website
 
-For officers. No code, no GitHub account needed. Changes go live about 2 minutes after you save.
+For officers. No code, no GitHub account needed. Changes go live at https://netimpactiu.org about 2 minutes after you save.
 
 ## Getting in
 
