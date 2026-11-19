@@ -2,7 +2,7 @@
   "seo_title": "Free Consulting for Bloomington Nonprofits | Net Impact IU",
   "seo_description": "Net Impact IU student teams give Bloomington-area nonprofits free, semester-long consulting in market research, growth, operations, sustainability and data.",
   "headline": "Free consulting for Bloomington nonprofits",
-  "intro": "Net Impact IU offers free, semester-long consulting to Bloomington-area nonprofits. A team of six IU students works on a project you define, meets with you regularly, and delivers finished work by the end of the semester.",
+  "intro": "Net Impact IU offers free, semester-long consulting to Bloomington-area nonprofits & Sustainability focused businesses. A team of six IU students works on a project you define, meets with you regularly, and delivers finished work by the end of the semester.",
   "services": [
     {
       "name": "Market Research",
@@ -47,7 +47,6 @@
       "text": "The team presents finished work in December, and you share mid-semester and final feedback."
     }
   ],
-  "cta_text": "Fall projects are scoped in July and August and kick off in October.",
   "proof_stats": [
     {
       "value": "2016",
@@ -70,5 +69,6 @@
   "client_quote": {
     "quote": "The team did far more than we expected. They turned our scattered ideas into a clear outreach and fundraising strategy, backed it with real community research, and left us with materials we still use every week. It felt like working with a professional firm.",
     "attribution": "Executive Director, environmental nonprofit"
-  }
+  },
+  "cta_text": "Fall projects are scoped in July and August and kick off in October."
 }
