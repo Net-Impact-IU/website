@@ -1,6 +1,7 @@
 ---
 import { publishedTestimonials } from '../lib/data';
 import { url, initials } from '../lib/url';
+import { webpSrcset } from '../lib/images';
 const items = publishedTestimonials();
 ---
 {items.length > 0 && (
@@ -12,7 +13,7 @@ const items = publishedTestimonials();
           <figure class="card quote">
             <blockquote><p>{t.quote}</p></blockquote>
             <figcaption>
-              {t.photo ? <img src={url(t.photo)} alt={t.photo_alt || ''} width="56" height="56" loading="lazy" /> : <span class="quote__initials" aria-hidden="true">{initials(t.name)}</span>}
+              {t.photo ? <picture>{webpSrcset(t.photo) && <source type="image/webp" srcset={webpSrcset(t.photo)} sizes="56px" />}<img src={url(t.photo)} alt={t.photo_alt || ''} width="56" height="56" loading="lazy" /></picture> : <span class="quote__initials" aria-hidden="true">{initials(t.name)}</span>}
               <span><strong>{t.name}</strong>{t.detail && <span class="quote__detail">{t.detail}</span>}</span>
             </figcaption>
           </figure>

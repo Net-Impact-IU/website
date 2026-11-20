@@ -6,10 +6,11 @@
   "description": "Net Impact Indiana University Undergrad chapter website",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "(node scripts/resize-images.mjs || echo '[WARN] resize-images failed; pages will use the original photos.') && astro build",
     "preview": "astro preview",
     "check:content": "node scripts/check-content.mjs",
-    "fetch:events": "node scripts/fetch-beinvolved.mjs && node scripts/fetch-iu-sustainability.mjs"
+    "fetch:events": "node scripts/fetch-beinvolved.mjs && node scripts/fetch-iu-sustainability.mjs",
+    "resize:images": "node scripts/resize-images.mjs"
   },
   "engines": {
     "node": ">=20"

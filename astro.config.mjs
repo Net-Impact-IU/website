@@ -13,5 +13,6 @@ export default defineConfig({
   base,
   trailingSlash: 'ignore',
   integrations: [sitemap()],
-  build: { format: 'directory' },
+  // CSS is inlined into each page so the browser doesn't wait on a separate stylesheet request.
+  build: { format: 'directory', inlineStylesheets: 'always' },
 });

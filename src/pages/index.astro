@@ -10,6 +10,7 @@ import page from '../content/pages/home.json';
 import nonprofits from '../content/pages/nonprofits.json';
 import { site, upcomingEvents, approvedProjects } from '../lib/data';
 import { url } from '../lib/url';
+import { webpSrcset } from '../lib/images';
 
 const allEvents = await upcomingEvents();
 const featured = allEvents.filter((e) => e.featured);
@@ -32,7 +33,7 @@ const projects = (await approvedProjects()).slice(0, 3);
       </div>
       <div class="hero__media">
         {page.hero_image ? (
-          <img src={url(page.hero_image)} alt={page.hero_image_alt} width="1800" height="1200" fetchpriority="high" />
+          <picture>{webpSrcset(page.hero_image) && <source type="image/webp" srcset={webpSrcset(page.hero_image)} sizes="(max-width: 860px) 100vw, 560px" />}<img src={url(page.hero_image)} alt={page.hero_image_alt} width="1800" height="1200" fetchpriority="high" /></picture>
         ) : (
           <div class="placeholder hero__placeholder">Group photo goes here<br />(Page text form: Home, hero image)</div>
         )}

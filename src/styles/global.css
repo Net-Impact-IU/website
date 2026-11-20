@@ -54,6 +54,8 @@ body {
   background: var(--color-bg);
 }
 img { max-width: 100%; height: auto; display: block; }
+/* <picture> only picks the file; the <img> inside keeps its own layout and styles */
+picture { display: contents; }
 /* Nationals: primary blues for headlines and larger text, dark gray for body copy */
 h1, h2, h3 { font-family: var(--font-display); color: var(--color-primary); margin: 0 0 var(--space-4); }
 h1 { font-size: var(--fs-h1); font-weight: 800; line-height: var(--lh-tight); letter-spacing: -0.02em; }

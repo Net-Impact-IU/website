@@ -5,3 +5,5 @@ dist/
 .env
 # Generated at build time by the event feed scripts
 src/content/generated/
+# Smaller WebP copies of uploaded photos, made at build time by scripts/resize-images.mjs
+public/images/_resized/

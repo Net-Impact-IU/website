@@ -1,6 +1,7 @@
 ---
 import { officers } from '../lib/data';
 import { url, initials } from '../lib/url';
+import { webpSrcset } from '../lib/images';
 
 // Group officers under their department, in the order departments first appear in the Officers form.
 // Officers with no department (the co-presidents) form the first group, titled by their shared role.
@@ -29,7 +30,7 @@ for (const g of groups) {
       {g.members.map((o) => (
         <li class="officer">
           {o.photo ? (
-            <img class="officer__photo" src={url(o.photo)} alt={o.photo_alt || `Headshot of ${o.name}`} width="240" height="240" loading="lazy" />
+            <picture>{webpSrcset(o.photo) && <source type="image/webp" srcset={webpSrcset(o.photo)} sizes="148px" />}<img class="officer__photo" src={url(o.photo)} alt={o.photo_alt || `Headshot of ${o.name}`} width="240" height="240" loading="lazy" /></picture>
           ) : (
             <div class="officer__photo officer__photo--initials" aria-hidden="true">{initials(o.name)}</div>
           )}
