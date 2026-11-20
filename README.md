@@ -2,7 +2,7 @@
 
 The chapter website for Net Impact IU, the undergraduate Net Impact chapter at the Kelley School of Business.
 
-- **Live site:** https://netimpactiu.org (until the domain is connected: https://net-impact-iu.github.io/website)
+- **Live site:** https://netimpactiu.org (the old address, https://net-impact-iu.github.io/website, permanently redirects here)
 - **Officers editing content:** read [docs/UPDATING.md](docs/UPDATING.md). You never need to touch code.
 - **This README:** for the technical maintainer.
 
@@ -51,11 +51,13 @@ npm run build        # outputs dist/
 
 1. **GitHub Pages:** repo Settings > Pages > Source: **GitHub Actions**.
 2. Push to `main` (or save in Pages CMS). The workflow builds and deploys in about a minute.
-3. **Custom domain (netimpactiu.org):**
-   - At the registrar, point the domain to GitHub Pages ([GitHub's DNS instructions](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)).
-   - Settings > Pages > Custom domain: `netimpactiu.org`, then tick **Enforce HTTPS**.
-   - Settings > Secrets and variables > Actions > **Variables**: add `CUSTOM_DOMAIN` = `netimpactiu.org`. This switches canonical URLs, the sitemap and asset paths from `/website` to the root. Re-run the workflow.
-   - Verify the domain in Google Search Console and submit `https://netimpactiu.org/sitemap-index.xml`.
+3. **Custom domain (netimpactiu.org), connected November 2026:**
+   - Registered at **Namecheap**. DNS (Advanced DNS) points the root domain to GitHub Pages and `www` to `net-impact-iu.github.io` ([GitHub's DNS instructions](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)). The domain is verified in the `Net-Impact-IU` GitHub organization.
+   - Settings > Pages > Custom domain is `netimpactiu.org` with **Enforce HTTPS** on.
+   - The repository variable `CUSTOM_DOMAIN` = `netimpactiu.org` (Settings > Secrets and variables > Actions > **Variables**) makes canonical URLs, the sitemap and asset paths use the root instead of `/website`. **Don't delete it:** without it the site builds for `/website` paths and every page on netimpactiu.org loses its styles and images.
+   - Redirects (checked Nov 18, 2026): `net-impact-iu.github.io/website/...` and `www.netimpactiu.org` both send a 301 (permanent) redirect to the same page on `https://netimpactiu.org/`.
+   - Google Search Console uses a **Domain property** for netimpactiu.org, owned by envbus@iu.edu and verified with a TXT record at Namecheap. Leave that TXT record in place or verification is lost. The sitemap is `https://netimpactiu.org/sitemap-index.xml`.
+   - **Renewal:** if the domain lapses, the site goes down at that address. Keep it on autopay under the club account.
 
 ## Pages CMS setup (one time)
 
@@ -113,7 +115,7 @@ The site is plain HTML first. Two small scripts add convenience and nothing depe
 
 Related features that use plain links, no script: "Add to Google Calendar" on each event, gallery photos that open full size, and the announcement strip at the top of every page (Site settings > Announcement strip; leave it empty to hide it).
 
-**Visitor statistics:** every page loads GoatCounter's counter script (no cookies, no personal data). The dashboard is https://netimpactiu.goatcounter.com, owned by envbus@iu.edu. It also counts clicks (`data-goatcounter-click`) on the membership form button, the Request a project buttons and email link, and every GroupMe link (Join button, Join "More links" line, footer). Each has its own event name so the dashboard shows which one was used. To keep officer visits out of the numbers, open the site once with `#toggle-goatcounter` at the end of the address in each browser you use. To turn it off, clear Site settings > Visitor statistics code. If no visits show, test in a browser without an ad blocker.
+**Visitor statistics:** every page loads GoatCounter's counter script (no cookies, no personal data). The dashboard is https://netimpactiu.goatcounter.com, owned by envbus@iu.edu. It also counts clicks (`data-goatcounter-click`) on the membership form button, the Request a project buttons and email link, and every GroupMe link (Join button, Join "More links" line, footer). Each has its own event name so the dashboard shows which one was used. To keep officer visits out of the numbers, open the site once with `#toggle-goatcounter` at the end of the address in each browser you use. To turn it off, clear Site settings > Visitor statistics code. If no visits show, test in a browser without an ad blocker. Visits before the domain move (through about Nov 17, 2026) are listed under `/website/...` paths (for example `/website/about/`); later visits use root paths (`/about/`). Add the two together when comparing a page's traffic across that date.
 
 Rule for anything new: content must be in the HTML, and the page must still work with scripts off.
 
