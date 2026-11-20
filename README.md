@@ -119,6 +119,17 @@ Related features that use plain links, no script: "Add to Google Calendar" on ea
 
 Rule for anything new: content must be in the HTML, and the page must still work with scripts off.
 
+## Photo sizes (automatic)
+
+Officers upload photos through Pages CMS as usual. On every build, `scripts/resize-images.mjs` makes smaller WebP copies of everything in `public/images/uploads/` (320, 480, 800, 1200 and 1800 px wide, never larger than the original) into `public/images/_resized/`, which is not committed. Pages use `<picture>` with those copies, so each phone or laptop downloads only the size it needs; browsers that can't use WebP get the original file. `src/lib/images.ts` looks the copies up.
+
+- If the script fails or a photo can't be read, the build continues with a warning and that photo uses the original file.
+- Copies are skipped when they're already newer than the original, so rebuilds stay fast.
+- The full-size photo viewer on About still opens the original file.
+- Tested Nov 20, 2026 (phone size): home page photo download went from 282 KB to 47 KB; About page photos from about 3 MB to about 530 KB.
+- CSS is inlined into each page (`inlineStylesheets: 'always'` in `astro.config.mjs`) so the first paint doesn't wait on a separate stylesheet.
+- Lighthouse will still flag "cache lifetimes" and security headers: GitHub Pages sets those and they can't be changed on the free plan.
+
 ## Resources page
 
 `/resources/` lists sustainability internships, funding, courses, job boards, certifications and related clubs. All content is in `src/content/pages/resources.json`, edited through Pages CMS ("Page text: Resources"): sections and resources can be added, removed and reordered without code. Each card is a link to another site; clicks are counted in GoatCounter as `resource: <name>`.

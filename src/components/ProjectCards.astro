@@ -1,13 +1,14 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { url } from '../lib/url';
+import { webpSrcset } from '../lib/images';
 interface Props { projects: CollectionEntry<'projects'>[] }
 const { projects } = Astro.props;
 ---
 <div class="grid grid--3">
   {projects.map((p) => (
     <article class="card project">
-      {p.data.image && <img src={url(p.data.image)} alt={p.data.image_alt} width="480" height="320" loading="lazy" />}
+      {p.data.image && <picture>{webpSrcset(p.data.image) && <source type="image/webp" srcset={webpSrcset(p.data.image)} sizes="(max-width: 640px) 100vw, 380px" />}<img src={url(p.data.image)} alt={p.data.image_alt} width="480" height="320" loading="lazy" /></picture>}
       <span class="chip">{p.data.service_area}</span>
       <h3>{p.data.client}</h3>
       <p class="project__sem">{p.data.semester}</p>

@@ -8,6 +8,7 @@ import page from '../content/pages/about.json';
 import PhotoViewer from '../components/PhotoViewer.astro';
 import { site, impact, galleryPhotos } from '../lib/data';
 import { url } from '../lib/url';
+import { webpSrcset } from '../lib/images';
 const photos = galleryPhotos();
 ---
 <Base title={page.seo_title} description={page.seo_description}>
@@ -44,7 +45,7 @@ const photos = galleryPhotos();
             <li>
               <figure>
                 <a href={url(p.image)} aria-label={`View larger photo: ${p.caption}`} data-gallery-link data-caption={p.caption}>
-                  <img src={url(p.image)} alt={p.alt} width="600" height="450" loading="lazy" />
+                  <picture>{webpSrcset(p.image) && <source type="image/webp" srcset={webpSrcset(p.image)} sizes="(max-width: 600px) 50vw, (max-width: 900px) 45vw, 300px" />}<img src={url(p.image)} alt={p.alt} width="600" height="450" loading="lazy" /></picture>
                 </a>
                 <figcaption>{p.caption}</figcaption>
               </figure>
