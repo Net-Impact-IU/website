@@ -58,7 +58,10 @@ const schemas = [org, ...extraSchema];
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="icon" href={url('/favicon.ico')} sizes="48x48" />
     <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={url('/favicon-96x96.png')} type="image/png" sizes="96x96" />
+    <link rel="icon" href={url('/favicon-192x192.png')} type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
     <link rel="sitemap" href={url('/sitemap-index.xml')} />
     <meta name="theme-color" content="#0067B1" />
