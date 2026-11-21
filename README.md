@@ -151,7 +151,8 @@ Officers upload photos through Pages CMS as usual. On every build, `scripts/resi
 ## Brand rules (from Net Impact nationals)
 
 - Logo files in `public/images/brand/` are the chapter lockup built to the nationals spec. Don't stretch, recolor or crop them, and don't show the logo under 200 px wide.
-- Don't separate the circle mark from the NET IMPACT text (that's why the favicon is a plain "NI" square).
+- Don't separate the circle mark from the NET IMPACT text in page layouts. The one exception is the site icon (favicon), which uses the circle mark alone on a white circle, matching the chapter Instagram avatar.
+- Favicon files live in `public/`: `favicon.svg` (master), `favicon.ico` (16/32/48), `favicon-48x48.png` through `favicon-192x192.png` (multiples of 48 for Google Search), and `apple-touch-icon.png` (white square, since iOS fills transparency with black). Keep these file names: Google wants a stable favicon URL.
 - Headlines in primary blue `#0067B1`; body text in gray `#444D3E`. Cyan, orange and green fail contrast as text on white; use them only for decoration.
 - When Net Impact Central provides the official chapter logo, replace `logo-color.svg`, `logo-white.svg` and the PNGs with the same file names.
 
